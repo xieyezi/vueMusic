@@ -1,25 +1,28 @@
 <template>
   <div id="app">
-    <MHeader></MHeader>
+    <MHead></MHead>
+    <Tab></Tab>
+      <keep-alive>
+          <router-view></router-view>
+      </keep-alive>
   </div>
 </template>
 <script>
-    import MHeader from 'views/m-header'
+    import MHead from 'components/mhead'
+    import Tab from 'components/tab'
     export default {
         name: 'app',
         data() {
             return {}
         },
-        created() {
-
-        },
-        methods: {
-
-        },
         components:{
-            MHeader
+            MHead,
+            Tab
         }
     }
 </script>
 <style>
+    *{
+        margin: 0px;
+    }
 </style>
