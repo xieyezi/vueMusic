@@ -4,7 +4,7 @@
            <div>
                <p class="title">热门</p>
                <ul>
-                   <li v-for=" item in singerList" class="Singerlist">
+                   <li v-for=" item in singerList" class="Singerlist" @click="selectSinger(item.id)">
                        <div class="infoImg">
                            <img   v-lazy="item.img1v1Url" class="imgInfo"/>
                        </div>
@@ -17,6 +17,7 @@
                </ul>
            </div>
         </div>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -54,6 +55,15 @@
                     .catch(error => {
                         console.log(error);
                     });
+            },
+            selectSinger(value){
+                //console.log(value);
+                this.$router.push({
+                    path:'/singer/singerDetail',
+                    query:{
+                        id:value
+                    }
+                })
             }
         },
         components: {},
