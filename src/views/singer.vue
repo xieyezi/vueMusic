@@ -4,7 +4,7 @@
            <div>
                <p class="title">热门</p>
                <ul>
-                   <li v-for=" item in singerList" class="Singerlist" @click="selectSinger(item.id)">
+                   <li v-for=" item in singerList" class="Singerlist" @click="selectSinger(item)">
                        <div class="infoImg">
                            <img   v-lazy="item.img1v1Url" class="imgInfo"/>
                        </div>
@@ -23,6 +23,7 @@
 
 <script>
     import BScroll from 'better-scroll';
+    import {mapMutations} from 'vuex'
     export default {
         name: "singer",
         data() {
@@ -56,15 +57,19 @@
                         console.log(error);
                     });
             },
-            selectSinger(value){
-                //console.log(value);
+            selectSinger(singer){
+                console.log(value);
                 this.$router.push({
                     path:'/singer/singerDetail',
                     query:{
-                        id:value
+                        id:singer.id
                     }
-                })
-            }
+                });
+                this.setSinger(singer);
+            },
+            ...mapMutations({
+                setSinger: 'SET_SINGER'
+            })
         },
         components: {},
         created() {

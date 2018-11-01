@@ -7,6 +7,7 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     export default {
         name: "singerDetail",
         data() {
@@ -14,9 +15,15 @@
                 id:''
             }
         },
+        computed:{
+            ...mapGetters([
+                'singer'
+            ])
+        },
         created(){
             this.id = decodeURIComponent(this.$route.query.id);
-            console.log(this.id);
+            //console.log(this.id);
+            console.log(this.singer);
         }
     }
 </script>
