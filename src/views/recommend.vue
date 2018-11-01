@@ -2,7 +2,6 @@
     <div class="recommend" ref="recommend">
         <scroll ref="scroll" class="recommend-content">
             <div>
-
                 <div v-if="bannerList.length" class="slider-wrapper">
                     <div class="slider-content">
                         <slider ref="slider" class="slide">
@@ -34,15 +33,34 @@
                 </div>
 
                 <div class="recommend-list">
-                    <h1 class="list-title">最新音乐单曲</h1>
+                    <h1 class="list-title">最新音乐大碟</h1>
                     <ul class="list-content">
-                        <li class="Songitem" v-for="item in newSongList" @click="toPlay(item.id)">
+                        <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
+                            <Col span="8" v-if="index < 6" v-for="(item,index) in newSongList" style="margin-bottom: 10px;">
+                                <li class="item">
+                                    <div class="icon">
+                                        <img @load="loadImage" width="100%" height="100%" v-lazy="item.song.album.blurPicUrl">
+                                    </div>
+                                    <div class="text">
+                                        <p class="name" v-html="item.name"></p>
+                                    </div>
+                                </li>
+                            </Col>
+                        </Row>
+
+                    </ul>
+                </div>
+
+                <div class="recommend-list">
+                    <h1 class="list-title">最热电台</h1>
+                    <ul class="list-content">
+                        <li class="Songitem" v-for="item in radioList">
+                            <div class="infoImg">
+                                <img  @load="loadImage" v-lazy="item.picUrl" class="imgInfo"/>
+                            </div>
                             <div class="info">
                                 <h2 class="name">{{item.name}}</h2>
-                                <p class="desc">{{item.song.artists[0].name}}-{{item.name}}</p>
-                            </div>
-                            <div class="playIcon">
-                                <img src="../common/image/play.png">
+                                <p class="desc">{{item.copywriter}}</p>
                             </div>
                         </li>
                     </ul>
@@ -63,6 +81,7 @@
             return {
                 bannerList: [],
                 recommendList: [],
+                radioList:[],
                 newSongList: []
             }
         },
@@ -93,9 +112,22 @@
                         console.log(error);
                     });
             },
+            loadRadio(){
+                var v = this;
+                v.$axios.get('api/personalized/djprogram')
+                    .then(response => {
+                        //console.log(response.data.result);
+                        if (response.data.code === 200) {
+                            v.radioList = response.data.result;
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            },
             loadNewsong() {
                 var v = this;
-                v.$axios.get('api/personalized/newsong')
+                v.$axios.get('api/personalized/newsong?limit=10')
                     .then(response => {
                         //console.log(response.data.result);
                         if (response.data.code === 200) {
@@ -110,7 +142,7 @@
                 if (!this.checkloaded) {
                     this.checkloaded = true
                     setTimeout(() => {
-                        this.$refs.scroll.refresh()
+                        this.$refs.scroll.refresh();
                     }, 20)
                 }
             },
@@ -129,6 +161,7 @@
             this.loadBanner();
             this.loadRecommend();
             this.loadNewsong();
+            this.loadRadio();
         }
     }
 </script>
@@ -186,15 +219,28 @@
     }
 
     .Songitem {
-        height: 50px;
+        display: flex;
+        height: 130px;
         border-bottom: solid #e6e6e6 1px;
     }
 
-    .Songitem .info {
+    .Songitem .infoImg {
+        position: relative;
+        flex:1;
+        margin-top: 5px;
         float: left;
         margin-left: 5px;
     }
-
+    .Songitem .imgInfo{
+        width: 120px;
+        height: 120px;
+    }
+    .Songitem .info{
+        position: relative;
+        top:30%;
+        flex:2;
+        margin-left: 5px;
+    }
     .Songitem .info .name {
         font-size: 13px;
         color: rgba(0, 0, 0, 0.8);
@@ -203,10 +249,5 @@
 
     .Songitem .info .desc {
         font-size: 10px;
-    }
-
-    .Songitem .playIcon {
-        float: right;
-        margin-right: 5px;
     }
 </style>
