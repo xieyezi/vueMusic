@@ -23,6 +23,7 @@
         created(){
             this.id = decodeURIComponent(this.$route.query.id);
             //console.log(this.id);
+            console.log("这是详情页");
             console.log(this.singer);
         }
     }

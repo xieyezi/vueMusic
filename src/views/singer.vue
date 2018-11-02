@@ -40,6 +40,17 @@
                         //console.log(response.datalist.artists);
                         if (response.data.code === 200) {
                             v.singerList = response.data.list.artists;
+                            /*
+                            * 这里在第一个位置插入我的信息，嘻嘻
+                            * */
+                            let xieyezi = {
+                                id:12478216,
+                                name:'写夜子',
+                                img1v1Url:"http://p4.music.126.net/9Go1z81prv-7oBQq6IG1Vg==/109951163419331306.jpg",
+                                score:666,
+                                topicPerson:38
+                            };
+                            v.singerList.unshift(xieyezi);
                             v.$nextTick(() =>{
                                 if (!this.scroll) {
                                     this.scroll = new BScroll(this.$refs.singerWarpper, {
@@ -58,7 +69,7 @@
                     });
             },
             selectSinger(singer){
-                console.log(value);
+                //console.log();
                 this.$router.push({
                     path:'/singer/singerDetail',
                     query:{
