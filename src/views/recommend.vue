@@ -13,7 +13,11 @@
                     </div>
                 </div>
 
+
                 <div class="recommend-list">
+                    <div class="demo-spin-container" v-show="Spinshow">
+                        <Spin fix></Spin>
+                    </div>
                     <h1 class="list-title">热门歌单推荐</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
@@ -82,7 +86,8 @@
                 bannerList: [],
                 recommendList: [],
                 radioList:[],
-                newSongList: []
+                newSongList: [],
+                Spinshow:true
             }
         },
         methods: {
@@ -106,6 +111,7 @@
                         //console.log(response.data.result);
                         if (response.data.code === 200) {
                             v.recommendList = response.data.result;
+                            v.Spinshow=false;
                         }
                     })
                     .catch(error => {
@@ -173,7 +179,11 @@
         top: 88px;
         bottom: 0;
     }
-
+    .demo-spin-container{
+        display: inline-block;
+        width: 100%;
+        position: relative;
+    }
     .recommend-content {
         height: 100%;
         overflow: hidden;
