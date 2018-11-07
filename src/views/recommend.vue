@@ -15,10 +15,8 @@
 
 
                 <div class="recommend-list">
-                    <div class="demo-spin-container" v-show="Spinshow">
-                        <Spin fix></Spin>
-                    </div>
-                    <h1 class="list-title">热门歌单推荐</h1>
+
+                    <h1 class="list-title" v-show="recommendList.length>0">热门歌单推荐</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
                             <Col span="8" v-for="item in recommendList" style="margin-bottom: 10px;">
@@ -37,7 +35,8 @@
                 </div>
 
                 <div class="recommend-list">
-                    <h1 class="list-title">最新音乐大碟</h1>
+
+                    <h1 class="list-title" v-show="newSongList.length>0">最新音乐大碟</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
                             <Col span="8" v-if="index < 6" v-for="(item,index) in newSongList" style="margin-bottom: 10px;">
@@ -56,7 +55,8 @@
                 </div>
 
                 <div class="recommend-list">
-                    <h1 class="list-title">最热电台</h1>
+
+                    <h1 class="list-title" v-show="radioList.length>0">最热电台</h1>
                     <ul class="list-content">
                         <li class="Songitem" v-for="item in radioList">
                             <div class="infoImg">
@@ -71,14 +71,18 @@
                 </div>
 
             </div>
+            <div class="loading-container" v-show="!recommendList.length&&!newSongList.length&&!radioList.length">
+                <loading></loading>
+            </div>
         </scroll>
+
     </div>
 </template>
 
 <script>
     import Slider from 'components/slider'
     import Scroll from 'components/scroll'
-
+    import Loading from  'components/loading'
     export default {
         name: "recommend",
         data() {
@@ -87,7 +91,7 @@
                 recommendList: [],
                 radioList:[],
                 newSongList: [],
-                Spinshow:true
+                // Spinshow:true
             }
         },
         methods: {
@@ -161,7 +165,8 @@
         },
         components: {
             Slider,
-            Scroll
+            Scroll,
+            Loading
         },
         created() {
             this.loadBanner();
@@ -178,11 +183,6 @@
         width: 100%;
         top: 88px;
         bottom: 0;
-    }
-    .demo-spin-container{
-        display: inline-block;
-        width: 100%;
-        position: relative;
     }
     .recommend-content {
         height: 100%;
@@ -244,6 +244,7 @@
     .Songitem .imgInfo{
         width: 120px;
         height: 120px;
+        border-radius: 2px;
     }
     .Songitem .info{
         position: relative;
@@ -260,4 +261,5 @@
     .Songitem .info .desc {
         font-size: 10px;
     }
+
 </style>

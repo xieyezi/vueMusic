@@ -5,10 +5,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import BScroll from 'better-scroll'
+  import BScroll from 'better-scroll';
 
-  const DIRECTION_H = 'horizontal'
-  const DIRECTION_V = 'vertical'
+  const DIRECTION_H = 'horizontal';
+  const DIRECTION_V = 'vertical';
 
   export default {
     props: {
@@ -60,7 +60,7 @@
           click: this.click,
           eventPassthrough: this.direction === DIRECTION_V ? DIRECTION_H : DIRECTION_V
         })
-
+        //console.log(this.scroll);
         if (this.listenScroll) {
           this.scroll.on('scroll', (pos) => {
             this.$emit('scroll', pos)
