@@ -123,9 +123,9 @@
     }
 
     .Singerlist .infoImg {
-        flex: 1;
+        flex: 2;
         margin-top: 5px;
-        margin-left: 8px;
+        margin-left: 10px;
     }
 
     .Singerlist .infoImg img {
@@ -135,7 +135,7 @@
     }
 
     .Singerlist .desc {
-        flex: 3;
+        flex: 7;
         margin-top: 15px;
     }
 </style>

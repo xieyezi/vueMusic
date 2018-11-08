@@ -7,11 +7,13 @@
       <keep-alive>
           <router-view></router-view>
       </keep-alive>
+      <player></player>
   </div>
 </template>
 <script>
     import MHead from 'components/mhead'
     import Tab from 'components/tab'
+    import Player from 'components/player'
     export default {
         name: 'app',
         data() {
@@ -19,7 +21,8 @@
         },
         components:{
             MHead,
-            Tab
+            Tab,
+            Player
         }
     }
 </script>

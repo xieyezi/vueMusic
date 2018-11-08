@@ -2,16 +2,18 @@
     <div class="music-list">
         <div class="back" @click="back">
             <i class="icon-back">
-                <Icon type="md-arrow-back"/>
+                <!--<Icon type="ios-arrow-back" />-->
             </i>
         </div>
         <h1 class="title">{{singerInfo.name}}</h1>
         <div class="bg-image" :style="bgStyle" ref="bgImage">
             <div class="filter" ref="filter"></div>
         </div>
-        <scroll :data="songList" class="list" ref="list">
+        <div class="bg-layer" ref="layer"></div>
+        <scroll @scroll="scroll" :probeType="probeType" :listenScroll="listenScroll" :data="songList" class="list"
+                ref="list">
             <div class="song-list-warpper">
-                <song-list :songs="songList"></song-list>
+                <song-list @select="selectItem" :songs="songList"></song-list>
             </div>
             <div v-show="!songList.length" class="loading-container">
                 <loading></loading>
@@ -25,6 +27,11 @@
     import Scroll from "./scroll";
     import SongList from "./songList";
     import Loading from "./loading";
+    import {mapActions} from 'vuex'
+
+
+    const RESERVED_HEIGHT = 120;
+
     export default {
         name: "musicList",
         components: {
@@ -42,7 +49,9 @@
         data() {
             return {
                 singerInfo: {},
-                songList: []
+                songList: [],
+                scrollY: 0,
+                probeType: 1
             }
         },
         computed: {
@@ -67,7 +76,7 @@
                         v.singerInfo = response.data.artist;
                         v.songList = response.data.hotSongs;
                         v.filterSinger(v.songList);
-                        console.log(v.songList);
+                        //console.log(v.songList);
                     }
                 }).catch(error => {
                     console.log(error);
@@ -85,22 +94,72 @@
                     s.ar = ar;
                 });
             },
-            back(){
+            back() {
                 this.$router.back();
+            },
+            scroll(pos) {
+                this.scrollY = pos.y;
+            },
+            selectItem(item,index){
+                var v = this;
+                v.selectPlay({
+                    list: v.songList,
+                    index:index
+                })
+            },
+            ...mapActions([
+                'selectPlay'
+            ])
+        },
+        watch: {
+            scrollY(newY) {
+                let translateY = Math.max(this.minTranslateY, newY);
+                let zIndex = 0;
+                let scale = 1;
+                let blur = 0;
+                this.$refs.layer.style['transform'] = `translate3d(0,${translateY}px,0)`;
+                this.$refs.layer.style['webkitTransform'] = `translate3d(0,${translateY}px,0)`;
+                //设置图片拖动放大缩小效果
+                const percent = Math.abs(newY / this.imageHeight);
+                if (newY > 0) {
+                    scale = percent+1;
+                    zIndex = 10;
+                }else {
+                    blur = Math.min(20 * percent,20);
+                }
+                //ios高斯模糊效果
+                this.$refs.filter.style['backdrop-filter'] = `blur(${blur}px)`;
+                this.$refs.filter.style['webkitBackdrop-filter'] = `blur(${blur}px)`
+                if (newY < this.minTranslateY) {
+                    zIndex = 10;
+                    this.$refs.bgImage.style.paddingTop = 0;
+                    this.$refs.bgImage.style.height = `${RESERVED_HEIGHT}px`;
+
+                } else {
+                    //console.log(newY+","+this.minTranslateY);
+                    this.$refs.bgImage.style.paddingTop = '70%';
+                    this.$refs.bgImage.style.height = 0;
+                }
+                this.$refs.bgImage.style.zIndex = zIndex;
+                this.$refs.bgImage.style['transform'] = `scale(${scale})`;
+                this.$refs.bgImage.style['webkitTransform'] = `scale(${scale})`;
             }
         },
-        mounted(){
-            // console.log(this.$refs.bgImage.clientHeight);
+        mounted() {
             this.imageHeight = this.$refs.bgImage.clientHeight;
+            this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT;
             this.$refs.list.$el.style.top = `${this.imageHeight}px`;
         },
         created() {
             this.loadSingerSong();
+            this.probeType = 3;
+            this.listenScroll = true;
         }
     }
 </script>
 
 <style scoped>
+     @import '../common/css/icon.css';
     .music-list {
         position: fixed;
         z-index: 100;
@@ -121,8 +180,8 @@
     .icon-back {
         display: block;
         padding: 10px;
-        font-size: 22px;
-        color: rgb(102, 153, 204);
+        font-size: 25px;
+        /*//color: rgb(102, 153, 204);*/
     }
 
     .title {
@@ -149,7 +208,8 @@
         background-size: cover;
 
     }
-    .filter{
+
+    .filter {
         position: absolute;
         top: 0;
         left: 0;
@@ -157,18 +217,26 @@
         height: 100%;
         background: rgba(7, 17, 27, 0.4);
     }
-    .list{
+
+    .list {
         position: absolute;
         top: 0;
         bottom: 0;
         width: 100%;
-        /*height: 100%;*/
-        overflow: hidden;
-        /*background: rgba(102,153,204,0.6);*/
+
+        /*overflow: hidden;*/
+
     }
-    .song-list-warpper{
-        /*padding: 20px;*/
-        padding-left: 30px;
+
+    .song-list-warpper {
+        /*padding: 10px 30px;*/
+        padding-left: 15px;
+    }
+
+    .bg-layer {
+        position: relative;
+        height: 100%;
+        background: #fff
     }
 
 </style>

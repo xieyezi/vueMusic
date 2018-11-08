@@ -4,10 +4,12 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import iView from 'iview';
+import fastclick from 'fastclick';
 import 'iview/dist/styles/iview.css';
 import VueLazyload from 'vue-lazyload'
 
 Vue.use(iView);
+fastclick.attach(document.body);
 Vue.config.productionTip = false;
 Vue.use(VueLazyload, {
     loading: require('common/image/default.jpg')
