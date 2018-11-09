@@ -134,7 +134,6 @@
                     zIndex = 10;
                     this.$refs.bgImage.style.paddingTop = 0;
                     this.$refs.bgImage.style.height = `${RESERVED_HEIGHT}px`;
-
                 } else {
                     //console.log(newY+","+this.minTranslateY);
                     this.$refs.bgImage.style.paddingTop = '70%';

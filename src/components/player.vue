@@ -19,7 +19,7 @@
                 </div>
                 <div class="middle">
                     <div class="middle-l">
-                        <div class="cd-wrapper">
+                        <div class="cd-wrapper" ref="cdWrapper">
                             <div class="cd">
                                 <img :src="currentSong.al.picUrl" class="image"/>
                             </div>
@@ -63,6 +63,7 @@
                 </div>
             </div>
         </transition>
+        <audio :src="songurl" ref="audio"></audio>
     </div>
 </template>
 
@@ -73,7 +74,9 @@
     export default {
         name: "player",
         data() {
-            return {}
+            return {
+                songurl: ''
+            }
         },
         computed: {
             ...mapGetters([
@@ -89,21 +92,97 @@
             open() {
                 this.setFullScreen(true);
             },
-            enter(el,done){
+            enter(el, done) {
+                const {x, y, scale} = this._getPosAndScale();
 
-            },
-            afterEnter(){
+                let animation = {
+                    0: {
+                        transform: `translate3d(${x}px,${y}px,0) scale(${scale})`
+                    },
+                    60: {
+                        transform: `translate3d(0,0,0) scale(1.1)`
+                    },
+                    100: {
+                        transform: `translate3d(0,0,0) scale(1)`
+                    }
+                };
 
+                animations.registerAnimation({
+                    name: 'move',
+                    animation,
+                    presets: {
+                        duration: 400,
+                        easing: 'linear'
+                    }
+                });
+                animations.runAnimation(this.$refs.cdWrapper, 'move', done);
             },
-            leave(el,done){
-
+            afterEnter() {
+                animations.unregisterAnimation('move');
+                this.$refs.cdWrapper.style.animation = '';
             },
-            afterLeave(){
+            leave(el, done) {
+                this.$refs.cdWrapper.style.transition = 'all 0.4s';
+                const {x, y, scale} = this._getPosAndScale();
+                this.$refs.cdWrapper.style['transform'] = `translate3d(${x}px,${y}px,0) scale(${scale})`;
+                const timer = setTimeout(done, 400);
+                this.$refs.cdWrapper.addEventListener('transitionend', () => {
+                    clearTimeout(timer)
+                    done()
+                })
+            },
+            afterLeave() {
+                this.$refs.cdWrapper.style.transition = '';
+                this.$refs.cdWrapper.style['transform'] = '';
+            },
+            _getPosAndScale() {
+                const targetWidth = 40;
+                const paddingLeft = 40;
+                const paddingBottom = 30;
+                const paddingTop = 80;
+                const width = window.innerWidth * 0.8;
+                const scale = targetWidth / width;
+                const x = -(window.innerWidth / 2 - paddingLeft);
+                const y = window.innerHeight - paddingTop - width / 2 - paddingBottom;
+                return {
+                    x,
+                    y,
+                    scale
+                }
+            },
+            getSongUrl(id) {
+                var v = this;
+                return v.$axios.get('api/song/url', {
+                    params: {
+                        id: id
+                    }
+                }).then(response => {
+                    //console.log(response.data.data[0].url);
+                    if (response.data.code === 200) {
+                        v.songurl = response.data.data[0].url;
+                        //console.log("地址：" + v.songurl);
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
 
             },
             ...mapMutations({
                 setFullScreen: 'SET_FULL_SCREEN'
             })
+        },
+        watch: {
+            currentSong() {
+                var v = this;
+                v.getSongUrl(v.currentSong.id).then(() => {
+                    this.$nextTick(() => {
+                        v.$refs.audio.play();
+                    });
+                })
+            }
+        },
+        created() {
+
         }
     }
 </script>
