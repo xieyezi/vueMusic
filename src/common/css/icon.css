@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icon';
-  src:  url('../fonts/icon.eot?p78myt');
-  src:  url('../fonts/icon.eot?p78myt#iefix') format('embedded-opentype'),
-    url('../fonts/icon.ttf?p78myt') format('truetype'),
-    url('../fonts/icon.woff?p78myt') format('woff'),
-    url('../fonts/icon.svg?p78myt#icon') format('svg');
+  src:  url('../fonts/icon.eot?9f1yyw');
+  src:  url('../fonts/icon.eot?9f1yyw#iefix') format('embedded-opentype'),
+    url('../fonts/icon.ttf?9f1yyw') format('truetype'),
+    url('../fonts/icon.woff?9f1yyw') format('woff'),
+    url('../fonts/icon.svg?9f1yyw#icon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,14 +25,6 @@
 }
 
 .icon-playlist:before {
-  content: "\e901";
-  color: #69f;
-}
-.icon-close:before {
-  content: "\e906";
-  color: #69f;
-}
-.icon-not-favorite:before {
   content: "\e90b";
   color: #69f;
 }
@@ -40,9 +32,13 @@
   content: "\e900";
   color: #69f;
 }
+.icon-close:before {
+  content: "\e901";
+  color: #87cad8;
+}
 .icon-delete:before {
   content: "\e902";
-  color: #69f;
+  color: #87cad8;
 }
 .icon-favorite:before {
   content: "\e903";
@@ -50,11 +46,15 @@
 }
 .icon-loop:before {
   content: "\e904";
-  color: #69f;
+  color: #87cad8;
 }
 .icon-next:before {
   content: "\e905";
-  color: #69f;
+  color: #87cad8;
+}
+.icon-not-favorite:before {
+  content: "\e906";
+  color: #87cad8;
 }
 .icon-pause-mini:before {
   content: "\e907";
@@ -62,7 +62,7 @@
 }
 .icon-pause:before {
   content: "\e908";
-  color: #69f;
+  color: #87cad8;
 }
 .icon-play-mini:before {
   content: "\e909";
@@ -70,17 +70,17 @@
 }
 .icon-play:before {
   content: "\e90a";
-  color: #69f;
+  color: #87cad8;
 }
 .icon-prev:before {
   content: "\e90c";
-  color: #69f;
+  color: #87cad8;
 }
 .icon-random:before {
   content: "\e90d";
-  color: #69f;
+  color: #87cad8;
 }
 .icon-sequence:before {
   content: "\e90e";
-  color: #69f;
+  color: #87cad8;
 }

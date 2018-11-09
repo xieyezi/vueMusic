@@ -9,7 +9,7 @@
     props: {
       title: {
         type: String,
-        default: '正在载入...'
+        default: '玩命载入中...'
       }
     }
   }
@@ -22,6 +22,6 @@
   .desc{
     line-height: 20px;
     font-size: 12px;
-    color:rgba(102, 153, 204, 0.8);
+    color:rgba(102, 153, 204, 0.9);
   }
 </style>
