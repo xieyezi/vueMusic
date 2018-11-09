@@ -19,7 +19,7 @@
         width: 100%;
         text-align: center;
         color: rgba(255,255,255,0.8);
-        background: rgba(102,153,204,0.7);
+        background:  rgb(135,203,216);
     }
     .mhead .icon{
         display: inline-block;

@@ -3,7 +3,7 @@
      <ul>
          <li @click="selectItem(song,index)"  v-for="(song,index) in songs" class="item">
              <div class="content">
-                  <div class="count">{{index+1}}</div>
+                  <div class="count">{{pad(index+1)}}</div>
                   <div class="info">
                      <h2 class="name">{{song.name}}</h2>
                      <p class="desc">{{song.ar}} - {{song.al.name}}</p>
@@ -24,6 +24,14 @@
             }
         },
         methods:{
+            pad(num, n = 2) {
+                let len = num.toString().length;
+                while (len < n) {
+                    num = '0' + num;
+                    len++;
+                }
+                return num;
+            },
             selectItem(item,index){
                 this.$emit('select',item,index);
             }
