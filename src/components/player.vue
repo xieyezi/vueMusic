@@ -8,7 +8,7 @@
         >
             <div class="normal-player" v-show="fullScreen">
                 <div class="background">
-                    <img :src="currentSong.al.picUrl" width="100%" height="100%"/>
+                    <img :src="currentSong.imgURL" width="100%" height="100%"/>
                 </div>
                 <div class="top">
                     <div class="back" @click="back">
@@ -21,7 +21,7 @@
                     <div class="middle-l">
                         <div class="cd-wrapper" ref="cdWrapper">
                             <div class="cd" :class="cdCls">
-                                <img :src="currentSong.al.picUrl" class="image"/>
+                                <img :src="currentSong.imgURL" class="image"/>
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                         <div class="progress-bar-wrapper">
                             <ProgressBar :percent="percent" @percentChange="onProgressBarChange"></ProgressBar>
                         </div>
-                        <span class="time time-r">{{formatTotalTime(currentSong.dt)}}</span>
+                        <span class="time time-r">{{formatTotalTime(currentSong.time)}}</span>
                     </div>
                     <div class="operators">
                         <div class="icon i-left">
@@ -59,7 +59,7 @@
         <transition name="mini">
             <div class="mini-player" v-show="!fullScreen" @click="open">
                 <div class="icon">
-                    <img :class="cdCls" :src="currentSong.al.picUrl" width="40" height="40"/>
+                    <img :class="cdCls" :src="currentSong.imgURL" width="40" height="40"/>
                 </div>
                 <div class="text">
                     <h2 class="name" v-html="currentSong.name"></h2>
@@ -106,7 +106,7 @@
             },
             percent() {
                 //console.log((this.currentTime*1000) / this.currentSong.dt);
-                return (this.currentTime * 1000) / this.currentSong.dt;
+                return (this.currentTime * 1000) / this.currentSong.time;
             },
             ...mapGetters([
                 'fullScreen',
@@ -264,7 +264,7 @@
             onProgressBarChange(percent) {
                 // console.log("totaltime:"+this.currentSong.dt);
                 // console.log("currenttime:"+this.currentSong.dt * percent);
-                const currentTime = (this.currentSong.dt * percent) / 1000;
+                const currentTime = (this.currentSong.time * percent) / 1000;
                 this.$refs.audio.currentTime = currentTime;
                 if(!this.playing){
                     this.togglePlaying();
@@ -286,10 +286,13 @@
                 })
             },
             playing(newPlaying) {
+                var v = this;
                 const audio = this.$refs.audio;
-                this.$nextTick(() => {
-                    newPlaying ? audio.play() : audio.pause();
-                });
+                this.getSongUrl(v.currentSong.id).then(() => {
+                    this.$nextTick(() => {
+                       newPlaying ? audio.play() : audio.pause();
+                    });
+                })
 
             }
         },

@@ -6,7 +6,7 @@
                   <div class="count">{{pad(index+1)}}</div>
                   <div class="info">
                      <h2 class="name">{{song.name}}</h2>
-                     <p class="desc">{{song.ar}} - {{song.al.name}}</p>
+                     <p class="desc">{{song.ar}} - {{song.al}}</p>
                   </div>
              </div>
          </li>

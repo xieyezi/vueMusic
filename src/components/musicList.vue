@@ -62,6 +62,7 @@
         methods: {
             loadSingerSong() {
                 var v = this;
+                let list = [];
                 if (!v.id) {
                     this.$router.push("/singer");
                     return;
@@ -74,9 +75,10 @@
                     //console.log(response.data);
                     if (response.data.code === 200) {
                         v.singerInfo = response.data.artist;
-                        v.songList = response.data.hotSongs;
-                        v.filterSinger(v.songList);
-                        //console.log(v.songList);
+                        list = response.data.hotSongs;
+                        v.filterSinger(list);
+                        v.formatSongs(list);
+                       // console.log(v.songList);
                     }
                 }).catch(error => {
                     console.log(error);
@@ -93,6 +95,26 @@
                     //console.log(ar);
                     s.ar = ar;
                 });
+            },
+            formatSongs(list){
+                for (let i = 0 ;i<list.length; i++) {
+                    let song = {
+                        id:'',
+                        name:'',
+                        ar:'',
+                        al:'',
+                        imgURL:'',
+                        time:0
+                    };
+                    song.id = list[i].id;
+                    song.name = list[i].name;
+                    song.ar = list[i].ar;
+                    song.al = list[i].al.name;
+                    song.imgURL = list[i].al.picUrl;
+                    song.time = list[i].dt;
+                    this.songList.push(song);
+                }
+
             },
             back() {
                 this.$router.back();
