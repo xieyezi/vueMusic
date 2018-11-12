@@ -100,11 +100,11 @@
             scroll(pos) {
                 this.scrollY = pos.y;
             },
-            selectItem(item,index){
+            selectItem(item, index) {
                 var v = this;
                 v.selectPlay({
                     list: v.songList,
-                    index:index
+                    index: index
                 })
             },
             ...mapActions([
@@ -122,10 +122,10 @@
                 //设置图片拖动放大缩小效果
                 const percent = Math.abs(newY / this.imageHeight);
                 if (newY > 0) {
-                    scale = percent+1;
+                    scale = percent + 1;
                     zIndex = 10;
-                }else {
-                    blur = Math.min(20 * percent,20);
+                } else {
+                    blur = Math.min(20 * percent, 20);
                 }
                 //ios高斯模糊效果
                 this.$refs.filter.style['backdrop-filter'] = `blur(${blur}px)`;
@@ -158,7 +158,8 @@
 </script>
 
 <style scoped>
-     @import '../common/css/icon.css';
+    @import '../common/css/icon.css';
+
     .music-list {
         position: fixed;
         z-index: 100;
