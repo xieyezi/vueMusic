@@ -1,3 +1,4 @@
+// import './common/js/hack'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -13,7 +14,7 @@ fastclick.attach(document.body);
 Vue.config.productionTip = false;
 Vue.use(VueLazyload, {
     loading: require('common/image/default.jpg')
-})
+});
 
 Vue.prototype.$axios= axios;
 

@@ -5,7 +5,7 @@
                 <!--<Icon type="ios-arrow-back" />-->
             </i>
         </div>
-        <h1 class="title">{{singerInfo.name}}</h1>
+        <h1 class="title" v-html="title"></h1>
         <div class="bg-image" :style="bgStyle" ref="bgImage">
             <div class="filter" ref="filter"></div>
         </div>
@@ -28,9 +28,11 @@
     import SongList from "./songList";
     import Loading from "./loading";
     import {mapActions} from 'vuex'
-
+    import {prefixStyle} from '../common/js/dom'
 
     const RESERVED_HEIGHT = 120;
+    const transform = prefixStyle('transform');
+    const backdrop = prefixStyle('backdrop-filter');
 
     export default {
         name: "musicList",
@@ -40,82 +42,35 @@
             Loading
         },
         props: {
-            id: {
+            title:{
                 type: String,
                 default: '',
-                required: true
+            },
+            bgImage:{
+                type:String,
+                default:''
+            },
+            songList:{
+                type:Array,
+                default:[],
+                required:true
             }
         },
         data() {
             return {
-                singerInfo: {},
-                songList: [],
+                // singerInfo: {},
+                // songList: [],
                 scrollY: 0,
                 probeType: 1
             }
         },
         computed: {
             bgStyle() {
-                return `background-image:url(${this.singerInfo.img1v1Url})`;
+                    return `background-image:url(${this.bgImage})`;
             }
         },
         methods: {
-            loadSingerSong() {
-                var v = this;
-                let list = [];
-                if (!v.id) {
-                    this.$router.push("/singer");
-                    return;
-                }
-                v.$axios.get('api/artists', {
-                    params: {
-                        id: v.id
-                    }
-                }).then(response => {
-                    //console.log(response.data);
-                    if (response.data.code === 200) {
-                        v.singerInfo = response.data.artist;
-                        list = response.data.hotSongs;
-                        v.filterSinger(list);
-                        v.formatSongs(list);
-                       // console.log(v.songList);
-                    }
-                }).catch(error => {
-                    console.log(error);
-                });
-            },
-            filterSinger(songList) {
-                songList.forEach((s) => {
-                    let ret = [];
-                    let ar = '';
-                    s.ar.forEach((item) => {
-                        ret.push(item.name);
-                    });
-                    ar = ret.join('/');
-                    //console.log(ar);
-                    s.ar = ar;
-                });
-            },
-            formatSongs(list){
-                for (let i = 0 ;i<list.length; i++) {
-                    let song = {
-                        id:'',
-                        name:'',
-                        ar:'',
-                        al:'',
-                        imgURL:'',
-                        time:0
-                    };
-                    song.id = list[i].id;
-                    song.name = list[i].name;
-                    song.ar = list[i].ar;
-                    song.al = list[i].al.name;
-                    song.imgURL = list[i].al.picUrl;
-                    song.time = list[i].dt;
-                    this.songList.push(song);
-                }
 
-            },
             back() {
                 this.$router.back();
             },
@@ -150,8 +105,8 @@
                     blur = Math.min(20 * percent, 20);
                 }
                 //ios高斯模糊效果
-                this.$refs.filter.style['backdrop-filter'] = `blur(${blur}px)`;
-                this.$refs.filter.style['webkitBackdrop-filter'] = `blur(${blur}px)`
+                this.$refs.filter.style[backdrop] = `blur(${blur}px)`;
+                //this.$refs.filter.style['webkitBackdrop-filter'] = `blur(${blur}px)`
                 if (newY < this.minTranslateY) {
                     zIndex = 10;
                     this.$refs.bgImage.style.paddingTop = 0;
@@ -162,17 +117,18 @@
                     this.$refs.bgImage.style.height = 0;
                 }
                 this.$refs.bgImage.style.zIndex = zIndex;
-                this.$refs.bgImage.style['transform'] = `scale(${scale})`;
-                this.$refs.bgImage.style['webkitTransform'] = `scale(${scale})`;
+                this.$refs.bgImage.style[transform] = `scale(${scale})`;
+                //this.$refs.bgImage.style['webkitTransform'] = `scale(${scale})`;
             }
         },
         mounted() {
-            this.imageHeight = this.$refs.bgImage.clientHeight;
-            this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT;
-            this.$refs.list.$el.style.top = `${this.imageHeight}px`;
+            // this.$nextTick(() => {
+                this.imageHeight = this.$refs.bgImage.clientHeight;
+                this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT;
+                this.$refs.list.$el.style.top = `${this.imageHeight}px`;
+            // });
         },
         created() {
-            this.loadSingerSong();
             this.probeType = 3;
             this.listenScroll = true;
         }

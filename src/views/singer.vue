@@ -54,9 +54,9 @@
                             let xieyezi = {
                                 id: 12478216,
                                 name: '写夜子',
-                                img1v1Url: "http://p4.music.126.net/9Go1z81prv-7oBQq6IG1Vg==/109951163419331306.jpg",
                                 score: 666,
-                                topicPerson: 38
+                                topicPerson: 38,
+                                img1v1Url: 'http://p4.music.126.net/9Go1z81prv-7oBQq6IG1Vg==/109951163419331306.jpg',
                             };
                             v.singerList.unshift(xieyezi);
                             v.$nextTick(() => {

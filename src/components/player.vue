@@ -158,7 +158,7 @@
                 this.$refs.cdWrapper.style['transform'] = `translate3d(${x}px,${y}px,0) scale(${scale})`;
                 const timer = setTimeout(done, 400);
                 this.$refs.cdWrapper.addEventListener('transitionend', () => {
-                    clearTimeout(timer)
+                    clearTimeout(timer);
                     done()
                 })
             },
@@ -283,6 +283,14 @@
                     this.$nextTick(() => {
                         v.$refs.audio.play();
                     });
+                    // setTimeout(()=>{
+                    //     v.$refs.audio.play();
+                    // },0);
+                    // if (v.$refs.audio) {
+                    //     setTimeout(() => {
+                    //         v.$refs.audio.play();
+                    //     }, 0)
+                    // }
                 })
             },
             playing(newPlaying) {
@@ -292,6 +300,11 @@
                     this.$nextTick(() => {
                        newPlaying ? audio.play() : audio.pause();
                     });
+                    // if (v.$refs.audio) {
+                    //     setTimeout(() => {
+                    //         newPlaying ? audio.play() : audio.pause();
+                    //     }, 0)
+                    // }
                 })
 
             }
@@ -318,7 +331,7 @@
         top: 0;
         bottom: 0;
         z-index: 150;
-        background: gray;
+        background: #2d3047;
     }
 
     .normal-player .background {
@@ -585,7 +598,7 @@
     .mini-player {
         display: flex;
         align-items: center;
-        position: absolute;
+        position: fixed;
         left: 0;
         bottom: 0;
         z-index: 180;

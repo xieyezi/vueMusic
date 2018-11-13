@@ -5,7 +5,7 @@
                 <div class="recommend-list">
                     <!--<h1 class="list-title" v-show="topList.length>0">官方榜</h1>-->
                     <ul class="list-content">
-                        <li class="Songitem" v-if="index < 5" v-for="(item,index) in topList">
+                        <li class="Songitem" v-if="index < 4" v-for="(item,index) in topList">
                             <div class="infoImg">
                                 <img @load="loadImage" v-lazy="item.coverImgUrl" class="imgInfo"/>
                             </div>
@@ -22,7 +22,7 @@
                     <h1 class="list-title" v-show="topList.length>0">全球榜</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
-                            <Col span="8" v-if="index > 4" v-for="(item,index)  in topList" style="margin-bottom: 10px;">
+                            <Col span="8" v-if="index > 3" v-for="(item,index)  in topList" style="margin-bottom: 10px;">
                                 <li class="item" >
                                     <div class="icon">
                                         <img @load="loadImage" width="100%" height="100%" v-lazy="item.coverImgUrl">
