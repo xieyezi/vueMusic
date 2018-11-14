@@ -280,31 +280,18 @@
             currentSong() {
                 var v = this;
                 v.getSongUrl(v.currentSong.id).then(() => {
-                    this.$nextTick(() => {
+                    v.$nextTick(() => {
                         v.$refs.audio.play();
                     });
-                    // setTimeout(()=>{
-                    //     v.$refs.audio.play();
-                    // },0);
-                    // if (v.$refs.audio) {
-                    //     setTimeout(() => {
-                    //         v.$refs.audio.play();
-                    //     }, 0)
-                    // }
                 })
             },
             playing(newPlaying) {
                 var v = this;
-                const audio = this.$refs.audio;
-                this.getSongUrl(v.currentSong.id).then(() => {
-                    this.$nextTick(() => {
+                const audio = v.$refs.audio;
+                v.getSongUrl(v.currentSong.id).then(() => {
+                    v.$nextTick(() => {
                        newPlaying ? audio.play() : audio.pause();
                     });
-                    // if (v.$refs.audio) {
-                    //     setTimeout(() => {
-                    //         newPlaying ? audio.play() : audio.pause();
-                    //     }, 0)
-                    // }
                 })
 
             }
