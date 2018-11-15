@@ -82,7 +82,6 @@
     import Slider from 'components/slider'
     import Scroll from 'components/scroll'
     import Loading from 'components/loading'
-
     export default {
         name: "recommend",
         data() {

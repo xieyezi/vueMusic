@@ -73,7 +73,7 @@
                 </div>
             </div>
         </transition>
-        <audio :src="songurl" ref="audio" @canplay="ready" @error="error" @timeupdate="updateTime"></audio>
+        <audio :src="currentSong.songURL" ref="audio" @canplay="ready" @error="error" @timeupdate="updateTime"></audio>
     </div>
 </template>
 
@@ -86,7 +86,6 @@
         name: "player",
         data() {
             return {
-                songurl: '',
                 songReady: false,
                 currentTime: 0
             }
@@ -181,22 +180,6 @@
                     scale
                 }
             },
-            getSongUrl(id) {
-                var v = this;
-                return v.$axios.get('api/song/url', {
-                    params: {
-                        id: id
-                    }
-                }).then(response => {
-                    if (response.data.code === 200) {
-                        v.songurl = response.data.data[0].url;
-                        //console.log("地址：" + v.songurl);
-                    }
-                }).catch(error => {
-                    console.log(error);
-                });
-
-            },
             togglePlaying() {
                 if (!this.songReady) {
                     return;
@@ -266,7 +249,7 @@
                 // console.log("currenttime:"+this.currentSong.dt * percent);
                 const currentTime = (this.currentSong.time * percent) / 1000;
                 this.$refs.audio.currentTime = currentTime;
-                if(!this.playing){
+                if (!this.playing) {
                     this.togglePlaying();
                 }
             },
@@ -279,21 +262,16 @@
         watch: {
             currentSong() {
                 var v = this;
-                v.getSongUrl(v.currentSong.id).then(() => {
-                    v.$nextTick(() => {
-                        v.$refs.audio.play();
-                    });
-                })
+                v.$nextTick(() => {
+                    v.$refs.audio.play();
+                });
             },
             playing(newPlaying) {
                 var v = this;
                 const audio = v.$refs.audio;
-                v.getSongUrl(v.currentSong.id).then(() => {
-                    v.$nextTick(() => {
-                       newPlaying ? audio.play() : audio.pause();
-                    });
-                })
-
+                v.$nextTick(() => {
+                    newPlaying ? audio.play() : audio.pause();
+                });
             }
         },
         components: {
@@ -311,6 +289,7 @@
     .player {
 
     }
+
     .normal-player {
         position: fixed;
         left: 0;
@@ -591,7 +570,7 @@
         z-index: 180;
         width: 100%;
         height: 60px;
-        background: rgb(135,203,216);
+        background: rgb(135, 203, 216);
     }
 
     .mini-enter-active, .mini-leave-active {

@@ -13,7 +13,7 @@
             return {
                 id: '',
                 singerInfo: {},
-                songList: [],
+                songList: []
             }
         },
         computed: {
@@ -47,9 +47,10 @@
                     if (response.data.code === 200) {
                         v.singerInfo = response.data.artist;
                         list = response.data.hotSongs;
+                        //console.log(list);
                         v.filterSinger(list);
                         v.formatSongs(list);
-                        // console.log(v.songList);
+
                     }
                 }).catch(error => {
                     console.log(error);
@@ -63,34 +64,71 @@
                         ret.push(item.name);
                     });
                     ar = ret.join('/');
-                    //console.log(ar);
                     s.ar = ar;
                 });
             },
             formatSongs(list){
-                for (let i = 0 ;i<list.length; i++) {
+                var  v = this;
+                v.loadSongUrl(list);
+            },
+            loadSongUrl(list) {
+                var v = this;
+                var songsIds = '';
+                var songUrlList = [];
+                for (let i = 0; i < list.length; i++) {
+                    songsIds += list[i].id +',';
+                }
+                songsIds = songsIds.substring(0,songsIds.length-1);
+                //console.log(songsIds);
+                v.$axios.get('api/song/url', {
+                    params: {
+                        id: songsIds
+                    }
+                }).then(response => {
+                    //console.log(response.data.data);
+                    if (response.data.code === 200) {
+                        songUrlList = response.data.data;
+                        //console.log(songUrlList);
+                        v.manageSongList(list,songUrlList);
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
+            },
+            manageSongList(list1,list2){
+                var v = this;
+                for (let i = 0;i<list1.length;i++){
                     let song = {
                         id:'',
                         name:'',
                         ar:'',
                         al:'',
                         imgURL:'',
+                        songURL:'',
                         time:0
                     };
-                    song.id = list[i].id;
-                    song.name = list[i].name;
-                    song.ar = list[i].ar;
-                    song.al = list[i].al.name;
-                    song.imgURL = list[i].al.picUrl;
-                    song.time = list[i].dt;
-                    this.songList.push(song);
+                    song.id = list1[i].id;
+                    song.name = list1[i].name;
+                    song.ar = list1[i].ar;
+                    song.al = list1[i].al.name;
+                    song.imgURL = list1[i].al.picUrl;
+                    song.time = list1[i].dt;
+                    for (let m = 0;m<list2.length;m++){
+                        if (list1[i].id === list2[m].id) {
+                            song.songURL = list2[m].url;
+                        }
+                    }
+                    v.songList.push(song);
                 }
+                // console.log("songList：");
+                // console.log(v.songList);
+            }
 
-            },
         },
         created() {
             this.id = decodeURIComponent(this.$route.query.id);
             this.loadSingerSong();
+
         }
     }
 </script>
