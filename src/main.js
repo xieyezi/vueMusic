@@ -1,15 +1,13 @@
-// import './common/js/hack'
+import './common/js/hack'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import iView from 'iview';
 import fastclick from 'fastclick';
-import 'iview/dist/styles/iview.css';
 import VueLazyload from 'vue-lazyload'
+import './plugins/iview.js'
 
-Vue.use(iView);
 fastclick.attach(document.body);
 Vue.config.productionTip = false;
 Vue.use(VueLazyload, {

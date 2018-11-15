@@ -1,14 +1,14 @@
 <template>
-  <div id="app">
-    <div class="tophead">
-      <MHead></MHead>
-      <Tab></Tab>
+    <div id="app">
+        <div class="tophead">
+            <MHead></MHead>
+            <Tab></Tab>
+        </div>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+        <player></player>
     </div>
-      <keep-alive>
-          <router-view></router-view>
-      </keep-alive>
-      <player></player>
-  </div>
 </template>
 <script>
     import MHead from 'components/mhead'
@@ -31,13 +31,13 @@
         margin: 0px;
     }
     .tophead{
-      position: fixed;
-      width: 100%;
+        position: fixed;
+        width: 100%;
     }
     .loading-container{
-      position: absolute;
-      width: 100%;
-      top:50%;
-      transform: translateY(-50%);
+        position: absolute;
+        width: 100%;
+        top:50%;
+        transform: translateY(-50%);
     }
 </style>

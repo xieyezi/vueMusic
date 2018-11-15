@@ -21,6 +21,8 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.4",
     "@vue/cli-service": "^3.0.4",
+    "babel-plugin-import": "^1.11.0",
+    "vue-cli-plugin-iview": "^1.0.6",
     "vue-lazyload": "^1.2.6",
     "vue-template-compiler": "^2.5.17"
   },
