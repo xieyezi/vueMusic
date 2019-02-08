@@ -1,5 +1,5 @@
 # myMusic
-
+![](https://img.shields.io/badge/vue2.5.22-version-green.svg)
 ## Project setup
 ```
 npm install
