@@ -4,6 +4,8 @@
 
 
 ![](https://img.shields.io/badge/vue2.5.22-version-green.svg)
+![](https://img.shields.io/badge/npm6.4.1-version-yellowgreen.svg)
+![](https://img.shields.io/badge/vue--cli3.0.4-version-green.svg)
 
 ## Project setup
 ```
