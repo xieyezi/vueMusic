@@ -1,4 +1,5 @@
-# myMusic
+# 夜子音乐Web App
+基于Vue开发的Web App
 ![](https://img.shields.io/badge/vue2.5.22-version-green.svg)
 ## Project setup
 ```
