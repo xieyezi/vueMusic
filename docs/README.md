@@ -1,3 +1,4 @@
+![](https://img.shields.io/badge/vue2.5.22-version-green.svg)
 # 项目简介
 > 这是一个基于Vue开发的混合Web 音乐App✌️.
 ## 快速入门
