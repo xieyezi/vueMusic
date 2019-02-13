@@ -90,7 +90,7 @@
                 recommendList: [],
                 radioList: [],
                 newSongList: [],
-                // Spinshow:true
+                // Spinshow:truess
             }
         },
         methods: {
