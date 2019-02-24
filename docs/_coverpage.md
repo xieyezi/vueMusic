@@ -1,6 +1,6 @@
 ![logo](_media/icon.svg)
 
-# 夜子音乐
+# 觉非音乐
 
 > 一个基于Vue开发的混合Web 音乐App
 

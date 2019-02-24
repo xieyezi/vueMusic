@@ -37,9 +37,9 @@
         },
         mounted() {
             setTimeout(() => {
-                this._setSliderWidth()
-                this._initDots()
-                this._initSlider()
+                this._setSliderWidth();
+                this._initDots();
+                this._initSlider();
 
                 if (this.autoPlay) {
                     this._play()
@@ -50,7 +50,7 @@
                 if (!this.slider || !this.slider.enabled) {
                     return
                 }
-                clearTimeout(this.resizeTimer)
+                clearTimeout(this.resizeTimer);
                 this.resizeTimer = setTimeout(() => {
                     if (this.slider.isInTransition) {
                         this._onScrollEnd()
@@ -64,20 +64,20 @@
             })
         },
         activated() {
-            this.slider.enable()
-            let pageIndex = this.slider.getCurrentPage().pageX
-            this.slider.goToPage(pageIndex, 0, 0)
-            this.currentPageIndex = pageIndex
+            this.slider.enable();
+            let pageIndex = this.slider.getCurrentPage().pageX;
+            this.slider.goToPage(pageIndex, 0, 0);
+            this.currentPageIndex = pageIndex;
             if (this.autoPlay) {
                 this._play()
             }
         },
         deactivated() {
-            this.slider.disable()
+            this.slider.disable();
             clearTimeout(this.timer)
         },
         beforeDestroy() {
-            this.slider.disable()
+            this.slider.disable();
             clearTimeout(this.timer)
         },
         methods: {
@@ -88,15 +88,15 @@
                 }
             },
             _setSliderWidth(isResize) {
-                this.children = this.$refs.sliderGroup.children
+                this.children = this.$refs.sliderGroup.children;
 
-                let width = 0
-                let sliderWidth = this.$refs.slider.clientWidth
+                let width = 0;
+                let sliderWidth = this.$refs.slider.clientWidth;
                 for (let i = 0; i < this.children.length; i++) {
-                    let child = this.children[i]
-                    addClass(child, 'slider-item')
+                    let child = this.children[i];
+                    addClass(child, 'slider-item');
 
-                    child.style.width = sliderWidth + 'px'
+                    child.style.width = sliderWidth + 'px';
                     width += sliderWidth
                 }
                 if (this.loop && !isResize) {
@@ -114,7 +114,7 @@
                         threshold: 0.3,
                         speed: 400
                     }
-                })
+                });
 
                 this.slider.on('scrollEnd', this._onScrollEnd)
 

@@ -90,6 +90,7 @@
                         songUrlList = response.data.data;
                         //console.log(songUrlList);
                         v.manageSongList(list,songUrlList);
+                        //sconsole.log(v.songList);
                     }
                 }).catch(error => {
                     console.log(error);

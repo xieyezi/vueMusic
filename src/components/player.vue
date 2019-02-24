@@ -204,9 +204,20 @@
                 const second = this.pad(interval % 60);
                 return `${minute}:${second}`;
             },
+            /*
+              @interval
+              根据interval计算出歌曲分秒
+             */
             formatTotalTime(interval) {
                 const minute = (interval % (1000 * 60 * 60)) / (1000 * 60) | 0;
-                const second = ((interval % (1000 * 60)) / 1000) | 0;
+                let secondChange = ((interval % (1000 * 60)) / 1000) | 0;
+                //如果秒小于10,就在前面加上0
+                if (secondChange < 10) {
+                    secondChange = '0'+ secondChange;
+                }
+                const second = secondChange;
+                // console.log("分钟数："+minute);
+                // console.log("秒数："+ second);
                 return `${minute}:${second}`;
             },
             prev() {
@@ -215,6 +226,7 @@
                 }
                 let index = this.currentIndex - 1;
                 if (index === -1) {
+                    //到第一首就切换到最后一首
                     index = this.playList.length - 1;
                 }
                 this.setCurrentIndex(index);
@@ -230,6 +242,7 @@
                 }
                 let index = this.currentIndex + 1;
                 if (index === this.playList.length) {
+                    //到最后一首就切到第一首
                     index = 0;
                 }
                 this.setCurrentIndex(index);

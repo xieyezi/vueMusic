@@ -49,7 +49,7 @@
                         if (response.data.code === 200) {
                             v.singerList = response.data.list.artists;
                             /*
-                            * 这里在第一个位置插入我的信息，嘻嘻
+                            * 这里在第一个位置插入写夜子的信息，嘻嘻
                             * */
                             let xieyezi = {
                                 id: 12478216,

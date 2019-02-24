@@ -46,10 +46,11 @@
             //     const rect = this.$refs.progressBar.getBoundingClientRect()
             //     const offsetWidth = e.pageX - rect.left
             //     this._offset(offsetWidth)
-            //     // 这里当我们点击 progressBtn 的时候，e.offsetX 获取不对
+            //     // 这里当我点击 progressBtn 的时候，e.offsetX 获取不对
             //     // this._offset(e.offsetX)
             //     this._triggerPercent()
             // },
+            //计算出滑动进度条的百分比
             _triggerPercent() {
                 const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth;
                 const percent = this.$refs.progress.clientWidth / barWidth;

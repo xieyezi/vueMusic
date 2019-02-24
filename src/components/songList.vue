@@ -24,6 +24,7 @@
             }
         },
         methods:{
+            //为前9首加上标号"0"
             pad(num, n = 2) {
                 let len = num.toString().length;
                 while (len < n) {
