@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'icon';
-  src:  url('../fonts/icon.eot?9f1yyw');
-  src:  url('../fonts/icon.eot?9f1yyw#iefix') format('embedded-opentype'),
-    url('../fonts/icon.ttf?9f1yyw') format('truetype'),
-    url('../fonts/icon.woff?9f1yyw') format('woff'),
-    url('../fonts/icon.svg?9f1yyw#icon') format('svg');
+  font-family: 'musicicon';
+  src:  url('../fonts/musicicon.eot?n97wl5');
+  src:  url('../fonts/musicicon.eot?n97wl5#iefix') format('embedded-opentype'),
+    url('../fonts/musicicon.ttf?n97wl5') format('truetype'),
+    url('../fonts/musicicon.woff?n97wl5') format('woff'),
+    url('../fonts/musicicon.svg?n97wl5#musicicon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icon' !important;
+  font-family: 'musicicon' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -24,63 +24,71 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-playlist:before {
-  content: "\e90b";
-  color: #69f;
-}
-.icon-back:before {
-  content: "\e900";
-  color: #69f;
-}
 .icon-close:before {
-  content: "\e901";
-  color: #87cad8;
-}
-.icon-delete:before {
-  content: "\e902";
-  color: #87cad8;
-}
-.icon-favorite:before {
-  content: "\e903";
-  color: #d81e06;
-}
-.icon-loop:before {
-  content: "\e904";
-  color: #87cad8;
-}
-.icon-next:before {
-  content: "\e905";
-  color: #87cad8;
-}
-.icon-not-favorite:before {
-  content: "\e906";
-  color: #87cad8;
-}
-.icon-pause-mini:before {
-  content: "\e907";
-  color: #69f;
-}
-.icon-pause:before {
-  content: "\e908";
-  color: #87cad8;
+  content: "\e90e";
+  color: #fff;
 }
 .icon-play-mini:before {
-  content: "\e909";
-  color: #69f;
+  content: "\e900";
+  color: #fff;
 }
-.icon-play:before {
-  content: "\e90a";
-  color: #87cad8;
+.icon-pause-mini:before {
+  content: "\e901";
+  color: #fff;
 }
-.icon-prev:before {
-  content: "\e90c";
-  color: #87cad8;
+.icon-playlist:before {
+  content: "\e902";
+  color: #fff;
 }
-.icon-random:before {
+.icon-favorite:before {
   content: "\e90d";
-  color: #87cad8;
+  color: #d81e06;
+}
+.icon-not-favorite:before {
+  content: "\e903";
+  color: #fff;
+}
+.icon-user:before {
+  content: "\e904";
+  color: #515151;
 }
 .icon-sequence:before {
-  content: "\e90e";
-  color: #87cad8;
+  content: "\e905";
+  color: #fff;
+}
+.icon-search:before {
+  content: "\e906";
+  color: #fff;
+}
+.icon-random:before {
+  content: "\e907";
+  color: #fff;
+}
+.icon-prev:before {
+  content: "\e908";
+  color: #fff;
+}
+.icon-play:before {
+  content: "\e909";
+  color: #fff;
+}
+.icon-pause:before {
+  content: "\e90a";
+  color: #fff;
+}
+.icon-next:before {
+  content: "\e90b";
+  color: #fff;
+}
+.icon-loop:before {
+  content: "\e90c";
+  color: #fff;
+}
+.icon-delete:before {
+  content: "\e90f";
+  color: #fff;
+}
+.icon-back:before {
+  content: "\e911";
+  color: #fff;
 }

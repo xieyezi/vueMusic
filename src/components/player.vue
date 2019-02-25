@@ -12,7 +12,7 @@
                 </div>
                 <div class="top">
                     <div class="back" @click="back">
-                        <i class="icon-back"></i>
+                        <i class="icon-close"></i>
                     </div>
                     <h1 class="title" v-html="currentSong.name"></h1>
                     <h2 class="subtitle" v-html="currentSong.ar"></h2>
@@ -27,7 +27,6 @@
                     </div>
                 </div>
                 <div class="bottom">
-
                     <div class="progress-wrapper">
                         <span class="time time-l">{{format(currentTime)}}</span>
                         <div class="progress-bar-wrapper">
@@ -36,8 +35,8 @@
                         <span class="time time-r">{{formatTotalTime(currentSong.time)}}</span>
                     </div>
                     <div class="operators">
-                        <div class="icon i-left">
-                            <i class="icon-sequence"></i>
+                        <div class="icon i-left" @click="changeMode">
+                            <i :class="iconMode"></i>
                         </div>
                         <div class="icon i-left" :class="disableCls">
                             <i class="icon-prev" @click="prev"></i>
@@ -55,7 +54,6 @@
                 </div>
             </div>
         </transition>
-
         <transition name="mini">
             <div class="mini-player" v-show="!fullScreen" @click="open">
                 <div class="icon">
@@ -73,7 +71,9 @@
                 </div>
             </div>
         </transition>
-        <audio :src="currentSong.songURL" ref="audio" @canplay="ready" @error="error" @timeupdate="updateTime"></audio>
+        <audio :src="currentSong.songURL" ref="audio" @canplay="ready"
+               @ended="end"
+               @error="error" @timeupdate="updateTime"></audio>
     </div>
 </template>
 
@@ -81,6 +81,8 @@
     import {mapGetters, mapMutations} from 'vuex'
     import animations from 'create-keyframe-animation'
     import ProgressBar from './progress-bar'
+    import {playMode} from '../common/js/config'
+    import {shuffle} from '../common/js/util'
 
     export default {
         name: "player",
@@ -97,6 +99,9 @@
             miniIcon() {
                 return this.playing ? 'icon-play-mini' : 'icon-pause-mini'
             },
+            iconMode() {
+                return this.mode === playMode.sequence ? 'icon-sequence' : this.mode === playMode.loop ? 'icon-loop' : 'icon-random'
+            },
             cdCls() {
                 return this.playing ? 'play' : ' play pause'
             },
@@ -112,7 +117,9 @@
                 'playList',
                 'currentSong',
                 'playing',
-                'currentIndex'
+                'currentIndex',
+                'mode',
+                'sequenceList'
             ])
         },
         methods: {
@@ -213,7 +220,7 @@
                 let secondChange = ((interval % (1000 * 60)) / 1000) | 0;
                 //如果秒小于10,就在前面加上0
                 if (secondChange < 10) {
-                    secondChange = '0'+ secondChange;
+                    secondChange = '0' + secondChange;
                 }
                 const second = secondChange;
                 // console.log("分钟数："+minute);
@@ -251,6 +258,48 @@
                 }
                 this.songReady = false;
             },
+            //歌曲播放完成自动播放下一曲
+            end(){
+                //如果播放模式为单曲循环，则不切换歌曲
+                if (this.mode ===playMode.loop) {
+                    this.loop();
+                }else {
+                    this.next();
+                }
+            },
+            //单曲循环
+            loop(){
+                //将当前时间重置为0，然后再调用播放函数
+                this.$refs.audio.currentTime = 0;
+                this.$refs.audio.play();
+            },
+            //更改歌曲播放模式
+            changeMode() {
+                const mode = (this.mode + 1) % 3;
+                this.setPlayMode(mode);
+                //重置歌曲播放列表
+                let list = null;
+                // console.log(this.sequenceList);
+                if (mode === playMode.random) {
+                    list = shuffle(this.sequenceList);
+                } else {
+                    list = this.sequenceList;
+                }
+                this.resetCurrentIndex(list);
+                this.setPlayList(list);
+
+            },
+            /**
+             * @list
+             * 重置CurrentIndex,模式切换的时候，从新的播放列表里面找出当前播放歌曲的index
+             * 保证模式切换时，当前歌曲不发生变化
+             */
+            resetCurrentIndex(list) {
+                let index = list.findIndex((item) => {
+                    return item.id === this.currentSong.id;
+                });
+                this.setCurrentIndex(index);
+            },
             ready() {
                 this.songReady = true;
             },
@@ -269,12 +318,17 @@
             ...mapMutations({
                 setFullScreen: 'SET_FULL_SCREEN',
                 setPlayingState: 'SET_PLAYING_STATE',
-                setCurrentIndex: 'SET_CURRENT_INDEX'
+                setCurrentIndex: 'SET_CURRENT_INDEX',
+                setPlayMode: 'SET_PLAY_MODE',
+                setPlayList: 'SET_PLAYLIST'
             })
         },
         watch: {
-            currentSong() {
+            currentSong(newSong, oldSong) {
                 var v = this;
+                if (newSong.id === oldSong.id) {
+                    return;
+                }
                 v.$nextTick(() => {
                     v.$refs.audio.play();
                 });
@@ -298,11 +352,6 @@
 
 <style scoped>
     @import '../common/css/icon.css';
-
-    .player {
-
-    }
-
     .normal-player {
         position: fixed;
         left: 0;
@@ -336,12 +385,10 @@
         z-index: 50;
     }
 
-    .normal-player .top .back .icon-back {
+    .normal-player .top .back .icon-close {
         display: block;
         padding: 9px;
-        font-size: 22px;
-        /*color: $color-theme*/
-        transform: rotate(-90deg);
+        font-size: 24px;
     }
 
     .normal-player .top .title {

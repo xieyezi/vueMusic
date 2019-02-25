@@ -6,7 +6,7 @@
         </router-link>
 
 
-        <router-link tag="div"  class="tab-item" :to="{ name: 'singer', params: {} }" exact>
+        <router-link tag="div" class="tab-item" :to="{ name: 'singer', params: {} }" exact>
                 <span class="tab-link">
                     <span class="tab-link">歌手</span>
                 </span>
@@ -38,7 +38,7 @@
         height: 44px;
         line-height: 44px;
         font-size: 14px;
-        background: rgb(135,203,216);
+        background: rgb(135, 203, 216);
     }
 
     .tab-item {
@@ -48,11 +48,11 @@
 
     .tab-link {
         padding-bottom: 5px;
-        color: rgba(0,0,0,0.8);
+        color: rgba(0, 0, 0, 0.8);
     }
 
-    .active .tab-link{
-        color: rgba(255,255,255,0.8);
+    .active .tab-link {
+        color: rgba(255, 255, 255, 0.8);
         border-bottom: 2px solid #fff;
     }
 </style>

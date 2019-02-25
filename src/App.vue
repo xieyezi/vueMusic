@@ -7,7 +7,7 @@
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
-        <player></player>
+            <player></player>
     </div>
 </template>
 <script>
