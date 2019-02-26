@@ -280,14 +280,15 @@
                 //重置歌曲播放列表
                 let list = null;
                 // console.log(this.sequenceList);
+                ////如果状态为随机播放，则将原有列表洗牌，否则就为顺序列表
                 if (mode === playMode.random) {
                     list = shuffle(this.sequenceList);
                 } else {
                     list = this.sequenceList;
                 }
+                //重置CurrentIndex和播放列表
                 this.resetCurrentIndex(list);
                 this.setPlayList(list);
-
             },
             /**
              * @list

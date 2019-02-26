@@ -6,9 +6,9 @@
         <h1 class="title" v-html="title"></h1>
         <div class="bg-image" :style="bgStyle" ref="bgImage">
             <div class="play-wrapper">
-                <div class="play" v-show="songList.length>0">
-                    <i class="icon-pause"></i>
-                    <sapn class="text">随机播放全部</sapn>
+                <div class="play" v-show="songList.length>0" ref="playBtn" @click="random">
+                    <i class="icon-themeplay"></i>
+                    <p class="text">随机播放全部</p>
                 </div>
             </div>
             <div class="filter" ref="filter"></div>
@@ -88,8 +88,15 @@
                     index: index
                 })
             },
+            //点击随机播放全部
+            random(){
+                this.randomPlay({
+                    list:this.songList,
+                });
+            },
             ...mapActions([
-                'selectPlay'
+                'selectPlay',
+                'randomPlay'
             ])
         },
         watch: {
@@ -210,7 +217,7 @@
         font-size: 0;
     }
 
-    .play .icon-pause {
+    .play .icon-themeplay {
         display: inline-block;
         vertical-align: middle;
         margin-right: 6px;

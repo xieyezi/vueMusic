@@ -33,4 +33,4 @@ module.exports = {
             .set('views',resolve('src/views'))
             .set('common',resolve('src/common'))
     }
-}
+};
