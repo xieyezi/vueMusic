@@ -33,12 +33,14 @@
     import Loading from "./loading";
     import {mapActions} from 'vuex'
     import {prefixStyle} from '../common/js/dom'
+    import {playlistMixin} from '../common/js/mixin'
 
     const RESERVED_HEIGHT = 120;
     const transform = prefixStyle('transform');
     const backdrop = prefixStyle('backdrop-filter');
 
     export default {
+        mixins: [playlistMixin],
         name: "musicList",
         components: {
             SongList,
@@ -74,7 +76,11 @@
             }
         },
         methods: {
-
+            handlePlayList(playList){
+                const bottom = playList.length > 0? '60px' :'';
+                this.$refs.list.$el.style.bottom = bottom;
+                this.$refs.list.refresh();
+            },
             back() {
                 this.$router.back();
             },
@@ -89,9 +95,9 @@
                 })
             },
             //点击随机播放全部
-            random(){
+            random() {
                 this.randomPlay({
-                    list:this.songList,
+                    list: this.songList,
                 });
             },
             ...mapActions([

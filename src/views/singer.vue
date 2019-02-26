@@ -1,5 +1,5 @@
 <template>
-    <div class="singer">
+    <div class="singer" ref="singer">
         <div class="singer-Warpper" ref="singerWarpper">
             <div>
                 <p class="title">热门</p>
@@ -29,8 +29,10 @@
     import BScroll from 'better-scroll';
     import Loading from 'components/loading'
     import {mapMutations} from 'vuex'
+    import {playlistMixin} from '../common/js/mixin'
 
     export default {
+        // mixins: [playlistMixin],
         name: "singer",
         data() {
             return {
@@ -41,6 +43,11 @@
             Loading
         },
         methods: {
+            // handlePlayList(playList) {
+            //     const bottom = playList.length > 0 ? '60px' : '';
+            //     this.$refs.singerWarpper.style.bottom = bottom;
+            //     this.scroll.refresh();
+            // },
             loadSinger() {
                 var v = this;
                 v.$axios.get('api/toplist/artist')
@@ -69,7 +76,6 @@
                                 } else {
                                     this.scroll.refresh();
                                 }
-                                ;
                             });
                         }
                     })

@@ -25,6 +25,13 @@
                             </div>
                         </div>
                     </div>
+                    <Scroll class="middle-r" ref="lyricList" :data ="currentSongLyric && currentSongLyric.lines">
+                        <div class="lyric-wrapper">
+                            <div v-if="currentSongLyric">
+                                <p ref="lyricLine" :class="{'current':currentLineNum === index}" class="text" :key="index" v-for="(line,index) in currentSongLyric.lines">{{line.lrc}}</p>
+                            </div>
+                        </div>
+                    </Scroll>
                 </div>
                 <div class="bottom">
                     <div class="progress-wrapper">
@@ -83,13 +90,17 @@
     import ProgressBar from './progress-bar'
     import {playMode} from '../common/js/config'
     import {shuffle} from '../common/js/util'
+    import  Scroll from '../components/scroll'
 
     export default {
         name: "player",
         data() {
             return {
                 songReady: false,
-                currentTime: 0
+                currentTime: 0,
+                currentLyric: [],
+                currentSongLyric:null,
+                currentLineNum:0,
             }
         },
         computed: {
@@ -128,6 +139,68 @@
             },
             open() {
                 this.setFullScreen(true);
+            },
+            //获取当前播放歌曲的歌词
+            getLyric() {
+                var v = this;
+                let lyric = '';
+                let lyricLine = [];
+                v.$axios.get('api/lyric', {
+                    params: {
+                        id: v.currentSong.id,
+                    }
+                }).then(response => {
+                    if (response.data.code === 200) {
+                        // v.currentLyric = response.data.lrc.lyric;
+                        lyric = response.data.lrc.lyric;
+                        lyricLine = v.divideLyric(lyric);
+                        lyricLine.pop();
+                        //console.log(lyricLine);
+                        v.resolveLyricTime(lyricLine);
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
+            },
+            getCurrentSongLyric(){
+                var v = this;
+                v.getLyric();
+                let temp = {
+                    curLine:0,
+                    lines:v.currentLyric,
+                };
+                v.currentSongLyric = temp;
+                console.log(v.currentSongLyric);
+            },
+            /**
+             * @lyric
+             * 获得的歌词为字符串形式，将其处理为数组形式
+             * */
+            divideLyric(lyric) {
+                return lyric.split("\n");
+            },
+            /**
+             *@lyricLine
+             * 根据每行歌词将时间换成毫秒
+             * 数据结构为{
+             *     time: xxxx
+             *     lyric:xxxx
+             * }
+             * */
+            resolveLyricTime(lyricLine) {
+                var v = this;
+                lyricLine.forEach((item) => {
+                    let line = item.substring(1, item.indexOf("]"));
+                    let lyricTemp = item.substring(item.indexOf("]")+2);
+                    let mintue = line.substring(0, 2);
+                    let second = line.substring(3, line.length - 1);
+                    let lyricLine = {
+                        time: (mintue * 60 * 1000)+ (second *1000),
+                        lrc: lyricTemp,
+                    };
+                    v.currentLyric.push(lyricLine);
+                });
+                //console.log(v.currentLyric);
             },
             enter(el, done) {
                 const {x, y, scale} = this._getPosAndScale();
@@ -212,10 +285,11 @@
                 return `${minute}:${second}`;
             },
             /*
-              @interval
+              @interval 毫秒单位
               根据interval计算出歌曲分秒
              */
             formatTotalTime(interval) {
+                // console.log("总时间:"+ interval);
                 const minute = (interval % (1000 * 60 * 60)) / (1000 * 60) | 0;
                 let secondChange = ((interval % (1000 * 60)) / 1000) | 0;
                 //如果秒小于10,就在前面加上0
@@ -259,16 +333,16 @@
                 this.songReady = false;
             },
             //歌曲播放完成自动播放下一曲
-            end(){
+            end() {
                 //如果播放模式为单曲循环，则不切换歌曲
-                if (this.mode ===playMode.loop) {
+                if (this.mode === playMode.loop) {
                     this.loop();
-                }else {
+                } else {
                     this.next();
                 }
             },
             //单曲循环
-            loop(){
+            loop() {
                 //将当前时间重置为0，然后再调用播放函数
                 this.$refs.audio.currentTime = 0;
                 this.$refs.audio.play();
@@ -332,6 +406,7 @@
                 }
                 v.$nextTick(() => {
                     v.$refs.audio.play();
+                    v.getCurrentSongLyric();
                 });
             },
             playing(newPlaying) {
@@ -343,16 +418,20 @@
             }
         },
         components: {
-            ProgressBar
+            ProgressBar,
+            Scroll
+        },
+        mounted() {
+
         },
         created() {
-
         }
     }
 </script>
 
 <style scoped>
     @import '../common/css/icon.css';
+
     .normal-player {
         position: fixed;
         left: 0;

@@ -82,7 +82,9 @@
     import Slider from 'components/slider'
     import Scroll from 'components/scroll'
     import Loading from 'components/loading'
+    import {playlistMixin} from '../common/js/mixin'
     export default {
+        mixins: [playlistMixin],
         name: "recommend",
         data() {
             return {
@@ -94,6 +96,11 @@
             }
         },
         methods: {
+            handlePlayList(playList){
+                const bottom = playList.length > 0 ? '60px' :'';
+                this.$refs.recommend.style.bottom = bottom;
+                this.$refs.scroll.refresh();
+            },
             loadBanner() {
                 var v = this;
                 v.$axios.get('api/banner')
