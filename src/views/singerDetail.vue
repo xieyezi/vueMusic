@@ -76,6 +76,7 @@
                 var songsIds = '';
                 var songUrlList = [];
                 for (let i = 0; i < list.length; i++) {
+                    //console.log(list[i].id);
                     songsIds += list[i].id +',';
                 }
                 songsIds = songsIds.substring(0,songsIds.length-1);
@@ -117,6 +118,7 @@
                     for (let m = 0;m<list2.length;m++){
                         if (list1[i].id === list2[m].id) {
                             song.songURL = list2[m].url;
+                            break;
                         }
                     }
                     v.songList.push(song);

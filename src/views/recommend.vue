@@ -18,8 +18,9 @@
                     <h1 class="list-title" v-show="recommendList.length>0">热门歌单推荐</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
-                            <Col span="8" v-for="item in recommendList" style="margin-bottom: 10px;">
-                                <li class="item" @click="openRecommendList(item.id)">
+                            <Col span="8" :key="index" v-if="index < 6" v-for="(item,index) in recommendList"
+                                 style="margin-bottom: 10px;">
+                                <li class="item" @click="openRecommendList(item)">
                                     <div class="icon">
                                         <img @load="loadImage" width="100%" height="100%" v-lazy="item.picUrl">
                                     </div>
@@ -34,15 +35,15 @@
                 </div>
 
                 <div class="recommend-list">
-                    <h1 class="list-title" v-show="newSongList.length>0">最新音乐大碟</h1>
+                    <h1 class="list-title" v-show="recommendList.length>0">精品歌单推荐</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
-                            <Col span="8" v-if="index < 6" v-for="(item,index) in newSongList"
+                            <Col span="8" v-if="index > 5 && index < 12" :key="index" v-for="(item,index) in recommendList"
                                  style="margin-bottom: 10px;">
-                                <li class="item">
+                                <li class="item" @click="openRecommendList(item)">
                                     <div class="icon">
                                         <img @load="loadImage" width="100%" height="100%"
-                                             v-lazy="item.song.album.blurPicUrl">
+                                             v-lazy="item.picUrl">
                                     </div>
                                     <div class="text">
                                         <p class="name" v-html="item.name"></p>
@@ -50,31 +51,30 @@
                                 </li>
                             </Col>
                         </Row>
-
                     </ul>
                 </div>
 
                 <div class="recommend-list">
-                    <h1 class="list-title" v-show="radioList.length>0">最热电台</h1>
+                    <h1 class="list-title" v-show="recommendList.length>0">写夜子推荐</h1>
                     <ul class="list-content">
-                        <li class="Songitem" v-for="item in radioList">
+                        <li class="Songitem" @click="openRecommendList(item)" :key="index" v-if="index>12" v-for="(item,index) in recommendList">
                             <div class="infoImg">
                                 <img @load="loadImage" v-lazy="item.picUrl" class="imgInfo"/>
                             </div>
                             <div class="info">
-                                <h2 class="name">{{item.name}}</h2>
-                                <p class="desc">{{item.copywriter}}</p>
+                                <!--<h2 class="name">{{item.name}}</h2>-->
+                                <p class="desc">{{item.name}}</p>
                             </div>
                         </li>
                     </ul>
                 </div>
 
             </div>
-            <div class="loading-container" v-show="!recommendList.length&&!newSongList.length&&!radioList.length">
+            <div class="loading-container" v-show="!recommendList.length">
                 <loading></loading>
             </div>
         </scroll>
-
+        <router-view></router-view>
     </div>
 </template>
 
@@ -83,6 +83,8 @@
     import Scroll from 'components/scroll'
     import Loading from 'components/loading'
     import {playlistMixin} from '../common/js/mixin'
+    import {mapMutations} from 'vuex'
+
     export default {
         mixins: [playlistMixin],
         name: "recommend",
@@ -96,8 +98,8 @@
             }
         },
         methods: {
-            handlePlayList(playList){
-                const bottom = playList.length > 0 ? '60px' :'';
+            handlePlayList(playList) {
+                const bottom = playList.length > 0 ? '60px' : '';
                 this.$refs.recommend.style.bottom = bottom;
                 this.$refs.scroll.refresh();
             },
@@ -116,7 +118,7 @@
             },
             loadRecommend() {
                 var v = this;
-                v.$axios.get('api/personalized?limit=6')
+                v.$axios.get('api/personalized')
                     .then(response => {
                         //console.log(response.data.result);
                         if (response.data.code === 200) {
@@ -128,35 +130,9 @@
                         console.log(error);
                     });
             },
-            loadRadio() {
-                var v = this;
-                v.$axios.get('api/personalized/djprogram')
-                    .then(response => {
-                        //console.log(response.data.result);
-                        if (response.data.code === 200) {
-                            v.radioList = response.data.result;
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            },
-            loadNewsong() {
-                var v = this;
-                v.$axios.get('api/personalized/newsong?limit=10')
-                    .then(response => {
-                        //console.log(response.data.result);
-                        if (response.data.code === 200) {
-                            v.newSongList = response.data.result;
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            },
             loadImage() {
                 if (!this.checkloaded) {
-                    this.checkloaded = true
+                    this.checkloaded = true;
                     setTimeout(() => {
                         this.$refs.scroll.refresh();
                     }, 20)
@@ -165,9 +141,15 @@
             toPlay(value) {
                 //console.log(value);
             },
-            openRecommendList(value) {
-                //console.log(value);
-            }
+            openRecommendList(disc) {
+                this.$router.push({
+                    path: `/recommend/${disc.id}`
+                });
+                this.setDisc(disc);
+            },
+            ...mapMutations({
+                setDisc: 'SET_DISC',
+            })
         },
         components: {
             Slider,
@@ -177,13 +159,12 @@
         created() {
             this.loadBanner();
             this.loadRecommend();
-            this.loadNewsong();
-            this.loadRadio();
         }
     }
 </script>
 
 <style scoped>
+
     .recommend {
         position: fixed;
         width: 100%;
@@ -210,9 +191,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-    }
-
-    .recommend-list {
     }
 
     .list-title {
@@ -250,8 +228,8 @@
     }
 
     .Songitem .imgInfo {
-        width: 120px;
-        height: 120px;
+        width: 100%;
+        height: 100%;
         border-radius: 2px;
     }
 
@@ -261,15 +239,8 @@
         flex: 2;
         margin-left: 5px;
     }
-
-    .Songitem .info .name {
-        font-size: 13px;
-        color: rgba(0, 0, 0, 0.8);
-        margin-bottom: 3px;
-    }
-
     .Songitem .info .desc {
-        font-size: 10px;
+        font-size: 12px;
     }
 
 </style>

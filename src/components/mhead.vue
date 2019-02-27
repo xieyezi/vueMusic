@@ -1,7 +1,7 @@
 <template>
     <div class="mhead">
-        <div class="icon"></div>
         <h2 class="text">️觉非音乐️</h2>
+        <div class="icon"></div>
     </div>
 </template>
 

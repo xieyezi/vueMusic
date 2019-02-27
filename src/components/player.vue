@@ -150,6 +150,7 @@
                         id: v.currentSong.id,
                     }
                 }).then(response => {
+                    //console.log(response);
                     if (response.data.code === 200) {
                         // v.currentLyric = response.data.lrc.lyric;
                         lyric = response.data.lrc.lyric;
@@ -406,6 +407,7 @@
                 }
                 v.$nextTick(() => {
                     v.$refs.audio.play();
+                    //获取歌曲歌词
                     v.getCurrentSongLyric();
                 });
             },
@@ -422,9 +424,10 @@
             Scroll
         },
         mounted() {
-
+            // console.log(this.currentSong);
         },
         created() {
+
         }
     }
 </script>
