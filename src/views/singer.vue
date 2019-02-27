@@ -1,6 +1,6 @@
 <template>
     <div class="singer" ref="singer">
-        <div class="singer-Warpper" ref="singerWarpper">
+        <scroll ref="scroll" class="singer-content" :data="singerList">
             <div>
                 <p class="title">热门</p>
                 <ul>
@@ -20,19 +20,20 @@
             <div class="loading-container" v-show="!singerList.length">
                 <loading></loading>
             </div>
-        </div>
+        </scroll>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
-    import BScroll from 'better-scroll';
+    // import BScroll from 'better-scroll';
+    import Scroll from 'components/scroll';
     import Loading from 'components/loading'
     import {mapMutations} from 'vuex'
     import {playlistMixin} from '../common/js/mixin'
 
     export default {
-        // mixins: [playlistMixin],
+        mixins: [playlistMixin],
         name: "singer",
         data() {
             return {
@@ -40,14 +41,15 @@
             }
         },
         components: {
-            Loading
+            Loading,
+            Scroll
         },
         methods: {
-            // handlePlayList(playList) {
-            //     const bottom = playList.length > 0 ? '60px' : '';
-            //     this.$refs.singerWarpper.style.bottom = bottom;
-            //     this.scroll.refresh();
-            // },
+            handlePlayList(playList) {
+                const bottom = playList.length > 0 ? '60px' : '';
+                this.$refs.singer.style.bottom = bottom;
+                this.$refs.scroll.refresh();
+            },
             loadSinger() {
                 var v = this;
                 v.$axios.get('api/toplist/artist')
@@ -66,17 +68,17 @@
                                 img1v1Url: 'http://p4.music.126.net/9Go1z81prv-7oBQq6IG1Vg==/109951163419331306.jpg',
                             };
                             v.singerList.unshift(xieyezi);
-                            v.$nextTick(() => {
-                                if (!this.scroll) {
-                                    this.scroll = new BScroll(this.$refs.singerWarpper, {
-                                        click: true,
-                                        probeType: 3
-                                    });
-                                    //console.log(this.scroll);
-                                } else {
-                                    this.scroll.refresh();
-                                }
-                            });
+                            // v.$nextTick(() => {
+                            //     if (!this.scroll) {
+                            //         this.scroll = new BScroll(this.$refs.singerWarpper, {
+                            //             click: true,
+                            //             probeType: 3
+                            //         });
+                            //         //console.log(this.scroll);
+                            //     } else {
+                            //         this.scroll.refresh();
+                            //     }
+                            // });
                         }
                     })
                     .catch(error => {
@@ -117,7 +119,7 @@
         padding-left: 5px;
     }
 
-    .singer-Warpper {
+    .singer-content {
         height: 100%;
         overflow: hidden;
     }

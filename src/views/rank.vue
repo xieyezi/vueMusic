@@ -22,7 +22,7 @@
                     <h1 class="list-title" v-show="topList.length>0">全球榜</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
-                            <Col span="8" v-if="index > 3" v-for="(item,index)  in topList" style="margin-bottom: 10px;">
+                            <Col span="8" v-if="index > 3" :key="index" v-for="(item,index)  in topList" style="margin-bottom: 10px;">
                                 <li class="item" >
                                     <div class="icon">
                                         <img @load="loadImage" width="100%" height="100%" v-lazy="item.coverImgUrl">
@@ -47,7 +47,9 @@
 <script>
     import Scroll from 'components/scroll'
     import Loading from 'components/loading'
+    import {playlistMixin} from '../common/js/mixin'
     export default {
+        mixins: [playlistMixin],
         name: "rank",
         data() {
             return {
@@ -59,6 +61,11 @@
             Loading
         },
         methods: {
+            handlePlayList(playList) {
+                const bottom = playList.length > 0 ? '60px' : '';
+                this.$refs.rank.style.bottom = bottom;
+                this.$refs.toplist.refresh();
+            },
             loadRank() {
                 var v = this;
                 v.$axios.get('api/toplist/detail')
