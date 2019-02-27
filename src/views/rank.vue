@@ -5,13 +5,13 @@
                 <div class="recommend-list">
                     <!--<h1 class="list-title" v-show="topList.length>0">官方榜</h1>-->
                     <ul class="list-content">
-                        <li class="Songitem" v-if="index < 4" v-for="(item,index) in topList">
+                        <li class="Songitem" @click="loadRankSongList(item)" v-if="index < 4" v-for="(item,index) in topList">
                             <div class="infoImg">
                                 <img @load="loadImage" v-lazy="item.coverImgUrl" class="imgInfo"/>
                             </div>
                             <div class="info">
                                 <div v-for="(song,count) in item.tracks" class="one">
-                                    <p class="song">{{count+1}}.  {{song.first}} -  {{song.second}}</p>
+                                    <p class="song">{{count+1}}. {{song.first}} - {{song.second}}</p>
                                 </div>
                             </div>
                         </li>
@@ -19,11 +19,12 @@
                 </div>
 
                 <div class="recommend-list">
-                    <h1 class="list-title" v-show="topList.length>0">全球榜</h1>
+                    <h1 class="list-title" v-show="topList.length>0">推荐榜</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
-                            <Col span="8" v-if="index > 3" :key="index" v-for="(item,index)  in topList" style="margin-bottom: 10px;">
-                                <li class="item" >
+                            <Col span="8" v-if="index > 3 && index < 10" :key="index" v-for="(item,index)  in topList"
+                                 style="margin-bottom: 10px;">
+                                <li class="item" @click="loadRankSongList(item)">
                                     <div class="icon">
                                         <img @load="loadImage" width="100%" height="100%" v-lazy="item.coverImgUrl">
                                     </div>
@@ -33,7 +34,25 @@
                                 </li>
                             </Col>
                         </Row>
+                    </ul>
+                </div>
 
+                <div class="recommend-list">
+                    <h1 class="list-title" v-show="topList.length>0">全球榜</h1>
+                    <ul class="list-content">
+                        <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
+                            <Col span="8" v-if="index > 10" :key="index" v-for="(item,index)  in topList"
+                                 style="margin-bottom: 10px;">
+                                <li class="item" @click="loadRankSongList(item)">
+                                    <div class="icon">
+                                        <img @load="loadImage" width="100%" height="100%" v-lazy="item.coverImgUrl">
+                                    </div>
+                                    <div class="text">
+                                        <p class="name" v-html="item.name"></p>
+                                    </div>
+                                </li>
+                            </Col>
+                        </Row>
                     </ul>
                 </div>
             </div>
@@ -41,6 +60,7 @@
                 <loading></loading>
             </div>
         </scroll>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -48,6 +68,8 @@
     import Scroll from 'components/scroll'
     import Loading from 'components/loading'
     import {playlistMixin} from '../common/js/mixin'
+    import {mapMutations} from 'vuex'
+
     export default {
         mixins: [playlistMixin],
         name: "rank",
@@ -81,35 +103,49 @@
             },
             loadImage() {
                 if (!this.checkloaded) {
-                    this.checkloaded = true
+                    this.checkloaded = true;
                     setTimeout(() => {
                         this.$refs.toplist.refresh();
                     }, 20)
                 }
-            }
+            },
+            loadRankSongList(rank) {
+                // console.log(rank.name);
+                this.$router.push({
+                    path: `/rank/${rank.id}`
+                });
+                this.setRank(rank);
+            },
+            ...mapMutations({
+                setRank: 'SET_RANK',
+            })
         },
         mounted() {
 
         },
         created() {
             this.loadRank();
+            // this.loadRankSongList("19723756");
         }
     }
 </script>
 
 <style scoped>
-    .rank{
+    .rank {
         position: fixed;
         width: 100%;
         top: 88px;
         bottom: 0;
     }
-    .toplist{
+
+    .toplist {
         height: 100%;
         overflow: hidden;
     }
+
     .recommend-list {
     }
+
     .list-title {
         height: 60px;
         line-height: 60px;
@@ -156,13 +192,15 @@
         flex: 3;
         margin-left: 8px;
     }
-    .Songitem .info .one{
+
+    .Songitem .info .one {
         padding: 6px 0px 6px 0px;
     }
-    .Songitem .info .one .song{
+
+    .Songitem .info .one .song {
         width: 80%;
         overflow: hidden;
-        text-overflow:ellipsis;
+        text-overflow: ellipsis;
         white-space: nowrap;
         font-size: 13px;
     }

@@ -17,7 +17,7 @@
         <scroll @scroll="scroll" :probeType="probeType" :listenScroll="listenScroll" :data="songList" class="list"
                 ref="list">
             <div class="song-list-warpper">
-                <song-list @select="selectItem" :songs="songList"></song-list>
+                <song-list @select="selectItem" :rankflag="rankflag" :songs="songList"></song-list>
             </div>
             <div v-show="!songList.length" class="loading-container">
                 <loading></loading>
@@ -60,6 +60,10 @@
                 type: Array,
                 default: [],
                 required: true
+            },
+            rankflag: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
