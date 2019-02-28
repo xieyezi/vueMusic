@@ -408,7 +408,7 @@
                 v.$nextTick(() => {
                     v.$refs.audio.play();
                     //获取歌曲歌词
-                    v.getCurrentSongLyric();
+                    // v.getCurrentSongLyric();
                 });
             },
             playing(newPlaying) {
