@@ -1,17 +1,16 @@
 <template>
     <div class="mhead">
-        <h2 class="text">️觉非音乐️</h2>
-        <div class="icon"></div>
+        <h2 class="text">觉非音乐</h2>
+        <div class="iconimg"></div>
     </div>
 </template>
 
 <script>
-    // @ is an alias to /src
-
     export default {
-        name: 'mhead'
+        name: "mhead"
     }
 </script>
+
 <style scoped>
     .mhead {
         position: relative;
@@ -22,11 +21,11 @@
         background: rgb(135, 203, 216);
     }
 
-    .mhead .icon {
+    .mhead .iconimg {
         position: absolute;
         display: inline-block;
-        margin-top: 8px;
-        right: 15px;
+        margin-top: 6px;
+        right: 10px;
         width: 30px;
         height: 32px;
         border-radius: 50%;
