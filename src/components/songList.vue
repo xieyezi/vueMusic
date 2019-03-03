@@ -85,6 +85,7 @@
     }
 
     .content .info {
+        width: 90%;
     }
 
     .content .info .name {

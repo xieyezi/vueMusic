@@ -5,9 +5,6 @@
             <input :placeholder="placeholder" v-model="query" class="box"/>
             <i v-show="query" @click="clear" class="icon-delete"></i>
         </div>
-        <div class="searchInfo">
-            <p v-show="query">搜索 "{{query}}"</p>
-        </div>
     </div>
 </template>
 
@@ -67,7 +64,7 @@
         flex: 1;
         margin: 0 5px;
         line-height: 18px;
-        background: rgba(135, 203, 216, 0.1);
+        background: rgba(135, 203, 216, 0.05);
         color: #666666;
         font-size: 14px;
         outline: 0;

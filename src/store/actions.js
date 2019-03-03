@@ -8,8 +8,8 @@ import {shuffle} from "../common/js/util";
  * @param song
  * 当点击随机播放时，找出顺序播放时歌曲在随机播放列表里面的下标
  */
-function findIndex(list,song) {
-    return list.findIndex((item)=>{
+function findIndex(list, song) {
+    return list.findIndex((item) => {
         return item.id === song.id;
     })
 }
@@ -20,9 +20,9 @@ export const selectPlay = function ({commit, state}, {list, index}) {
     if (state.mode === playMode.random) {
         let randomList = shuffle(list);
         commit(types.SET_PLAYLIST, randomList);
-        index = findIndex(randomList,list[index]);
+        index = findIndex(randomList, list[index]);
 
-    }else {
+    } else {
         commit(types.SET_PLAYLIST, list);
     }
     commit(types.SET_CURRENT_INDEX, index);
@@ -40,6 +40,47 @@ export const randomPlay = function ({commit}, {list}) {
     let randomList = shuffle(list);
     commit(types.SET_PLAYLIST, randomList);
     commit(types.SET_CURRENT_INDEX, 0);
+    commit(types.SET_FULL_SCREEN, true);
+    commit(types.SET_PLAYING_STATE, true);
+};
+
+/***
+ * 插入歌曲到当前播放列表
+ */
+export const insertSong = function ({commit, state}, {song}) {
+    let playList = state.playList;
+    let sequenceList = state.sequenceList;
+    let currentIndex = state.currentIndex;
+    //记录当前歌曲
+    let currentSong = playList[currentIndex];
+    //查找播放列表中是否已经有待插入歌曲
+    let fpIndex = findIndex(playList, song);
+    //插入歌曲，索引加1
+    currentIndex++;
+    playList.splice(currentIndex, 0, song);
+    //如果已经存在，插入后则将其删除
+    if (fpIndex > -1) {
+        //如果当前插入的序号大于列表中的序号
+        if (currentIndex > fpIndex) {
+            playList.splice(fpIndex, 1);
+            currentIndex--;
+        } else {
+            playList.splice(fpIndex + 1, 1);
+        }
+    }
+    let currentSIndex = findIndex(sequenceList, currentSong) + 1;
+    let fsIndex = findIndex(sequenceList, song);
+    sequenceList.splice(currentSIndex, 0, song);
+    if (fsIndex > -1) {
+        if (currentSIndex > fsIndex) {
+            sequenceList.splice(fsIndex, 1);
+        } else {
+            sequenceList.splice(fsIndex + 1, 1);
+        }
+    }
+    commit(types.SET_PLAYLIST, playList);
+    commit(types.SET_SEQUENCE_LIST, sequenceList);
+    commit(types.SET_CURRENT_INDEX, currentIndex);
     commit(types.SET_FULL_SCREEN, true);
     commit(types.SET_PLAYING_STATE, true);
 };

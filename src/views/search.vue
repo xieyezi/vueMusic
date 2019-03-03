@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div class="search-result" v-show=" query">
+        <div class="search-result" v-show="query" ref="searchResult">
             <suggest :query="query"></suggest>
         </div>
     </div>
@@ -38,6 +38,15 @@
             Suggest
         },
         methods: {
+            // handlePlaylist(playlist) {
+            //     const bottom = playlist.length > 0 ? '60px' : '';
+            //
+            //     this.$refs.searchResult.style.bottom = bottom;
+            //     this.$refs.suggest.refresh();
+            //     //
+            //     // this.$refs.shortcutWrapper.style.bottom = bottom;
+            //     // this.$refs.shortcut.refresh();
+            // },
             loadHotSearch() {
                 var v = this;
                 v.$axios.get('api/search/hot')
@@ -52,7 +61,7 @@
                     });
             },
             addQuery(query) {
-                this.$refs.searchBox.setQuery(query)
+                this.$refs.searchBox.setQuery(query);
             },
             onQueryChange(query){
                 this.query = query;
@@ -136,7 +145,7 @@
     .search-result {
         position: fixed;
         width: 100%;
-        top: 178px;
+        top: 175px;
         bottom: 0;
     }
 </style>

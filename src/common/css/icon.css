@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'musicicon';
-  src:  url('../fonts/musicicon.eot?hati1u');
-  src:  url('../fonts/musicicon.eot?hati1u#iefix') format('embedded-opentype'),
-    url('../fonts/musicicon.ttf?hati1u') format('truetype'),
-    url('../fonts/musicicon.woff?hati1u') format('woff'),
-    url('../fonts/musicicon.svg?hati1u#musicicon') format('svg');
+  src:  url('../fonts/musicicon.eot?attlgy');
+  src:  url('../fonts/musicicon.eot?attlgy#iefix') format('embedded-opentype'),
+    url('../fonts/musicicon.ttf?attlgy') format('truetype'),
+    url('../fonts/musicicon.woff?attlgy') format('woff'),
+    url('../fonts/musicicon.svg?attlgy#musicicon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -40,12 +40,12 @@
   content: "\e902";
   color: #fff;
 }
-.icon-delete1:before {
-  content: "\e912";
+.icon-music:before {
+  content: "\e913";
   color: #bfbfbf;
 }
-.icon-search1:before {
-  content: "\e913";
+.icon-delete1:before {
+  content: "\e912";
   color: #bfbfbf;
 }
 .icon-themeplay:before {
