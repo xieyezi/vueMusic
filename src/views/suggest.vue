@@ -127,7 +127,7 @@
              */
             loadSongUrl(song) {
                 var v = this;
-                v.$axios.get('api/song/url', {
+                return v.$axios.get('api/song/url', {
                     params: {
                         id: song.id
                     }
@@ -135,8 +135,8 @@
                     //console.log(response);
                     if (response.data.code === 200) {
                         v.insertSongUrl = response.data.data[0].url;
-                        console.log("异步请求里面的地址:")
-                        console.log(v.insertSongUrl);
+                        // console.log("异步请求里面的地址:");
+                        // console.log(v.insertSongUrl);
                     }
                 }).catch(error => {
                     console.log(error);
@@ -145,7 +145,7 @@
             loadSongDetail(song) {
                 var v = this;
                 let songDetail = {};
-                v.$axios.get('api/song/detail', {
+                return v.$axios.get('api/song/detail', {
                     params: {
                         ids: song.id
                     }
@@ -155,26 +155,32 @@
                         songDetail = response.data.songs[0];
                         v.filterSinger(songDetail);
                         v.insertSongDetail = songDetail;
-                        //console.log(v.insertSongDetail);
                     }
                 }).catch(error => {
                     console.log(error);
                 });
             },
             selectItem(song) {
+                var v =this;
                 //先格式化歌曲，然后插入到列表
-                this.loadSongUrl(song);
-                this.loadSongDetail(song);
-                console.log("播放地址:");
-                console.log(this.insertSongUrl);
-                // console.log("歌曲详情:");
-                // console.log(this.insertSongDetail);
+                this.loadSongUrl(song).then(() => {
+                    this.loadSongDetail(song);
+                    // console.log("播放地址:");
+                    // console.log(this.insertSongUrl);
+                });
+                this.loadSongDetail(song).then(() =>{
+                    // console.log("歌曲详情:");
+                    // console.log(this.insertSongDetail);
+                   // console.log(this.insertSongUrl);
+                    v.manageSongInfo(v.insertSongUrl, v.insertSongDetail);
+                });
+
                 //this.insertSong(this.insertSong);
 
             },
             manageSongInfo(songurl, songDetail) {
-                // console.log(songDetail);
-                // console.log(songurl);
+                console.log(songDetail);
+                console.log(songurl);
                 let song = {
                     id: '',
                     name: '',
@@ -192,7 +198,7 @@
                 song.time = songDetail.dt;
                 song.songURL = songurl;
                 this.insertSong = song;
-                // console.log(this.insertSong);
+                console.log(this.insertSong);
             },
             filterSinger(song) {
                 let ret = [];
