@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" @touchmove.prevent>
         <div class="tophead">
             <MHead></MHead>
             <Tab></Tab>
