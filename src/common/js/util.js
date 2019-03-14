@@ -8,7 +8,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-//洗牌函数
+//洗牌函数,打乱歌曲顺序
 export function shuffle(arr) {
     let _arr = arr.slice();
     //保留arr,制作一个副本

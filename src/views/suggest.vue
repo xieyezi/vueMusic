@@ -65,7 +65,7 @@
                     if (response.data.code === 200) {
                         v.songCount = response.data.result.songCount;
                         v.result = response.data.result.songs;
-                        console.log(v.result);
+                        //console.log(v.result);
                         if (v.pageTotal === -1) {
                             v.pageTotal = v.songCount % (v.result.length);
                             if (v.pageTotal === 0) {
@@ -132,7 +132,7 @@
                         id: song.id
                     }
                 }).then(response => {
-                    //console.log(response);
+                    // console.log(response);
                     if (response.data.code === 200) {
                         v.insertSongUrl = response.data.data[0].url;
                         // console.log("异步请求里面的地址:");
@@ -179,8 +179,8 @@
 
             },
             manageSongInfo(songurl, songDetail) {
-                console.log(songDetail);
-                console.log(songurl);
+                //console.log(songurl);
+                // console.log(songDetail);
                 let song = {
                     id: '',
                     name: '',
@@ -198,7 +198,21 @@
                 song.time = songDetail.dt;
                 song.songURL = songurl;
                 this.insertSong = song;
-                console.log(this.insertSong);
+                /**
+                 * @insertsong 上次写到这里，点击了搜索结果中的某首歌，
+                 * 根据歌曲ID去请求detail和播放地址URL
+                 * 整合为一首歌的数据结构
+                 * {
+                 *      al: "绿色"
+                        ar: "陈雪凝"
+                        id: 1345848098
+                        imgURL: "http://p1.music.126.net/R4ZP3AJ9xV0vvw8LX7AbMA==/109951163860425334.jpg"
+                        name: "绿色"
+                        songURL: "http://m10.music.126.net/20190314200006/1bcd419bed94d47ad5aa8b7b0aec5da1/ymusic/76b4/dcbb/0a65/9198b18815ee8ce42ae368ae29276f78.mp3"
+                        time: 269590
+                 * }
+                 */
+                //console.log(this.insertSong);
             },
             filterSinger(song) {
                 let ret = [];
