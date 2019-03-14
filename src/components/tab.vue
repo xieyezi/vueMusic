@@ -38,7 +38,9 @@
         height: 44px;
         line-height: 44px;
         font-size: 14px;
-        background: rgb(135, 203, 216);
+        /*background: #87CBD8;*/
+        /*background: #ff7675;*/
+        background: #D6A2E8;
     }
 
     .tab-item {

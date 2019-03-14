@@ -22,6 +22,7 @@
   .desc{
     line-height: 20px;
     font-size: 12px;
-    color:rgba(102, 153, 204, 0.9);
+    /*color:rgba(102, 153, 204, 0.9);*/
+    color: #ff7675;;
   }
 </style>

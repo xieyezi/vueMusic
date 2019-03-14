@@ -174,7 +174,7 @@
                    // console.log(this.insertSongUrl);
                     v.manageSongInfo(v.insertSongUrl, v.insertSongDetail);
                 });
-
+                //TODO 将当前歌曲插入到播放列表，更改状态管理器
                 //this.insertSong(this.insertSong);
 
             },

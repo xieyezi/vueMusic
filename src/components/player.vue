@@ -713,7 +713,9 @@
         z-index: 180;
         width: 100%;
         height: 60px;
-        background: rgb(135, 203, 216);
+        /*background: #87CBD8;*/
+        /*background: #ff7675;*/
+        background: #D6A2E8;
     }
 
     .mini-enter-active, .mini-leave-active {

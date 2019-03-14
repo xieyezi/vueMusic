@@ -1,13 +1,18 @@
 <template>
     <div class="mhead">
         <h2 class="text">觉非音乐</h2>
-        <div class="iconimg"></div>
+        <div class="iconimg" @click="changeTheme"></div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "mhead"
+        name: "mhead",
+        methods:{
+            changeTheme(){
+
+            }
+        }
     }
 </script>
 
@@ -18,8 +23,11 @@
         width: 100%;
         text-align: center;
         color: rgba(255, 255, 255, 0.8);
-        background: rgb(135, 203, 216);
+        /*background: #87CBD8;*/
+        /*background: #ff7675;*/
+        background: #D6A2E8;
     }
+
 
     .mhead .iconimg {
         position: absolute;
