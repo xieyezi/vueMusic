@@ -15,7 +15,7 @@
                                 <Card style="height: 150px;">
                                     <div style="text-align:center">
                                         <span class="theme1-1"><Icon type="ios-log-in" /></span>
-                                        <h3>登录</h3>
+                                        <p>登录</p>
                                     </div>
                                 </Card>
                             </Col>
@@ -23,7 +23,7 @@
                                 <Card style="height: 150px;">
                                     <div style="text-align:center">
                                         <span class="theme1-1"><Icon type="ios-person-outline" /></span>
-                                        <h3>注册</h3>
+                                        <p>注册</p>
                                     </div>
                                 </Card>
                             </Col>
@@ -31,7 +31,7 @@
                                 <Card style="height: 150px;">
                                     <div style="text-align:center" @click="toChangeTheme">
                                         <span class="theme1-1"><Icon type="ios-shirt-outline" /></span>
-                                        <h3>更换皮肤</h3>
+                                        <p>更换皮肤</p>
                                     </div>
                                 </Card>
                             </Col>
@@ -39,7 +39,7 @@
                                 <Card style="height: 150px;">
                                     <div style="text-align:center">
                                         <span class="theme1-1"><Icon type="ios-information-circle-outline" /></span>
-                                        <h3>关于</h3>
+                                        <p>关于</p>
                                     </div>
                                 </Card>
                             </Col>

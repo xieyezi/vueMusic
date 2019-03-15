@@ -1,77 +1,97 @@
 <template>
     <transition name="slide">
-        <div class="theme theme1">
+        <div class="theme theme1" ref="theme">
             <div class="back" @click="back">
                 <i class="icon-back"></i>
             </div>
             <div class="choose" @click="choose">
                 <p class="choosetext">确定</p>
             </div>
-            <div class="tophead" ref="tophead">
+            <div class="tophead theme1" ref="tophead">
             </div>
             <div class="content">
-                <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
-                    <Col span="24" style="margin-bottom: 2px;margin-top: 20px;">
-                        <div ref="theme1">
-                            <Card style="height: 150px;background: #ff7675;">
-                                <div style="text-align:center" @click="chooseItem1">
-                                    <h3 class="title">桃花粉</h3>
-                                    <p class="text">云片何人画，尘侵粉色微</p>
-                                </div>
-                            </Card>
-                        </div>
-                    </Col>
-                    <Col span="24" style="margin-bottom: 2px;">
-                        <div ref="theme2">
-                            <Card style="height: 150px;background: #87cbd8;">
-                                <div style="text-align:center"  @click="chooseItem2">
-                                    <h3 class="title">绿松青</h3>
-                                    <p class="text">稍见青青色，还从柳上归</p>
-                                </div>
-                            </Card>
-                        </div>
-                    </Col>
-                    <Col span="24">
-                        <div ref="theme3">
-                            <Card style="height: 150px;background: #d6a2e8;">
-                                <div style="text-align:center"  @click="chooseItem3">
-                                    <h3 class="title">丁香紫</h3>
-                                    <p class="text">烟轻雨小，紫陌香尘少</p>
-                                </div>
-                            </Card>
-                        </div>
-                    </Col>
-                </Row>
+                <div class="preview">
+                    <div class="imgwrapper">
+                        <img :src="imgurl">
+                    </div>
+
+                </div>
+                <div class="themeitme">
+                    <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
+                        <Col span="8">
+                            <div ref="theme1">
+                                <Card style="height: 50px;background: #ff7675;">
+                                    <div style="text-align:center" @click="chooseItem1">
+                                        <p class="title">桃花粉</p>
+                                    </div>
+                                </Card>
+                            </div>
+                        </Col>
+                        <Col span="8">
+                            <div ref="theme2">
+                                <Card style="height: 50px;background: #87cbd8;">
+                                    <div style="text-align:center"  @click="chooseItem2">
+                                        <p class="title">绿松青</p>
+                                    </div>
+                                </Card>
+                            </div>
+                        </Col>
+                        <Col span="8">
+                            <div ref="theme3">
+                                <Card style="height: 50px;background: #d6a2e8;">
+                                    <div style="text-align:center"  @click="chooseItem3">
+                                        <p class="title">丁香紫</p>
+                                    </div>
+                                </Card>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
             </div>
         </div>
     </transition>
 </template>
 
 <script>
+    import {playlistMixin} from '../common/js/mixin'
     export default {
+        mixins: [playlistMixin],
         name: "theme",
+        data(){
+            return{
+                imgurl:'http://tu.027cgb.com/618013/yulan1.png'
+            }
+        },
         methods: {
+            handlePlayList(playList) {
+                const bottom = playList.length > 0 ? '60px' : '';
+                this.$refs.theme.style.bottom = bottom;
+            },
             back() {
+                this.$refs.theme1.style.border = '0';
+                this.$refs.theme2.style.border = '0';
+                this.$refs.theme3.style.border = '0';
                 this.$router.back();
             },
             choose() {
 
             },
             chooseItem1() {
-                this.$refs.theme1.style.border = 'solid 2px gray';
-                this.$refs.tophead.style.background = '#ff7675';
+                this.imgurl = 'http://tu.027cgb.com/618013/yulan1.png';
+                this.$refs.theme1.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
+
             },
             chooseItem2() {
-                this.$refs.theme2.style.border = 'solid 2px gray';
-                this.$refs.tophead.style.background = '#87cbd8';
+                this.imgurl = 'http://tu.027cgb.com/618013/yulan2.png';
+                this.$refs.theme2.style.border = 'solid 1px gray';
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme3.style.border = '0';
             },
             chooseItem3() {
-                this.$refs.theme3.style.border = 'solid 2px gray';
-                this.$refs.tophead.style.background = '#D6A2E8';
+                this.imgurl = 'http://tu.027cgb.com/618013/yulan3.png';
+                this.$refs.theme3.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme1.style.border = '0';
             }
@@ -142,15 +162,30 @@
         height: 100%;
         background: rgba(255, 255, 255, 0.9);
     }
-
-    .content .title {
-        padding-top: 30px;
-        color: white;
+    .preview{
+        width: 70%;
+        margin: 0 auto;
+        padding: 5px 0px 5px 0px;
+        /*background: #d81e06;*/
+    }
+    .preview .imgwrapper{
+        margin: 0 auto;
     }
 
-    .content .text {
-        padding-top: 10px;
+    .preview img{
+        width: auto;
+        height: auto;
+        width: 100%;
+        height: 100%;
+    }
+    .themeitme{
+        width: 70%;
+        margin: 0 auto;
+    }
+    .content .title {
+        padding-top: 5px;
         color: white;
+        font-size: 12px;
     }
 
     .slide-enter-active, .slide-leave-active {
