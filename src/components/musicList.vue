@@ -6,8 +6,10 @@
         <h1 class="title" v-html="title"></h1>
         <div class="bg-image" :style="bgStyle" ref="bgImage">
             <div class="play-wrapper">
-                <div class="play" v-show="songList.length>0" ref="playBtn" @click="random">
-                    <i class="icon-themeplay"></i>
+                <div class="play theme1" v-show="songList.length>0" ref="playBtn" @click="random">
+                    <span class="themeplay">
+                       <Icon type="ios-play-outline" />
+                    </span>
                     <p class="text">随机播放全部</p>
                 </div>
             </div>
@@ -157,7 +159,7 @@
 </script>
 
 <style scoped>
-    @import '../common/css/icon.css';
+    /*@import '../common/css/icon.css';*/
 
     .music-list {
         position: fixed;
@@ -167,6 +169,18 @@
         bottom: 0;
         right: 0;
         background: #fff;
+    }
+    .theme1{
+        color: #ff7675;
+        border: 1px solid #ff7675;
+    }
+    .theme2{
+        color: #87cbd8;
+        border: 1px solid #87cbd8;
+    }
+    .theme3{
+        color: #D6A2E8;
+        border: 1px solid #D6A2E8;
     }
 
     .back {
@@ -221,23 +235,26 @@
         padding: 7px 0;
         margin: 0 auto;
         text-align: center;
-        border: 1px solid rgb(135, 203, 216);
-        color: rgb(135, 203, 216);
+        z-index: 999;
+        /*border: 1px solid rgb(135, 203, 216);*/
+        /*color: rgb(135, 203, 216);*/
         border-radius: 100px;
         font-size: 0;
     }
 
-    .play .icon-themeplay {
+    .play .themeplay {
         display: inline-block;
         vertical-align: middle;
         margin-right: 6px;
         font-size: 16px;
+        /*color: rgb(135, 203, 216);*/
     }
 
     .play .text {
         display: inline-block;
         vertical-align: middle;
         font-size: 12px;
+        font-weight: 400;
     }
 
     .filter {

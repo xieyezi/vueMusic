@@ -1,5 +1,5 @@
 <template>
-    <div class="tab">
+    <div class="tab theme1">
 
         <router-link tag="div" class="tab-item" :to="{ name: 'recommend', params: {} }" exact>
             <span class="tab-link">推荐</span>
@@ -40,9 +40,16 @@
         font-size: 14px;
         /*background: #87CBD8;*/
         /*background: #ff7675;*/
+    }
+    .theme1{
+        background: #ff7675;
+    }
+    .theme2{
+        background: #87cbd8;
+    }
+    .theme3{
         background: #D6A2E8;
     }
-
     .tab-item {
         flex: 1;
         text-align: center;

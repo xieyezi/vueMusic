@@ -7,6 +7,8 @@ import Search from 'views/search'
 import SingerDetail from 'views/singerDetail'
 import Disc from 'views/disc'
 import RankDetail from 'views/rankDetail'
+import Menu from 'components/usermenu'
+import Theme from 'components/theme'
 
 Vue.use(Router);
 
@@ -57,6 +59,16 @@ export default new Router({
             path: '/search',
             name: 'search',
             component: Search
+        },
+        {
+            path:'/menu',
+            name:'menu',
+            component:Menu
+        },
+        {
+            path:'/theme',
+            name:'theme',
+            component:Theme
         }
     ]
 })

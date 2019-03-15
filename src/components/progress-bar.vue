@@ -1,13 +1,13 @@
 <template>
     <div class="progress-bar" ref="progressBar">
         <div class="bar-inner">
-            <div class="progress" ref="progress"></div>
+            <div class="progress theme1" ref="progress"></div>
             <div class="progress-btn-wrapper" ref="progressBtn"
                  @touchstart.prevent="progressTouchStart"
                  @touchmove.prevent="progressTouchMove"
                  @touchend="progressTouchEnd"
             >
-                <div class="progress-btn"></div>
+                <div class="progress-btn theme1"></div>
             </div>
         </div>
     </div>
@@ -93,7 +93,16 @@
     .bar-inner .progress {
         position: absolute;
         height: 100%;
-        background: rgb(135,203,216);
+        /*background: rgb(135,203,216);*/
+    }
+    .theme1{
+        background: #ff7675;
+    }
+    .theme2{
+        background: #87cbd8;
+    }
+    .theme3{
+        background: #D6A2E8;
     }
 
     .bar-inner .progress-btn-wrapper {
@@ -113,6 +122,6 @@
         height: 16px;
         border: 3px solid #fff;
         border-radius: 50%;
-        background: rgb(135,203,216);
+        /*background: rgb(135,203,216);*/
     }
 </style>

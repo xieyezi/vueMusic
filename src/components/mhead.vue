@@ -1,7 +1,9 @@
 <template>
-    <div class="mhead">
+    <div class="mhead theme1">
         <h2 class="text">觉非音乐</h2>
-        <div class="iconimg" @click="changeTheme"></div>
+        <div class="iconimg" @click="toMenu">
+            <Icon  type="md-menu" />
+        </div>
     </div>
 </template>
 
@@ -9,8 +11,10 @@
     export default {
         name: "mhead",
         methods:{
-            changeTheme(){
-
+            toMenu(){
+                this.$router.push({
+                    path: '/menu'
+                });
             }
         }
     }
@@ -25,9 +29,17 @@
         color: rgba(255, 255, 255, 0.8);
         /*background: #87CBD8;*/
         /*background: #ff7675;*/
+
+    }
+    .theme1{
+        background: #ff7675;
+    }
+    .theme2{
+        background: #87cbd8;
+    }
+    .theme3{
         background: #D6A2E8;
     }
-
 
     .mhead .iconimg {
         position: absolute;
@@ -36,8 +48,8 @@
         right: 10px;
         width: 30px;
         height: 32px;
+        font-size: 20px;
         border-radius: 50%;
-        background-image: url("../common/image/user.png");
         background-size: 28px 28px;
 
     }

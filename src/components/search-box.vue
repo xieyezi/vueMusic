@@ -1,8 +1,8 @@
 <template>
     <div class="searchBox">
-        <div class="search-box">
+        <div class="search-box theme1">
             <i class="icon-search"></i>
-            <input :placeholder="placeholder" v-model="query" class="box"/>
+            <input :placeholder="placeholder" v-model="query" class="box theme1-1"/>
             <i v-show="query" @click="clear" class="icon-delete"></i>
         </div>
     </div>
@@ -51,7 +51,7 @@
         width: 100%;
         padding: 0 6px;
         height: 40px;
-        background: rgba(135, 203, 216, 0.7);
+        /*background: rgba(135, 203, 216, 0.7);*/
         border-radius: 6px;
     }
 
@@ -64,13 +64,30 @@
         flex: 1;
         margin: 0 5px;
         line-height: 18px;
-        background: rgba(135, 203, 216, 0.05);
+        /*background: rgba(135, 203, 216, 0.05);*/
         color: #666666;
         font-size: 14px;
         outline: 0;
         border: 0;
     }
-
+    .theme1{
+        background: rgba(255,118,117,0.7);
+    }
+    .theme2{
+        background: rgba(135,203,216,0.7);
+    }
+    .theme3{
+        background: rgba(214,162,232,0.7);
+    }
+    .theme1-1{
+        background: rgba(255,118,117,0.05);
+    }
+    .theme2-1{
+        background: rgba(135,203,216,0.05);
+    }
+    .theme3-1{
+        background: rgba(214,162,232,0.05);
+    }
     input::placeholder {
         color: #666666;
     }

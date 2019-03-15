@@ -62,7 +62,7 @@
             </div>
         </transition>
         <transition name="mini">
-            <div class="mini-player" v-show="!fullScreen" @click="open">
+            <div class="mini-player theme1" v-show="!fullScreen" @click="open">
                 <div class="icon">
                     <img :class="cdCls" :src="currentSong.imgURL" width="40" height="40"/>
                 </div>
@@ -715,6 +715,15 @@
         height: 60px;
         /*background: #87CBD8;*/
         /*background: #ff7675;*/
+        /*background: #D6A2E8;*/
+    }
+    .theme1{
+        background: #ff7675;
+    }
+    .theme2{
+        background: #87cbd8;
+    }
+    .theme3{
         background: #D6A2E8;
     }
 
