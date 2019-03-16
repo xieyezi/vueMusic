@@ -199,7 +199,7 @@
     .icon-back {
         display: block;
         padding: 10px;
-        font-size: 25px;
+        font-size: 20px;
         /*//color: rgb(102, 153, 204);*/
     }
 
