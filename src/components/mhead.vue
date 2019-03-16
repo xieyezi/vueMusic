@@ -1,5 +1,5 @@
 <template>
-    <div class="mhead theme1">
+    <div class="mhead" :class="themeNumber">
         <h2 class="text">觉非音乐</h2>
         <div class="iconimg" @click="toMenu">
             <Icon  type="md-menu" />
@@ -8,8 +8,17 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     export default {
         name: "mhead",
+        computed: {
+            themeNumber() {
+                return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
+            ...mapGetters([
+                'theme',
+            ])
+        },
         methods:{
             toMenu(){
                 this.$router.push({

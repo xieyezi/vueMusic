@@ -1,19 +1,20 @@
 <template>
     <div class="progress-bar" ref="progressBar">
         <div class="bar-inner">
-            <div class="progress theme1" ref="progress"></div>
+            <div class="progress" :class="themeNumber" ref="progress"></div>
             <div class="progress-btn-wrapper" ref="progressBtn"
                  @touchstart.prevent="progressTouchStart"
                  @touchmove.prevent="progressTouchMove"
                  @touchend="progressTouchEnd"
             >
-                <div class="progress-btn theme1"></div>
+                <div class="progress-btn" :class="themeNumber"></div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     const progressBtnWidth = 16;
     //const transform = prefixStyle('transform');
     export default {
@@ -23,6 +24,14 @@
                 type: Number,
                 default: 0
             }
+        },
+        computed: {
+            themeNumber() {
+                return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
+            ...mapGetters([
+                'theme',
+            ])
         },
         methods: {
             progressTouchStart(e) {

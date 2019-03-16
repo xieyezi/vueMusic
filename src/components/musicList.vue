@@ -6,7 +6,7 @@
         <h1 class="title" v-html="title"></h1>
         <div class="bg-image" :style="bgStyle" ref="bgImage">
             <div class="play-wrapper">
-                <div class="play theme1" v-show="songList.length>0" ref="playBtn" @click="random">
+                <div class="play" :class="themeNumber" v-show="songList.length>0" ref="playBtn" @click="random">
                     <span class="themeplay">
                        <Icon type="ios-play-outline" />
                     </span>
@@ -33,7 +33,7 @@
     import Scroll from "./scroll";
     import SongList from "./songList";
     import Loading from "./loading";
-    import {mapActions} from 'vuex'
+    import {mapGetters,mapActions} from 'vuex'
     import {prefixStyle} from '../common/js/dom'
     import {playlistMixin} from '../common/js/mixin'
 
@@ -79,7 +79,13 @@
         computed: {
             bgStyle() {
                 return `background-image:url(${this.bgImage})`;
-            }
+            },
+            themeNumber() {
+                return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
+            ...mapGetters([
+                'theme',
+            ])
         },
         methods: {
             handlePlayList(playList){

@@ -1,6 +1,6 @@
 <template>
     <transition name="slide">
-        <div class="uermenu theme1">
+        <div class="uermenu" :class="themeNumber">
             <div class="back" @click="back">
                 <i class="icon-back"></i>
             </div>
@@ -14,7 +14,7 @@
                             <Col span="12" style="margin-bottom: 30px;">
                                 <Card style="height: 150px;">
                                     <div style="text-align:center">
-                                        <span class="theme1-1"><Icon type="ios-log-in" /></span>
+                                        <span :class="themeNum"><Icon type="ios-log-in" /></span>
                                         <p>登录</p>
                                     </div>
                                 </Card>
@@ -22,7 +22,7 @@
                             <Col span="12">
                                 <Card style="height: 150px;">
                                     <div style="text-align:center">
-                                        <span class="theme1-1"><Icon type="ios-person-outline" /></span>
+                                        <span :class="themeNum"><Icon type="ios-person-outline" /></span>
                                         <p>注册</p>
                                     </div>
                                 </Card>
@@ -30,7 +30,7 @@
                             <Col span="12">
                                 <Card style="height: 150px;">
                                     <div style="text-align:center" @click="toChangeTheme">
-                                        <span class="theme1-1"><Icon type="ios-shirt-outline" /></span>
+                                        <span :class="themeNum"><Icon type="ios-shirt-outline" /></span>
                                         <p>更换皮肤</p>
                                     </div>
                                 </Card>
@@ -38,7 +38,7 @@
                             <Col span="12">
                                 <Card style="height: 150px;">
                                     <div style="text-align:center">
-                                        <span class="theme1-1"><Icon type="ios-information-circle-outline" /></span>
+                                        <span :class="themeNum"><Icon type="ios-information-circle-outline" /></span>
                                         <p>关于</p>
                                     </div>
                                 </Card>
@@ -52,8 +52,20 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     export default {
         name: "usermenu",
+        computed: {
+            themeNumber() {
+                return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
+            themeNum(){
+                return this.theme === 0 ? 'theme1-1' : this.theme === 1 ? 'theme2-1' : 'theme3-1'
+            },
+            ...mapGetters([
+                'theme',
+            ])
+        },
         methods:{
             back(){
                 this.$router.back();

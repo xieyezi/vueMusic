@@ -1,16 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router);
-// import Recommend from 'views/recommend'
-// import Rank from 'views/rank'
-// import Singer from 'views/singer'
-// import Search from 'views/search'
-// import SingerDetail from 'views/singerDetail'
-// import Disc from 'views/disc'
-// import RankDetail from 'views/rankDetail'
-// import Menu from 'components/usermenu'
-// import Theme from 'components/theme'
-
 const Recommend = () => import('views/recommend');
 const Rank = () => import('views/rank');
 const Singer = () => import('views/singer');

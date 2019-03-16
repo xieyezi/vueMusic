@@ -1,5 +1,5 @@
 <template>
-    <div class="tab theme1">
+    <div class="tab" :class="themeNumber">
 
         <router-link tag="div" class="tab-item" :to="{ name: 'recommend', params: {} }" exact>
             <span class="tab-link">推荐</span>
@@ -27,8 +27,17 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     export default {
-        name: "tab"
+        name: "tab",
+        computed: {
+            themeNumber() {
+                return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
+            ...mapGetters([
+                'theme',
+            ])
+        },
     }
 </script>
 

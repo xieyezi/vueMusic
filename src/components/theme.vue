@@ -1,13 +1,13 @@
 <template>
     <transition name="slide">
-        <div class="theme theme1">
+        <div class="theme" :class="themeNumber">
             <div class="back" @click="back">
                 <i class="icon-back"></i>
             </div>
             <div class="choose" @click="changeTheme">
                 <p class="choosetext">确定</p>
             </div>
-            <div class="tophead theme1" ref="tophead">
+            <div class="tophead" :class="themeNumber" ref="tophead">
             </div>
             <div class="content" ref="theme">
                 <div class="preview">
@@ -17,7 +17,7 @@
 
                 </div>
                 <div class="themeitme">
-                    <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
+                    <Row :gutter="16" type="flex" justify="space-between" class="code-row-bg">
                         <Col span="8">
                             <div ref="theme1">
                                 <Card style="height: 50px;background: #ff7675;">
@@ -54,7 +54,7 @@
 
 <script>
     import {playlistMixin} from '../common/js/mixin'
-    import {mapMutations} from 'vuex'
+    import {mapGetters, mapMutations} from 'vuex'
 
     export default {
         mixins: [playlistMixin],
@@ -62,13 +62,20 @@
         data() {
             return {
                 imgurl: 'http://tu.027cgb.com/618013/yulan1.png',
-                theme:0 //默认为桃花粉主题
+                themeId: 0 //默认为桃花粉主题
             }
         },
-        computed: {},
+        computed: {
+            themeNumber() {
+                return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
+            ...mapGetters([
+                'theme',
+            ])
+        },
         methods: {
             handlePlayList(playList) {
-                const bottom = playList.length > 0 ? '30px' : '';
+                const bottom = playList.length > 0 ? '20px' : '';
                 this.$refs.theme.style.bottom = bottom;
             },
             back() {
@@ -79,30 +86,29 @@
                 this.$router.back();
             },
             changeTheme() {
-                console.log(this.theme);
-                this.setTheme(this.theme);
-                //  todo 已经将theme编号设置到vueX中，接下来只需在各个组件取出来判断即可
+                this.setTheme(this.themeId);
+                this.$router.back();
             },
             chooseItem1() {
                 this.imgurl = 'http://tu.027cgb.com/618013/yulan1.png';
                 this.$refs.theme1.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
-                this.theme = 0;
+                this.themeId = 0;
             },
             chooseItem2() {
                 this.imgurl = 'http://tu.027cgb.com/618013/yulan2.png';
                 this.$refs.theme2.style.border = 'solid 1px gray';
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme3.style.border = '0';
-                this.theme = 1;
+                this.themeId = 1;
             },
             chooseItem3() {
                 this.imgurl = 'http://tu.027cgb.com/618013/yulan3.png';
                 this.$refs.theme3.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme1.style.border = '0';
-                this.theme = 2;
+                this.themeId = 2;
             },
             ...mapMutations({
                 setTheme: 'SET_THEME',
@@ -160,7 +166,7 @@
     .choosetext {
         display: block;
         padding: 10px;
-        font-size: 15px;
+        font-size: 14px;
         color: white;
     }
 
@@ -199,7 +205,6 @@
     }
 
     .content .title {
-        padding-top: 5px;
         color: white;
         font-size: 12px;
     }

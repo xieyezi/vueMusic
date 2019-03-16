@@ -62,7 +62,7 @@
             </div>
         </transition>
         <transition name="mini">
-            <div class="mini-player theme1" v-show="!fullScreen" @click="open">
+            <div class="mini-player" :class="themeNumber" v-show="!fullScreen" @click="open">
                 <div class="icon">
                     <img :class="cdCls" :src="currentSong.imgURL" width="40" height="40"/>
                 </div>
@@ -123,6 +123,9 @@
                 //console.log((this.currentTime*1000) / this.currentSong.dt);
                 return (this.currentTime * 1000) / this.currentSong.time;
             },
+            themeNumber(){
+                return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
             ...mapGetters([
                 'fullScreen',
                 'playList',
@@ -130,6 +133,7 @@
                 'playing',
                 'currentIndex',
                 'mode',
+                'theme',
                 'sequenceList'
             ])
         },

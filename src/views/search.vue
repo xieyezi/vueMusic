@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="search-result" v-show="query" ref="searchResult">
-            <suggest :query="query"></suggest>
+            <suggest :query="query" ref="suggest"></suggest>
         </div>
     </div>
 </template>
@@ -24,9 +24,10 @@
 <script>
     import SearchBox from '../components/search-box'
     import Suggest from './suggest'
-
+    import {playlistMixin} from '../common/js/mixin'
     export default {
         name: "search",
+        mixins: [playlistMixin],
         data() {
             return {
                 hotKey: [],
@@ -38,15 +39,11 @@
             Suggest
         },
         methods: {
-            // handlePlaylist(playlist) {
-            //     const bottom = playlist.length > 0 ? '60px' : '';
-            //
-            //     this.$refs.searchResult.style.bottom = bottom;
-            //     this.$refs.suggest.refresh();
-            //     //
-            //     // this.$refs.shortcutWrapper.style.bottom = bottom;
-            //     // this.$refs.shortcut.refresh();
-            // },
+            handlePlayList(playlist) {
+                const bottom = playlist.length > 0 ? '60px' : '';
+                this.$refs.searchResult.style.bottom = bottom;
+                this.$refs.suggest.refresh();
+            },
             loadHotSearch() {
                 var v = this;
                 v.$axios.get('api/search/hot')

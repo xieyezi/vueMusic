@@ -1,14 +1,15 @@
 <template>
     <div class="searchBox">
-        <div class="search-box theme1">
+        <div class="search-box" :class="themeNumber">
             <i class="icon-search"></i>
-            <input :placeholder="placeholder" v-model="query" class="box theme1-1"/>
+            <input :placeholder="placeholder" v-model="query" class="box" :class="themeNum"/>
             <i v-show="query" @click="clear" class="icon-delete"></i>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     export default {
         name: "search-box",
         props: {
@@ -16,6 +17,17 @@
                 type: String,
                 default: '搜索歌曲、歌手'
             }
+        },
+        computed: {
+            themeNumber() {
+                return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
+            themeNum(){
+                return this.theme === 0 ? 'theme1-1' : this.theme === 1 ? 'theme2-1' : 'theme3-1'
+            },
+            ...mapGetters([
+                'theme',
+            ])
         },
         data() {
             return {
