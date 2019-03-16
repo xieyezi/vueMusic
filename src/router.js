@@ -1,16 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Recommend from 'views/recommend'
-import Rank from 'views/rank'
-import Singer from 'views/singer'
-import Search from 'views/search'
-import SingerDetail from 'views/singerDetail'
-import Disc from 'views/disc'
-import RankDetail from 'views/rankDetail'
-import Menu from 'components/usermenu'
-import Theme from 'components/theme'
-
 Vue.use(Router);
+// import Recommend from 'views/recommend'
+// import Rank from 'views/rank'
+// import Singer from 'views/singer'
+// import Search from 'views/search'
+// import SingerDetail from 'views/singerDetail'
+// import Disc from 'views/disc'
+// import RankDetail from 'views/rankDetail'
+// import Menu from 'components/usermenu'
+// import Theme from 'components/theme'
+
+const Recommend = () => import('views/recommend');
+const Rank = () => import('views/rank');
+const Singer = () => import('views/singer');
+const Search = () => import('views/search');
+const SingerDetail = () => import('views/singerDetail');
+const Disc = () => import('views/disc');
+const RankDetail = () => import('views/rankDetail');
+const Menu = () => import('components/usermenu');
+const Theme = () => import('components/theme');
+
 
 export default new Router({
     linkActiveClass: 'active',

@@ -23,3 +23,5 @@ export const currentSong = (state) => {
 export const disc = state => state.disc;
 
 export const rank = state => state.rank;
+
+export const theme = state => state.theme;

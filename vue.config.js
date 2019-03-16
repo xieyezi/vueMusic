@@ -1,8 +1,10 @@
 // vue.config.js
 const path = require('path');
-function resolve (dir) {
+
+function resolve(dir) {
     return path.join(__dirname, dir)
 }
+
 module.exports = {
     // 选项...,
     baseUrl: './',
@@ -24,13 +26,22 @@ module.exports = {
             }
         }  // 配置多个代理
     },
-    chainWebpack: (config)=>{
+    chainWebpack: (config) => {
         //配置别名
-        config.resolve.alias
+        config
+            .resolve.alias
             .set('@', resolve('src'))
-            .set('assets',resolve('src/assets'))
-            .set('components',resolve('src/components'))
-            .set('views',resolve('src/views'))
-            .set('common',resolve('src/common'))
+            .set('assets', resolve('src/assets'))
+            .set('components', resolve('src/components'))
+            .set('views', resolve('src/views'))
+            .set('common', resolve('src/common'));
+    },
+    //取消打包244kb警告
+    configureWebpack: {
+        performance: {
+
+            hints:false
+
+        }
     }
 };

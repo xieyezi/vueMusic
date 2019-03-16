@@ -1,7 +1,6 @@
 import * as types from './mutation-types'
 import {playMode} from '../common/js/config'
 import {shuffle} from "../common/js/util";
-
 /**
  *
  * @param list

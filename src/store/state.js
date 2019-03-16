@@ -1,4 +1,5 @@
 import {playMode} from "../common/js/config";
+import {themeNumber} from "../common/js/config"
 
 const state = {
     singer: {},
@@ -9,7 +10,8 @@ const state = {
     mode: playMode.sequence,  //播放模式(默认为顺序播放)
     currentIndex: -1,   //当前播放歌曲的索引
     disc: {}, //歌单
-    rank:{}  //排行榜
+    rank:{},  //排行榜
+    theme:themeNumber.pink  //主题颜色(默认为桃花粉)
 };
 
 export default state;

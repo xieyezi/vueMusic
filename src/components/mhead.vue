@@ -1,6 +1,6 @@
 <template>
     <div class="mhead theme1">
-        <h2 class="text">效果预览</h2>
+        <h2 class="text">觉非音乐</h2>
         <div class="iconimg" @click="toMenu">
             <Icon  type="md-menu" />
         </div>

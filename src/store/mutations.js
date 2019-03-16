@@ -27,6 +27,9 @@ const mutations = {
     },
     [types.SET_RANK](state,rank) {
         state.rank = rank;
+    },
+    [types.SET_THEME](state,theme) {
+        state.theme = theme;
     }
 };
 export default mutations;
