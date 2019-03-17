@@ -12,7 +12,7 @@
 
 预览地址：
 
-![预览地址](http://tu.027cgb.com/618013/%E9%9F%B3%E4%B9%90app%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
+![预览地址](http://pohm05hj4.bkt.clouddn.com/%E9%9F%B3%E4%B9%90app%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
 
 ```
 npm install
