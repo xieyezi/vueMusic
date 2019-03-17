@@ -43,7 +43,7 @@
                 beforeScroll: true,
                 insertSongUrl: '',
                 insertSongDetail: {},
-                insertSong: {} //格式化之后的待插入歌曲
+                waitInsertSong:{}
             }
         },
         methods: {
@@ -127,7 +127,7 @@
              */
             loadSongUrl(song) {
                 var v = this;
-                return v.$axios.get('api/song/url', {
+                v.$axios.get('api/song/url', {
                     params: {
                         id: song.id
                     }
@@ -155,27 +155,22 @@
                         songDetail = response.data.songs[0];
                         v.filterSinger(songDetail);
                         v.insertSongDetail = songDetail;
+                        //console.log(v.insertSongDetail);
                     }
                 }).catch(error => {
                     console.log(error);
                 });
             },
             selectItem(song) {
-                var v =this;
-                //先格式化歌曲，然后插入到列表
-                this.loadSongUrl(song).then(() => {
-                    this.loadSongDetail(song);
-                    // console.log("播放地址:");
-                    // console.log(this.insertSongUrl);
-                });
-                this.loadSongDetail(song).then(() =>{
-                    // console.log("歌曲详情:");
-                    // console.log(this.insertSongDetail);
-                   // console.log(this.insertSongUrl);
-                    v.manageSongInfo(v.insertSongUrl, v.insertSongDetail);
-                });
-                //TODO 将当前歌曲插入到播放列表，更改状态管理器
-                //this.insertSong(this.insertSong);
+                //TODO 获取歌曲URL和detail之后再将歌曲插入到vuex里面
+                // var v =this;
+                // v.loadSongUrl(song);
+                // console.log(v.insertSongUrl);
+                // v.loadSongDetail(song);
+                // console.log(v.insertSongDetail);
+                // //将歌曲信息整合到一起
+                // v.manageSongInfo(v.insertSongUrl,v.insertSongDetail);
+                // this.insertSong(this.waitInsertSong);
 
             },
             manageSongInfo(songurl, songDetail) {
@@ -197,7 +192,7 @@
                 song.imgURL = songDetail.al.picUrl;
                 song.time = songDetail.dt;
                 song.songURL = songurl;
-                this.insertSong = song;
+                this.waitInsertSong = song;
                 /**
                  * @insertsong 上次写到这里，点击了搜索结果中的某首歌，
                  * 根据歌曲ID去请求detail和播放地址URL
@@ -212,7 +207,6 @@
                         time: 269590
                  * }
                  */
-                //console.log(this.insertSong);
             },
             filterSinger(song) {
                 let ret = [];

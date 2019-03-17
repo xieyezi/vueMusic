@@ -1,6 +1,7 @@
 import * as types from './mutation-types'
 import {playMode} from '../common/js/config'
 import {shuffle} from "../common/js/util";
+
 /**
  *
  * @param list
@@ -47,9 +48,10 @@ export const randomPlay = function ({commit}, {list}) {
  * 插入歌曲到当前播放列表
  */
 export const insertSong = function ({commit, state}, {song}) {
-    let playList = state.playList;
-    let sequenceList = state.sequenceList;
+    let playList = state.playList.slice();
+    let sequenceList = state.sequenceList.slice();
     let currentIndex = state.currentIndex;
+    //插入到当前播放列表
     //记录当前歌曲
     let currentSong = playList[currentIndex];
     //查找播放列表中是否已经有待插入歌曲
@@ -67,6 +69,7 @@ export const insertSong = function ({commit, state}, {song}) {
             playList.splice(fpIndex + 1, 1);
         }
     }
+    //插入到顺序列表中
     let currentSIndex = findIndex(sequenceList, currentSong) + 1;
     let fsIndex = findIndex(sequenceList, song);
     sequenceList.splice(currentSIndex, 0, song);
