@@ -127,64 +127,40 @@
              */
             loadSongUrl(song) {
                 var v = this;
-                v.$axios.get('api/song/url', {
+                return v.$axios.get('api/song/url', {
                     params: {
                         id: song.id
                     }
-                // }).then(response => {
-                //     // console.log(response);
-                //     if (response.data.code === 200) {
-                //         v.insertSongUrl = response.data.data[0].url;
-                //         // console.log("异步请求里面的地址:");
-                //         // console.log(v.insertSongUrl);
-                //     }
-                // }).catch(error => {
-                //     console.log(error);
                 });
             },
             loadSongDetail(song) {
                 var v = this;
-                // let songDetail = {};
                 return v.$axios.get('api/song/detail', {
                     params: {
                         ids: song.id
                     }
-                // }).then(response => {
-                //     //console.log(response);
-                //     if (response.data.code === 200) {
-                //         songDetail = response.data.songs[0];
-                //         v.filterSinger(songDetail);
-                //         v.insertSongDetail = songDetail;
-                //         //console.log(v.insertSongDetail);
-                //     }
-                // }).catch(error => {
-                //     console.log(error);
                 });
             },
             selectItem(song) {
                 //TODO 获取歌曲URL和detail之后再将歌曲插入到vuex里面
-                // var v =this;
-                // v.$axios.all([v.loadSongUrl(song),v.loadSongDetail(song)])
-                //     .then(response =>{
-                //         console.log(response);
-                //         console.log(response[0]);
-                //         // console.log(resUrl);
-                //         // console.log(resDetail);
-                //     }).catch(error =>{
-                //     console.log(error);
-                // })
-                // var v =this;
-                // v.loadSongUrl(song);
-                // console.log(v.insertSongUrl);
-                // v.loadSongDetail(song);
-                // console.log(v.insertSongDetail);
-                // //将歌曲信息整合到一起
-                // v.manageSongInfo(v.insertSongUrl,v.insertSongDetail);
-                // this.insertSong(this.waitInsertSong);
+                var v =this;
+                let songDetail = {};
+                return v.$axios.all([v.loadSongUrl(song),v.loadSongDetail(song)])
+                    .then(v.$axios.spread((resUrl,resDetail) =>{
+                        v.insertSongUrl = resUrl.data.data[0].url;
+                        songDetail = resDetail.data.songs[0];
+                        v.filterSinger(songDetail);
+                        v.insertSongDetail = songDetail;
+                        v.manageSongInfo(v.insertSongUrl,v.insertSongDetail);
+                        // console.log(v.waitInsertSong);
+                        v.insertSong(v.waitInsertSong);
 
+                    })).catch(error =>{
+                    console.log(error);
+                });
             },
             manageSongInfo(songurl, songDetail) {
-                //console.log(songurl);
+                // console.log(songurl);
                 // console.log(songDetail);
                 let song = {
                     id: '',
@@ -228,7 +204,7 @@
                 song.ar = ar;
             },
             ...mapActions([
-                'insertSong '
+                'insertSong'
             ])
         },
         watch: {

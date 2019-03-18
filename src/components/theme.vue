@@ -61,7 +61,7 @@
         name: "theme",
         data() {
             return {
-                imgurl: 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan1.png?Expires=1552889737&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=sG9P91NKTO65xgZhPJH11%2BqyFmY%3D',
+                imgurl: 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan1.png?Expires=1552901216&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=%2BRoYNKenW%2BkZVBmaGu9jPNlrt9o%3D',
                 themeId: 0 //默认为桃花粉主题
             }
         },
@@ -82,7 +82,7 @@
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
-                this.imgurl = 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan1.png?Expires=1552889737&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=sG9P91NKTO65xgZhPJH11%2BqyFmY%3D';
+                this.imgurl = 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan1.png?Expires=1552901216&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=%2BRoYNKenW%2BkZVBmaGu9jPNlrt9o%3D';
                 this.$router.back();
             },
             changeTheme() {
@@ -90,21 +90,21 @@
                 this.$router.back();
             },
             chooseItem1() {
-                this.imgurl = 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan1.png?Expires=1552889737&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=sG9P91NKTO65xgZhPJH11%2BqyFmY%3D';
+                this.imgurl = 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan1.png?Expires=1552901216&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=%2BRoYNKenW%2BkZVBmaGu9jPNlrt9o%3D';
                 this.$refs.theme1.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 0;
             },
             chooseItem2() {
-                this.imgurl = 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan2.png?Expires=1552889782&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=SUDrYnTViCwuyS577KkmTQ3dcOE%3D';
+                this.imgurl = 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan2.png?Expires=1552901284&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=lEyon6GvivQtGyytJ5k2eSMFOCc%3D';
                 this.$refs.theme2.style.border = 'solid 1px gray';
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 1;
             },
             chooseItem3() {
-                this.imgurl = 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan3.png?Expires=1552889793&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=o1Gyjq8zx3dKxjbO%2Fi8x4YPfCs4%3D';
+                this.imgurl = 'http://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan3.png?Expires=1552901322&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=lLatgPXzGeybG68VB45MOQBLLPA%3D';
                 this.$refs.theme3.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme1.style.border = '0';
