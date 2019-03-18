@@ -12,7 +12,7 @@
 
 预览地址：
 
-![预览地址](https://vuemusic.oss-cn-shanghai.aliyuncs.com/%E9%9F%B3%E4%B9%90app%E4%BA%8C%E7%BB%B4%E7%A0%81.png?Expires=1552884153&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=KBYh%2B2%2B55T%2FiiCz4LZG21Atj3v0%3D)
+![预览地址](https://s2.ax1x.com/2019/03/18/AnkcFO.png)
 
 ```
 npm install

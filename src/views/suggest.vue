@@ -142,7 +142,7 @@
                 });
             },
             selectItem(song) {
-                //TODO 获取歌曲URL和detail之后再将歌曲插入到vuex里面
+                //获取歌曲URL和detail之后再将歌曲插入到vuex里面
                 var v =this;
                 let songDetail = {};
                 return v.$axios.all([v.loadSongUrl(song),v.loadSongDetail(song)])
