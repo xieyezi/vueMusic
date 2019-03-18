@@ -1,5 +1,10 @@
 <template>
-    <scroll class="suggest" :data="result" :pullup="pullup" @scrollToEnd="searchMore" ref="suggest">
+    <scroll class="suggest"
+            :data="result"
+            :pullup="pullup"
+            :beforeScroll="beforeScroll"
+            @scrollToEnd="searchMore"
+            @beforeScroll="listScroll"  ref="suggest">
         <ul class="suggest-list">
             <li class="suggest-item" @click="selectItem(item)" v-for="item in result">
                 <div class="icon">
@@ -11,19 +16,24 @@
             </li>
             <loading v-show="hasMore" :title="title"></loading>
         </ul>
+        <div v-show="!hasMore && !result.length" class="no-result-wrapper">
+            <no-result title="抱歉，暂无搜索结果"></no-result>
+        </div>
     </scroll>
 </template>
 
 <script>
     import Scroll from 'components/scroll';
     import Loading from 'components/loading'
+    import NoResult from '../components/no-result'
     import {mapActions} from 'vuex'
 
     export default {
         name: "suggest",
         components: {
             Scroll,
-            Loading
+            Loading,
+            NoResult
         },
         props: {
             query: {
@@ -43,7 +53,7 @@
                 beforeScroll: true,
                 insertSongUrl: '',
                 insertSongDetail: {},
-                waitInsertSong:{}
+                waitInsertSong: {}
             }
         },
         methods: {
@@ -64,9 +74,11 @@
                     //console.log(response);
                     if (response.data.code === 200) {
                         v.songCount = response.data.result.songCount;
-                        v.result = response.data.result.songs;
-                        //console.log(v.result);
-                        if (v.pageTotal === -1) {
+                        if (v.songCount > 0) {
+                            v.result = response.data.result.songs;
+                        }
+                        // console.log(v.result.length);
+                        if (v.pageTotal === -1 && v.result.length !== 0) {
                             v.pageTotal = v.songCount % (v.result.length);
                             if (v.pageTotal === 0) {
                                 v.pageTotal = v.songCount / (v.result.length);
@@ -110,6 +122,9 @@
                     // this.checkMore();
                 }
             },
+            listScroll(){
+                this.$emit('listScroll');
+            },
             /**
              * 如果当前返回值没有songList字段或者当前页数加1已经大于总页数
              * 则不能再进行上拉加载
@@ -143,21 +158,21 @@
             },
             selectItem(song) {
                 //获取歌曲URL和detail之后再将歌曲插入到vuex里面
-                var v =this;
+                var v = this;
                 let songDetail = {};
-                return v.$axios.all([v.loadSongUrl(song),v.loadSongDetail(song)])
-                    .then(v.$axios.spread((resUrl,resDetail) =>{
+                return v.$axios.all([v.loadSongUrl(song), v.loadSongDetail(song)])
+                    .then(v.$axios.spread((resUrl, resDetail) => {
                         v.insertSongUrl = resUrl.data.data[0].url;
                         songDetail = resDetail.data.songs[0];
                         v.filterSinger(songDetail);
                         v.insertSongDetail = songDetail;
-                        v.manageSongInfo(v.insertSongUrl,v.insertSongDetail);
+                        v.manageSongInfo(v.insertSongUrl, v.insertSongDetail);
                         // console.log(v.waitInsertSong);
                         v.insertSong(v.waitInsertSong);
 
-                    })).catch(error =>{
-                    console.log(error);
-                });
+                    })).catch(error => {
+                        console.log(error);
+                    });
             },
             manageSongInfo(songurl, songDetail) {
                 // console.log(songurl);

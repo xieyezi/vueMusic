@@ -59,7 +59,7 @@
           probeType: this.probeType,
           click: this.click,
           eventPassthrough: this.direction === DIRECTION_V ? DIRECTION_H : DIRECTION_V
-        })
+        });
         //console.log(this.scroll);
         if (this.listenScroll) {
           this.scroll.on('scroll', (pos) => {

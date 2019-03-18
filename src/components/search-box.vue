@@ -2,7 +2,7 @@
     <div class="searchBox">
         <div class="search-box" :class="themeNumber">
             <i class="icon-search"></i>
-            <input :placeholder="placeholder" v-model="query" class="box" :class="themeNum"/>
+            <input ref="query" :placeholder="placeholder" v-model="query" class="box" :class="themeNum"/>
             <i v-show="query" @click="clear" class="icon-delete"></i>
         </div>
     </div>
@@ -10,6 +10,8 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import {debounce} from "../common/js/util";
+
     export default {
         name: "search-box",
         props: {
@@ -38,14 +40,17 @@
             clear() {
                 this.query = '';
             },
+            blur() {
+                this.$refs.query.blur();
+            },
             setQuery(query) {
                 this.query = query;
             }
         },
         created() {
-            this.$watch('query', (newQuery) => {
+            this.$watch('query', debounce((newQuery) => {
                 this.$emit('query', newQuery);
-            })
+            },200));
         }
     }
 </script>

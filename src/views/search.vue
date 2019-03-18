@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="search-result" v-show="query" ref="searchResult">
-            <suggest :query="query" ref="suggest"></suggest>
+            <suggest @listScroll="blurInput" :query="query" ref="suggest"></suggest>
         </div>
     </div>
 </template>
@@ -43,6 +43,9 @@
                 const bottom = playlist.length > 0 ? '60px' : '';
                 this.$refs.searchResult.style.bottom = bottom;
                 this.$refs.suggest.refresh();
+            },
+            blurInput(){
+                this.$refs.searchBox.blur();
             },
             loadHotSearch() {
                 var v = this;
