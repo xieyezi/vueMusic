@@ -61,7 +61,7 @@
         name: "theme",
         data() {
             return {
-                imgurl: 'http://pohm05hj4.bkt.clouddn.com/yulan1.png',
+                imgurl: 'https://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan1.png?Expires=1552884212&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=6%2ByK1ELlKd3RtK0l9Z%2BLoljic%2Bs%3D',
                 themeId: 0 //默认为桃花粉主题
             }
         },
@@ -82,7 +82,7 @@
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
-                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan1.png';
+                this.imgurl = 'https://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan1.png?Expires=1552884212&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=6%2ByK1ELlKd3RtK0l9Z%2BLoljic%2Bs%3D';
                 this.$router.back();
             },
             changeTheme() {
@@ -90,21 +90,21 @@
                 this.$router.back();
             },
             chooseItem1() {
-                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan1.png';
+                this.imgurl = 'https://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan1.png?Expires=1552884212&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=6%2ByK1ELlKd3RtK0l9Z%2BLoljic%2Bs%3D';
                 this.$refs.theme1.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 0;
             },
             chooseItem2() {
-                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan2.png';
+                this.imgurl = 'https://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan2.png?Expires=1552884252&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=Lbsa52gIQO54G8Ak6QC%2FneqV3Y8%3D';
                 this.$refs.theme2.style.border = 'solid 1px gray';
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 1;
             },
             chooseItem3() {
-                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan3.png';
+                this.imgurl = 'https://vuemusic.oss-cn-shanghai.aliyuncs.com/yulan3.png?Expires=1552884265&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=i6T%2BDxZfQohoDMIgEHHrrqs7ok8%3D';
                 this.$refs.theme3.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme1.style.border = '0';

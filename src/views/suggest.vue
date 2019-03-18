@@ -131,38 +131,46 @@
                     params: {
                         id: song.id
                     }
-                }).then(response => {
-                    // console.log(response);
-                    if (response.data.code === 200) {
-                        v.insertSongUrl = response.data.data[0].url;
-                        // console.log("异步请求里面的地址:");
-                        // console.log(v.insertSongUrl);
-                    }
-                }).catch(error => {
-                    console.log(error);
+                // }).then(response => {
+                //     // console.log(response);
+                //     if (response.data.code === 200) {
+                //         v.insertSongUrl = response.data.data[0].url;
+                //         // console.log("异步请求里面的地址:");
+                //         // console.log(v.insertSongUrl);
+                //     }
+                // }).catch(error => {
+                //     console.log(error);
                 });
             },
             loadSongDetail(song) {
                 var v = this;
-                let songDetail = {};
+                // let songDetail = {};
                 return v.$axios.get('api/song/detail', {
                     params: {
                         ids: song.id
                     }
-                }).then(response => {
-                    //console.log(response);
-                    if (response.data.code === 200) {
-                        songDetail = response.data.songs[0];
-                        v.filterSinger(songDetail);
-                        v.insertSongDetail = songDetail;
-                        //console.log(v.insertSongDetail);
-                    }
-                }).catch(error => {
-                    console.log(error);
+                // }).then(response => {
+                //     //console.log(response);
+                //     if (response.data.code === 200) {
+                //         songDetail = response.data.songs[0];
+                //         v.filterSinger(songDetail);
+                //         v.insertSongDetail = songDetail;
+                //         //console.log(v.insertSongDetail);
+                //     }
+                // }).catch(error => {
+                //     console.log(error);
                 });
             },
             selectItem(song) {
                 //TODO 获取歌曲URL和detail之后再将歌曲插入到vuex里面
+                var v =this;
+                v.$axios.all([v.loadSongUrl(song),v.loadSongDetail(song)])
+                    .then(v.$axios.spread((resUrl,resDetail) =>{
+                        console.log(resUrl);
+                        console.log(resDetail);
+                    })).catch(error =>{
+                    console.log(error);
+                })
                 // var v =this;
                 // v.loadSongUrl(song);
                 // console.log(v.insertSongUrl);

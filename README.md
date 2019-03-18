@@ -12,7 +12,7 @@
 
 预览地址：
 
-![预览地址](http://pohm05hj4.bkt.clouddn.com/%E9%9F%B3%E4%B9%90app%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
+![预览地址](https://vuemusic.oss-cn-shanghai.aliyuncs.com/%E9%9F%B3%E4%B9%90app%E4%BA%8C%E7%BB%B4%E7%A0%81.png?Expires=1552884153&OSSAccessKeyId=TMP.AQGBCYJFFNTuFJPKqY3SPc1avWBjP582wheYaldbPts8bS3tKgQEiNAuo00PAAAwLAIULgVcg8Xc3Xakhb9rw4SZhGBb3TICFGq4n--c8l6b_ZTyNJfFlYCk3xrp&Signature=KBYh%2B2%2B55T%2FiiCz4LZG21Atj3v0%3D)
 
 ```
 npm install
