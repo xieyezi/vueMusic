@@ -163,14 +163,16 @@
             },
             selectItem(song) {
                 //TODO 获取歌曲URL和detail之后再将歌曲插入到vuex里面
-                var v =this;
-                v.$axios.all([v.loadSongUrl(song),v.loadSongDetail(song)])
-                    .then(v.$axios.spread((resUrl,resDetail) =>{
-                        console.log(resUrl);
-                        console.log(resDetail);
-                    })).catch(error =>{
-                    console.log(error);
-                })
+                // var v =this;
+                // v.$axios.all([v.loadSongUrl(song),v.loadSongDetail(song)])
+                //     .then(response =>{
+                //         console.log(response);
+                //         console.log(response[0]);
+                //         // console.log(resUrl);
+                //         // console.log(resDetail);
+                //     }).catch(error =>{
+                //     console.log(error);
+                // })
                 // var v =this;
                 // v.loadSongUrl(song);
                 // console.log(v.insertSongUrl);
