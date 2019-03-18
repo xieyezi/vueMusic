@@ -61,7 +61,7 @@
         name: "theme",
         data() {
             return {
-                imgurl: 'http://tu.027cgb.com/618013/yulan1.png',
+                imgurl: 'http://pohm05hj4.bkt.clouddn.com/yulan1.png',
                 themeId: 0 //默认为桃花粉主题
             }
         },
@@ -82,7 +82,7 @@
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
-                this.imgurl = 'http://tu.027cgb.com/618013/yulan1.png';
+                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan1.png';
                 this.$router.back();
             },
             changeTheme() {
@@ -90,21 +90,21 @@
                 this.$router.back();
             },
             chooseItem1() {
-                this.imgurl = 'http://tu.027cgb.com/618013/yulan1.png';
+                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan1.png';
                 this.$refs.theme1.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 0;
             },
             chooseItem2() {
-                this.imgurl = 'http://tu.027cgb.com/618013/yulan2.png';
+                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan2.png';
                 this.$refs.theme2.style.border = 'solid 1px gray';
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 1;
             },
             chooseItem3() {
-                this.imgurl = 'http://tu.027cgb.com/618013/yulan3.png';
+                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan3.png';
                 this.$refs.theme3.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme1.style.border = '0';
@@ -127,9 +127,7 @@
         left: 0px;
         right: 0px;
         bottom: 0px;
-        /*background: rgba(214,162,232);*/
     }
-
     .theme1 {
         background: #ff7675;
     }

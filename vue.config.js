@@ -1,5 +1,6 @@
 // vue.config.js
 const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -39,9 +40,17 @@ module.exports = {
     //取消打包244kb警告
     configureWebpack: {
         performance: {
-
             hints:false
-
-        }
-    }
+        },
+    },
+    // configureWebpack: config => {
+    //     if (process.env.NODE_ENV === 'production') {
+    //         return {
+    //             plugins: [
+    //                 new BundleAnalyzerPlugin()
+    //             ]
+    //         }
+    //     }
+    // }
+    //    "analyz": "npm_config_report=true npm run build"
 };
