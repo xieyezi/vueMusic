@@ -13,30 +13,52 @@
                         </li>
                     </ul>
                 </div>
+                <div class="search-history" v-show="searchHistory.length">
+                    <h1 class="title">
+                        <span class="text">搜索历史</span>
+                        <span class="clear" @click="showConfirm">
+                                <Icon size="18" type="ios-trash-outline"/>
+                        </span>
+                    </h1>
+                    <search-list @select="addQuery" @delete="deleteSearchHistory"
+                                 :searches="searchHistory"></search-list>
+                </div>
             </div>
         </div>
         <div class="search-result" v-show="query" ref="searchResult">
-            <suggest @listScroll="blurInput" :query="query" ref="suggest"></suggest>
+            <suggest @select="saveSearch" @listScroll="blurInput" :query="query" ref="suggest"></suggest>
         </div>
+        <confirm ref="confirm" @confirm="clearSearchHistory" text="是否清空所有搜索历史?" confirmBtnText="清空"></confirm>
     </div>
 </template>
 
 <script>
     import SearchBox from '../components/search-box'
     import Suggest from './suggest'
+    import Confirm from '../components/confirm'
+    import SearchList from '../components/search-list'
     import {playlistMixin} from '../common/js/mixin'
+    import {mapActions, mapGetters} from 'vuex'
+
     export default {
         name: "search",
         mixins: [playlistMixin],
         data() {
             return {
                 hotKey: [],
-                query:'',
+                query: '',
             }
         },
         components: {
             SearchBox,
-            Suggest
+            Suggest,
+            SearchList,
+            Confirm
+        },
+        computed: {
+            ...mapGetters([
+                'searchHistory'
+            ])
         },
         methods: {
             handlePlayList(playlist) {
@@ -44,7 +66,7 @@
                 this.$refs.searchResult.style.bottom = bottom;
                 this.$refs.suggest.refresh();
             },
-            blurInput(){
+            blurInput() {
                 this.$refs.searchBox.blur();
             },
             loadHotSearch() {
@@ -63,9 +85,21 @@
             addQuery(query) {
                 this.$refs.searchBox.setQuery(query);
             },
-            onQueryChange(query){
+            onQueryChange(query) {
                 this.query = query;
-            }
+            },
+            //将搜索关键词保存至缓存和vuex
+            saveSearch() {
+                this.saveSearchHistory(this.query);
+            },
+            showConfirm(){
+                this.$refs.confirm.show();
+            },
+            ...mapActions([
+                'saveSearchHistory',
+                'deleteSearchHistory',
+                'clearSearchHistory'
+            ])
         },
         created() {
             this.loadHotSearch();

@@ -1,5 +1,6 @@
 import {playMode} from "../common/js/config";
 import {themeNumber} from "../common/js/config"
+import {loadSearch} from "../common/js/cache";
 
 const state = {
     singer: {},
@@ -11,7 +12,9 @@ const state = {
     currentIndex: -1,   //当前播放歌曲的索引
     disc: {}, //歌单
     rank:{},  //排行榜
-    theme:themeNumber.pink  //主题颜色(默认为桃花粉)
+    theme:themeNumber.pink,  //主题颜色(默认为桃花粉)
+    searchHistory:loadSearch()     //存储搜索历史
+
 };
 
 export default state;

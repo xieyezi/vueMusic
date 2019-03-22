@@ -30,6 +30,9 @@ const mutations = {
     },
     [types.SET_THEME](state,theme) {
         state.theme = theme;
-    }
+    },
+    [types.SET_SEARCH_HISTORY](state, history) {
+        state.searchHistory = history
+    },
 };
 export default mutations;

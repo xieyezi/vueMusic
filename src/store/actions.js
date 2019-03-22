@@ -1,6 +1,7 @@
 import * as types from './mutation-types'
 import {playMode} from '../common/js/config'
 import {shuffle} from "../common/js/util";
+import {saveSearch,deleteSearch,clearSearch} from '../common/js/cache'
 
 /**
  *
@@ -44,8 +45,11 @@ export const randomPlay = function ({commit}, {list}) {
     commit(types.SET_PLAYING_STATE, true);
 };
 
-/***
+/**
  * 插入歌曲到当前播放列表
+ * @param commit
+ * @param state
+ * @param song
  */
 export const insertSong = function ({commit, state}, song) {
     let playList = state.playList.slice();
@@ -85,4 +89,28 @@ export const insertSong = function ({commit, state}, song) {
     commit(types.SET_CURRENT_INDEX, currentIndex);
     commit(types.SET_FULL_SCREEN, true);
     commit(types.SET_PLAYING_STATE, true);
+};
+
+/**保存搜索历史
+ *
+ * @param commit
+ * @param query
+ */
+export const saveSearchHistory = function ({commit}, query) {
+    commit(types.SET_SEARCH_HISTORY, saveSearch(query));
+};
+/**
+ * 删除搜索历史
+ * @param commit
+ * @param query
+ */
+export const deleteSearchHistory = function ({commit}, query) {
+    commit(types.SET_SEARCH_HISTORY, deleteSearch(query));
+};
+/**
+ * 清空搜索历史
+ * @param commit
+ */
+export const clearSearchHistory = function ({commit}) {
+    commit(types.SET_SEARCH_HISTORY, clearSearch())
 };

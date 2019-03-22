@@ -167,8 +167,10 @@
                         v.filterSinger(songDetail);
                         v.insertSongDetail = songDetail;
                         v.manageSongInfo(v.insertSongUrl, v.insertSongDetail);
-                        // console.log(v.waitInsertSong);
+                        //console.log(v.waitInsertSong);
                         v.insertSong(v.waitInsertSong);
+                        //派发一个事件给父组件
+                        v.$emit('select', v.waitInsertSong);
 
                     })).catch(error => {
                         console.log(error);
