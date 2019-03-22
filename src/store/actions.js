@@ -116,7 +116,5 @@ export const clearSearchHistory = function ({commit}) {
 };
 
 export const changeTheme = function ({commit}, theme) {
-    console.log("进入action");
-    console.log(theme);
     commit(types.SET_THEME, saveTheme(theme));
 };

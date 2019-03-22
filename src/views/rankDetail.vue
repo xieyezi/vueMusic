@@ -45,8 +45,8 @@
                     }
                 }).then(response => {
                     if (response.data.code === 200) {
+                        // console.log(response);
                         list = response.data.playlist;
-                        //console.log(list);
                         v.loadSongUrl(list.tracks);
                     }
                 }).catch(error => {
@@ -89,6 +89,7 @@
              */
             manageSongList(list1, list2) {
                 var v = this;
+                //console.log(list1);
                 v.filterSinger(list1);
                 // console.log("歌曲详情：");
                 // console.log(list1);

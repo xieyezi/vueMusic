@@ -4,14 +4,14 @@
             :pullup="pullup"
             :beforeScroll="beforeScroll"
             @scrollToEnd="searchMore"
-            @beforeScroll="listScroll"  ref="suggest">
+            @beforeScroll="listScroll" ref="suggest">
         <ul class="suggest-list">
             <li class="suggest-item" @click="selectItem(item)" v-for="item in result">
                 <div class="icon">
                     <i class="icon-music"></i>
                 </div>
                 <div class="name">
-                    <p class="text">{{item.name}}</p>
+                    <p class="text">{{item.name}}  - {{item.artists}}</p>
                 </div>
             </li>
             <loading v-show="hasMore" :title="title"></loading>
@@ -62,6 +62,7 @@
             },
             search(keywords, page) {
                 var v = this;
+                let resultTemp = [];
                 v.hasMore = true;
                 this.$refs.suggest.scrollTo(0, 0);
                 v.$axios.get('api/search', {
@@ -75,9 +76,11 @@
                     if (response.data.code === 200) {
                         v.songCount = response.data.result.songCount;
                         if (v.songCount > 0) {
-                            v.result = response.data.result.songs;
+                            resultTemp = response.data.result.songs;
+                            v.filterResult(resultTemp);
+                            v.result = resultTemp;
+                            // console.log(v.result);
                         }
-                        // console.log(v.result.length);
                         if (v.pageTotal === -1 && v.result.length !== 0) {
                             v.pageTotal = v.songCount % (v.result.length);
                             if (v.pageTotal === 0) {
@@ -94,6 +97,7 @@
             },
             loadMore(keywords, page) {
                 var v = this;
+                let resultTemp = [];
                 v.hasMore = true;
                 v.$axios.get('api/search', {
                     params: {
@@ -105,7 +109,10 @@
                     //console.log(response);
                     if (response.data.code === 200) {
                         v.songCount = response.data.result.songCount;
-                        v.result = v.result.concat(response.data.result.songs);
+                        resultTemp = response.data.result.songs;
+                        //console.log(resultTemp);
+                        v.filterResult(resultTemp);
+                        v.result = v.result.concat(resultTemp);
                         //console.log(v.result);
                         v.checkMore(v.pageTotal);
                     }
@@ -122,7 +129,7 @@
                     // this.checkMore();
                 }
             },
-            listScroll(){
+            listScroll() {
                 this.$emit('listScroll');
             },
             /**
@@ -219,6 +226,17 @@
                 });
                 ar = ret.join('/');
                 song.ar = ar;
+            },
+            filterResult(result) {
+                result.forEach((song) => {
+                    let ret = [];
+                    let ar = '';
+                    song.artists.forEach((item) => {
+                        ret.push(item.name);
+                    });
+                    ar = ret.join('/');
+                    song.artists = ar;
+                });
             },
             ...mapActions([
                 'insertSong'
