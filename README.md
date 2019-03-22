@@ -12,7 +12,7 @@
 
 预览地址：
 
-![预览地址](https://s2.ax1x.com/2019/03/18/AnkcFO.png)
+![预览地址](http://pohm05hj4.bkt.clouddn.com/%E9%9F%B3%E4%B9%90app%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
 
 ```
 npm install

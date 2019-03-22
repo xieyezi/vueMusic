@@ -3,6 +3,7 @@
 import storage from 'good-storage'
 
 const SEARCH_KEY = '_search_';
+const THEME_KEY = '_theme_';
 const SEARCH_MAX_LENGTH = 15;
 
 //判断缓存中是否已经有当前搜索关键词
@@ -57,4 +58,15 @@ export function deleteSearch(query) {
 export function clearSearch() {
     storage.remove(SEARCH_KEY);
     return [];
+}
+
+//保存当前主题至缓存
+export function saveTheme(theme) {
+    storage.set(THEME_KEY,theme);
+    return theme;
+}
+
+//从缓存中取出当前主题,如果没有，则默认为0(桃花粉)
+export function loadTheme() {
+    return storage.get(THEME_KEY,0);
 }

@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 import {playMode} from '../common/js/config'
 import {shuffle} from "../common/js/util";
-import {saveSearch,deleteSearch,clearSearch} from '../common/js/cache'
+import {saveSearch, deleteSearch, clearSearch, saveTheme} from '../common/js/cache'
 
 /**
  *
@@ -112,5 +112,11 @@ export const deleteSearchHistory = function ({commit}, query) {
  * @param commit
  */
 export const clearSearchHistory = function ({commit}) {
-    commit(types.SET_SEARCH_HISTORY, clearSearch())
+    commit(types.SET_SEARCH_HISTORY, clearSearch());
+};
+
+export const changeTheme = function ({commit}, theme) {
+    console.log("进入action");
+    console.log(theme);
+    commit(types.SET_THEME, saveTheme(theme));
 };

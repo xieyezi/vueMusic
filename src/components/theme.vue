@@ -4,7 +4,7 @@
             <div class="back" @click="back">
                 <i class="icon-back"></i>
             </div>
-            <div class="choose" @click="changeTheme">
+            <div class="choose" @click="changeThemeOK">
                 <p class="choosetext">确定</p>
             </div>
             <div class="tophead" :class="themeNumber" ref="tophead">
@@ -54,14 +54,14 @@
 
 <script>
     import {playlistMixin} from '../common/js/mixin'
-    import {mapGetters, mapMutations} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
 
     export default {
         mixins: [playlistMixin],
         name: "theme",
         data() {
             return {
-                imgurl: 'https://s2.ax1x.com/2019/03/18/Anksw6.png',
+                imgurl: 'http://pohm05hj4.bkt.clouddn.com/yulan1.png',
                 themeId: 0 //默认为桃花粉主题
             }
         },
@@ -82,37 +82,38 @@
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
-                this.imgurl = 'https://s2.ax1x.com/2019/03/18/Anksw6.png';
+                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan1.png';
                 this.$router.back();
             },
-            changeTheme() {
-                this.setTheme(this.themeId);
+            changeThemeOK() {
+                var v = this;
+                this.changeTheme(v.themeId);
                 this.$router.back();
             },
             chooseItem1() {
-                this.imgurl = 'https://s2.ax1x.com/2019/03/18/Anksw6.png';
+                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan1.png';
                 this.$refs.theme1.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 0;
             },
             chooseItem2() {
-                this.imgurl = 'https://s2.ax1x.com/2019/03/18/AnkUW4.png';
+                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan2.png';
                 this.$refs.theme2.style.border = 'solid 1px gray';
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 1;
             },
             chooseItem3() {
-                this.imgurl = 'https://s2.ax1x.com/2019/03/18/AnkNYF.png';
+                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan3.png';
                 this.$refs.theme3.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme1.style.border = '0';
                 this.themeId = 2;
             },
-            ...mapMutations({
-                setTheme: 'SET_THEME',
-            })
+            ...mapActions([
+                'changeTheme'
+            ])
         }
     }
 </script>
@@ -128,6 +129,7 @@
         right: 0px;
         bottom: 0px;
     }
+
     .theme1 {
         background: #ff7675;
     }

@@ -3,27 +3,29 @@
         <div class="search-box-wrapper">
             <search-box ref="searchBox" @query="onQueryChange"></search-box>
         </div>
-        <div class="shortcut-wrapper" v-show="!query">
-            <div class="shortcut">
-                <div class="hot-key">
-                    <h1 class="title">热门搜索</h1>
-                    <ul>
-                        <li @click="addQuery(item.first)" class="item" v-for="item in hotKey">
-                            <span>{{item.first}}</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="search-history" v-show="searchHistory.length">
-                    <h1 class="title">
-                        <span class="text">搜索历史</span>
-                        <span class="clear" @click="showConfirm">
+        <div class="shortcut-wrapper" ref="shortcutWrapper" v-show="!query">
+            <scroll class="shortcut" :data="shortcut" ref="shortcut">
+                <div>
+                    <div class="hot-key">
+                        <h1 class="title">热门搜索</h1>
+                        <ul>
+                            <li @click="addQuery(item.first)" class="item" v-for="item in hotKey">
+                                <span>{{item.first}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="search-history" v-show="searchHistory.length">
+                        <h1 class="title">
+                            <span class="text">搜索历史</span>
+                            <span class="clear" @click="showConfirm">
                                 <Icon size="18" type="ios-trash-outline"/>
                         </span>
-                    </h1>
-                    <search-list @select="addQuery" @delete="deleteSearchHistory"
-                                 :searches="searchHistory"></search-list>
+                        </h1>
+                        <search-list @select="addQuery" @delete="deleteSearchHistory"
+                                     :searches="searchHistory"></search-list>
+                    </div>
                 </div>
-            </div>
+            </scroll>
         </div>
         <div class="search-result" v-show="query" ref="searchResult">
             <suggest @select="saveSearch" @listScroll="blurInput" :query="query" ref="suggest"></suggest>
@@ -34,6 +36,7 @@
 
 <script>
     import SearchBox from '../components/search-box'
+    import Scroll from '../components/scroll'
     import Suggest from './suggest'
     import Confirm from '../components/confirm'
     import SearchList from '../components/search-list'
@@ -53,16 +56,31 @@
             SearchBox,
             Suggest,
             SearchList,
-            Confirm
+            Confirm,
+            Scroll
         },
         computed: {
+            shortcut() {
+                return this.hotKey.concat(this.searchHistory);
+            },
             ...mapGetters([
                 'searchHistory'
             ])
         },
+        watch: {
+            query(newQuery) {
+                if (!newQuery) {
+                    setTimeout(() => {
+                        this.$refs.shortcut.refresh();
+                    }, 20);
+                }
+            }
+        },
         methods: {
             handlePlayList(playlist) {
                 const bottom = playlist.length > 0 ? '60px' : '';
+                this.$refs.shortcutWrapper.style.bottom = bottom;
+                this.$refs.shortcut.refresh();
                 this.$refs.searchResult.style.bottom = bottom;
                 this.$refs.suggest.refresh();
             },
@@ -92,7 +110,7 @@
             saveSearch() {
                 this.saveSearchHistory(this.query);
             },
-            showConfirm(){
+            showConfirm() {
                 this.$refs.confirm.show();
             },
             ...mapActions([
