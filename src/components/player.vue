@@ -25,10 +25,11 @@
                             </div>
                         </div>
                     </div>
-                    <Scroll class="middle-r" ref="lyricList" :data ="currentSongLyric && currentSongLyric.lines">
+                    <Scroll class="middle-r" ref="lyricList" :data="currentSongLyric && currentSongLyric.lines">
                         <div class="lyric-wrapper">
                             <div v-if="currentSongLyric">
-                                <p ref="lyricLine" :class="{'current':currentLineNum === index}" class="text" :key="index" v-for="(line,index) in currentSongLyric.lines">{{line.lrc}}</p>
+                                <p ref="lyricLine" :class="{'current':currentLineNum === index}" class="text"
+                                   :key="index" v-for="(line,index) in currentSongLyric.lines">{{line.lrc}}</p>
                             </div>
                         </div>
                     </Scroll>
@@ -73,11 +74,12 @@
                 <div class="control">
                     <i :class="miniIcon" @click.stop="togglePlaying"></i>
                 </div>
-                <div class="control">
+                <div class="control" @click.stop="showPlayList">
                     <i class="icon-playlist"></i>
                 </div>
             </div>
         </transition>
+        <play-list ref="playlist"></play-list>
         <audio :src="currentSong.songURL" ref="audio" @canplay="ready"
                @ended="end"
                @error="error" @timeupdate="updateTime"></audio>
@@ -90,7 +92,8 @@
     import ProgressBar from './progress-bar'
     import {playMode} from '../common/js/config'
     import {shuffle} from '../common/js/util'
-    import  Scroll from '../components/scroll'
+    import Scroll from '../components/scroll'
+    import PlayList from '../components/playlist'
 
     export default {
         name: "player",
@@ -99,8 +102,8 @@
                 songReady: false,
                 currentTime: 0,
                 currentLyric: [],
-                currentSongLyric:null,
-                currentLineNum:0,
+                currentSongLyric: null,
+                currentLineNum: 0,
             }
         },
         computed: {
@@ -123,7 +126,7 @@
                 //console.log((this.currentTime*1000) / this.currentSong.dt);
                 return (this.currentTime * 1000) / this.currentSong.time;
             },
-            themeNumber(){
+            themeNumber() {
                 return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
             },
             ...mapGetters([
@@ -143,6 +146,9 @@
             },
             open() {
                 this.setFullScreen(true);
+            },
+            showPlayList() {
+                this.$refs.playlist.show();
             },
             //获取当前播放歌曲的歌词
             getLyric() {
@@ -167,12 +173,12 @@
                     console.log(error);
                 });
             },
-            getCurrentSongLyric(){
+            getCurrentSongLyric() {
                 var v = this;
                 v.getLyric();
                 let temp = {
-                    curLine:0,
-                    lines:v.currentLyric,
+                    curLine: 0,
+                    lines: v.currentLyric,
                 };
                 v.currentSongLyric = temp;
                 console.log(v.currentSongLyric);
@@ -196,11 +202,11 @@
                 var v = this;
                 lyricLine.forEach((item) => {
                     let line = item.substring(1, item.indexOf("]"));
-                    let lyricTemp = item.substring(item.indexOf("]")+2);
+                    let lyricTemp = item.substring(item.indexOf("]") + 2);
                     let mintue = line.substring(0, 2);
                     let second = line.substring(3, line.length - 1);
                     let lyricLine = {
-                        time: (mintue * 60 * 1000)+ (second *1000),
+                        time: (mintue * 60 * 1000) + (second * 1000),
                         lrc: lyricTemp,
                     };
                     v.currentLyric.push(lyricLine);
@@ -406,6 +412,9 @@
         watch: {
             currentSong(newSong, oldSong) {
                 var v = this;
+                if (!newSong.id) {
+                    return;
+                }
                 if (newSong.id === oldSong.id) {
                     return;
                 }
@@ -425,7 +434,8 @@
         },
         components: {
             ProgressBar,
-            Scroll
+            Scroll,
+            PlayList
         },
         mounted() {
             // console.log(this.currentSong);
@@ -721,13 +731,16 @@
         /*background: #ff7675;*/
         /*background: #D6A2E8;*/
     }
-    .theme1{
+
+    .theme1 {
         background: #ff7675;
     }
-    .theme2{
+
+    .theme2 {
         background: #87cbd8;
     }
-    .theme3{
+
+    .theme3 {
         background: #D6A2E8;
     }
 
