@@ -36,7 +36,7 @@
                         <span class="text">添加歌曲到队列</span>
                     </div>
                 </div>
-                <div class="list-close" @click="hide">
+                <div class="list-close" :class="themeNumber" @click="hide">
                     <span>关闭</span>
                 </div>
             </div>
@@ -61,11 +61,15 @@
             }
         },
         computed: {
+            themeNumber() {
+                return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
             ...mapGetters([
                 'sequenceList',
                 'currentSong',
                 'playList',
-                'mode'
+                'mode',
+                'theme'
             ])
             // modeText() {
             //     return this.mode === playMode.sequence ? '顺序播放' : this.mode === playMode.random ? '随机播放' : '单曲循环'
@@ -325,9 +329,17 @@
     .list-close {
         text-align: center;
         line-height: 50px;
-        background: #D6A2E8;
         font-size: 14px;
         color: white;
+    }
+    .theme1{
+        background: #ff7675;
+    }
+    .theme2{
+        background: #87cbd8;
+    }
+    .theme3{
+        background: #D6A2E8;
     }
 
 </style>

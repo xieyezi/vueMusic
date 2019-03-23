@@ -2,7 +2,7 @@
     <div class="mhead" :class="themeNumber">
         <h2 class="text">觉非音乐</h2>
         <div class="iconimg" @click="toMenu">
-            <Icon  type="md-menu" />
+            <Icon type="md-menu" />
         </div>
     </div>
 </template>
