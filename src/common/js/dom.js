@@ -8,7 +8,7 @@ export function addClass(el, className) {
 
 
 
-let elementStyle = document.createElement('div').style
+let elementStyle = document.createElement('div').style;
 
 let vendor = (() => {
     let transformNames = {

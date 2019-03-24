@@ -14,6 +14,7 @@
     "fastclick": "^1.0.6",
     "good-storage": "^1.1.0",
     "iview": "^3.1.4",
+    "lyric-parser": "^1.0.1",
     "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
     "vue-router": "^3.0.1",
