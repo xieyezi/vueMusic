@@ -4,8 +4,7 @@
             <div class="list-wrapper" @click.stop>
                 <div class="list-header">
                     <h1 class="title">
-                        <i class="icon"></i>
-                        <span class="text"></span>
+                        <span class="text">当前播放列表</span>
                         <span class="clear" @click="showConfirm">
                             <!--<i class="icon-clear"></i>-->
                             <Icon size="22" color="#666" type="ios-trash-outline"/>
@@ -33,7 +32,7 @@
                 <div class="list-operate">
                     <div class="add">
                         <i class="icon-add"></i>
-                        <span class="text">添加歌曲到队列</span>
+                        <span class="text"></span>
                     </div>
                 </div>
                 <div class="list-close" :class="themeNumber" @click="hide">
@@ -116,26 +115,10 @@
             },
             deleteOne(item) {
                 this.deleteSong(item);
-                // this.setPlayingState(true);
-                // if (item.deleting) {
-                //     return
-                // }
-                // item.deleting = true
-                // this.deleteSong(item)
                 if (!this.playList.length) {
                     this.hide();
                 }
-                // setTimeout(() => {
-                //     item.deleting = false
-                // }, 300)
             },
-            // addSong() {
-            //     this.$refs.addSong.show()
-            // },
-            // ...mapActions([
-            //     'deleteSong',
-            //     'deleteSongList'
-            // ])
             ...mapMutations({
                 setCurrentIndex: 'SET_CURRENT_INDEX',
                 setPlayingState: 'SET_PLAYING_STATE',
@@ -148,7 +131,7 @@
         watch: {
             currentSong(newSong, oldSong) {
                 if (!this.showFlag || newSong.id === oldSong.id) {
-                    return
+                    return;
                 }
                 setTimeout(() => {
                     this.scrollToCurrent(newSong);
@@ -257,13 +240,13 @@
     }
 
 
-    .list-enter-active, .list-leave-active {
-        transition: all 0.1s linear;
+    .list-content .list-enter-active, .list-leave-active {
+        transition: all 0.2s linear;
     }
 
 
-    .list-enter, .list-leave-to {
-        height: 0
+    .list-content .list-enter, .list-leave-to {
+        height: 0;
     }
 
 
@@ -300,7 +283,7 @@
 
     .list-operate {
         width: 140px;
-        margin: 20px auto 30px auto;
+        margin: 10px auto 10px auto;
     }
 
 
@@ -308,9 +291,9 @@
         display: flex;
         align-items: center;
         padding: 8px 16px;
-        border: 1px solid #666;
-        border-radius: 100px;
-        color: #666;
+        /*border: 1px solid #666;*/
+        /*border-radius: 100px;*/
+        /*color: #666;*/
     }
 
 

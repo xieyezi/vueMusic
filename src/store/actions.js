@@ -112,7 +112,7 @@ export const deleteSong = function ({commit, state}, song) {
     commit(types.SET_SEQUENCE_LIST, sequenceList);
     commit(types.SET_CURRENT_INDEX, currentIndex);
     //如果删除到最后一首歌，则将播放状态切为false
-    const playingState = playList.length>0;
+    const playingState = playList.length > 0;
     commit(types.SET_PLAYING_STATE, playingState);
 };
 /**
