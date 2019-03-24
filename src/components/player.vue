@@ -414,6 +414,8 @@
             },
             middleTouchStart(e) {
                 this.touch.initiated = true;
+                // 用来判断是否是一次移动
+                this.touch.moved = false;
                 const touch = e.touches[0];
                 this.touch.startX = touch.pageX;
                 this.touch.startY = touch.pageY;
@@ -424,11 +426,15 @@
                     return;
                 }
                 const touch = e.touches[0];
-                const deltaX = touch.pageX - this.touch.startX;
-                const deltaY = touch.pageY - this.touch.startY;
+                const deltaX = touch.pageX - this.touch.startX
+                const deltaY = touch.pageY - this.touch.startY
                 //如果纵向滚动大于横向滚动,则不做处理
                 if (Math.abs(deltaY) > Math.abs(deltaX)) {
+                    // console.log("大于，不应该移动!!");
                     return;
+                }
+                if (!this.touch.moved) {
+                    this.touch.moved = true;
                 }
                 const left = this.currentShow === 'cd' ? 0 : -window.innerWidth;
                 const offsetWidth = Math.min(0, Math.max(-window.innerWidth, left + deltaX));
@@ -525,7 +531,7 @@
         top: 0;
         bottom: 0;
         z-index: 150;
-        background: #2d3047;
+        background: #222;
     }
 
     .normal-player .background {
