@@ -110,7 +110,7 @@
     import Lyric from 'lyric-parser'
     import {prefixStyle} from "../common/js/dom";
 
-    const transitionDuration = prefixStyle('transitionDuration')
+    const transitionDuration = prefixStyle('transitionDuration');
     const transform = prefixStyle('transform');
 
     export default {
@@ -426,11 +426,11 @@
                     return;
                 }
                 const touch = e.touches[0];
-                const deltaX = touch.pageX - this.touch.startX
-                const deltaY = touch.pageY - this.touch.startY
+                const deltaX = touch.pageX - this.touch.startX;
+                const deltaY = touch.pageY - this.touch.startY;
                 //如果纵向滚动大于横向滚动,则不做处理
                 if (Math.abs(deltaY) > Math.abs(deltaX)) {
-                    // console.log("大于，不应该移动!!");
+                    console.log("大于，不应该移动!!");
                     return;
                 }
                 if (!this.touch.moved) {

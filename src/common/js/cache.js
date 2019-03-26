@@ -1,6 +1,6 @@
 //用于缓存
 
-import storage from 'good-storage'
+import storage from 'xieyezi-storage'
 
 const SEARCH_KEY = '_search_';
 const THEME_KEY = '_theme_';

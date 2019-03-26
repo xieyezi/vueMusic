@@ -27,7 +27,6 @@
     import Loading from 'components/loading'
     import NoResult from '../components/no-result'
     import {mapActions} from 'vuex'
-
     export default {
         name: "suggest",
         components: {
