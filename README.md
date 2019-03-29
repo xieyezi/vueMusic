@@ -14,6 +14,11 @@
 
 ![预览地址](http://pohm05hj4.bkt.clouddn.com/%E9%9F%B3%E4%B9%90app%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
 
+
+### 项目结构
+
+![音乐Web App架构思维导图.png](http://pohm05hj4.bkt.clouddn.com/%E9%9F%B3%E4%B9%90Web%20App%E6%9E%B6%E6%9E%84%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png)
+
 ```
 npm install
 ```
