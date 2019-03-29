@@ -13,12 +13,12 @@
     "css-loader": "^1.0.1",
     "fastclick": "^1.0.6",
     "iview": "^3.1.4",
-    "lyric-parser": "^1.0.1",
     "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "xieyezi-storage": "^1.0.3"
+    "xieyezi-lyric": "^1.0.3",
+    "xieyezi-storage": "^1.0.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.4",

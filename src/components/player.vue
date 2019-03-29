@@ -107,7 +107,7 @@
     import {shuffle} from '../common/js/util'
     import Scroll from '../components/scroll'
     import PlayList from '../components/playlist'
-    import Lyric from 'lyric-parser'
+    import Lyric from 'xieyezi-lyric'
     import {prefixStyle} from "../common/js/dom";
 
     const transitionDuration = prefixStyle('transitionDuration');
@@ -390,9 +390,12 @@
                 this.loadLyric().then((resolve) => {
                     if (resolve.data.code === 200) {
                         lyric = resolve.data.lrc.lyric;
+                        // console.log("未处理的歌词:");
+                        // console.log(lyric);
                     }
                     v.currentLyric = new Lyric(lyric, this.handleLyric);
                     if (this.playing) {
+                        // console.log("处理后的歌词:");
                         this.currentLyric.play();
                     }
                     // console.log(v.currentLyric);
@@ -430,7 +433,7 @@
                 const deltaY = touch.pageY - this.touch.startY;
                 //如果纵向滚动大于横向滚动,则不做处理
                 if (Math.abs(deltaY) > Math.abs(deltaX)) {
-                    console.log("大于，不应该移动!!");
+                    // console.log("大于，不应该移动!!");
                     return;
                 }
                 if (!this.touch.moved) {
