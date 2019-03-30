@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router);
+//路由懒加载
 const Recommend = () => import('views/recommend');
 const Rank = () => import('views/rank');
 const Singer = () => import('views/singer');
@@ -10,6 +11,7 @@ const Disc = () => import('views/disc');
 const RankDetail = () => import('views/rankDetail');
 const Menu = () => import('components/usermenu');
 const Theme = () => import('components/theme');
+const About = () => import('components/about');
 
 
 export default new Router({
@@ -69,6 +71,11 @@ export default new Router({
             path:'/theme',
             name:'theme',
             component:Theme
+        },
+        {
+            path:'/about',
+            name:'about',
+            component:About
         }
     ]
 })

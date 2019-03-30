@@ -6,7 +6,7 @@
             </div>
             <div class="menu-warpper">
                 <div class="tophead" >
-                    <p>今天也要开心哦～</p>
+                    <!--<p>今天也要开心哦～</p>-->
                 </div>
                 <div class="content">
                     <div class="content-warpper">
@@ -37,7 +37,7 @@
                             </Col>
                             <Col span="12">
                                 <Card style="height: 150px;">
-                                    <div style="text-align:center">
+                                    <div style="text-align:center" @click="toAboutMe">
                                         <span :class="themeNum"><Icon type="ios-information-circle-outline" /></span>
                                         <p>关于</p>
                                     </div>
@@ -73,6 +73,11 @@
             toChangeTheme(){
                 this.$router.push({
                     path: '/theme'
+                });
+            },
+            toAboutMe(){
+                this.$router.push({
+                    path: '/about'
                 });
             }
         }
@@ -131,8 +136,7 @@
     }
     .tophead{
         position: relative;
-        top:5%;
-        height: 10%;
+        height: 8%;
         text-align: center;
         font-weight: 400;
         font-size: 16px;
@@ -140,14 +144,16 @@
     }
     .content{
         position: relative;
-        height: 100%;
+        /*height: 100%;*/
         background: rgba(255,255,255,0.9);
-        border-top-left-radius: 50px;
-        border-top-right-radius: 50px;
+        /*border-top-left-radius: 50px;*/
+        /*border-top-right-radius: 50px;*/
+        border-radius: 30px;
     }
     .content-warpper{
         /*border:solid 1px red;*/
         padding-top: 30%;
+        padding-bottom: 30%;
         vertical-align: middle;
         text-align: center;
     }

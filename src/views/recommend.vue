@@ -5,10 +5,9 @@
                 <div v-if="bannerList.length" class="slider-wrapper">
                     <div class="slider-content">
                         <slider ref="slider" class="slide">
-                            <div v-for="item in bannerList" @click="toPlay(item.encodeId)">
+                            <div v-for="item in bannerList">
                                 <img :src="item.imageUrl">
                             </div>
-                            <!--<div class="type"></div>-->
                         </slider>
                     </div>
                 </div>
@@ -137,9 +136,6 @@
                         this.$refs.scroll.refresh();
                     }, 20)
                 }
-            },
-            toPlay(value) {
-                //console.log(value);
             },
             openRecommendList(disc) {
                 this.$router.push({

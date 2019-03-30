@@ -1,6 +1,8 @@
 <template>
     <div class="mhead" :class="themeNumber">
-        <h2 class="text">觉非音乐</h2>
+        <span class="icon"><Icon type="ios-musical-notes-outline" /></span>
+        <h2 class="text">时刻音乐</h2>
+        <span class="icon"><Icon type="ios-musical-notes-outline" /></span>
         <div class="iconimg" @click="toMenu">
             <Icon type="md-menu" />
         </div>
@@ -67,6 +69,13 @@
         display: inline-block;
         vertical-align: top;
         margin-top: 6px;
+        line-height: 30px;
+        font-size: 18px;
+    }
+    .mhead .icon{
+        margin-top: 6px;
+        display: inline-block;
+        vertical-align: top;
         line-height: 30px;
         font-size: 18px;
     }
