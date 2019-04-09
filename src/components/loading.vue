@@ -1,6 +1,6 @@
 <template>
   <div class="loading">
-    <img width="40" height="30" src="http://pohm05hj4.bkt.clouddn.com/loading.gif">
+    <img width="40" height="30" src="http://cdn.xieyezi.com/loading.gif">
     <p class="desc" :class="themeNumber">{{title}}</p>
   </div>
 </template>

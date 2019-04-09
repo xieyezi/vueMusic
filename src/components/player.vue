@@ -76,7 +76,7 @@
             </div>
         </transition>
         <transition name="mini">
-            <div class="mini-player" :class="themeNumber" v-show="!fullScreen" @click="open">
+            <div class="mini-player" ref="mini-player" :class="themeNumber" v-show="!fullScreen" @click="open">
                 <div class="icon">
                     <img :class="cdCls" :src="currentSong.imgURL" width="40" height="40"/>
                 </div>

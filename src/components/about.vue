@@ -1,5 +1,6 @@
 <template>
-    <div class="about">
+    <transition name="slide">
+     <div class="about">
         <div class="top" :class="themeNumber">
             <div class="back" @click="back">
                 <i class="icon-back"></i>
@@ -38,6 +39,7 @@
             <p>Copyright Xieyezi.All Rights Reserved.</p>
         </div>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -47,9 +49,9 @@
         data(){
             return{
                 imgList:[
-                    'http://pohm05hj4.bkt.clouddn.com/logo1.png',
-                    'http://pohm05hj4.bkt.clouddn.com/logo2.png',
-                    'http://pohm05hj4.bkt.clouddn.com/logo3.png'
+                    'http://cdn.xieyezi.com/logo1.png',
+                    'http://cdn.xieyezi.com/logo2.png',
+                    'http://cdn.xieyezi.com/logo3.png'
                 ]
 
             }
@@ -155,5 +157,12 @@
         text-align: center;
         font-size: 12px;
         color: #aaa;
+    }
+    .slide-enter-active, .slide-leave-active {
+        transition: all 0.3s;
+    }
+
+    .slide-enter, .slide-leave-to {
+        transform: translate3d(100%, 0, 0);
     }
 </style>

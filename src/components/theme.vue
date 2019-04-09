@@ -61,7 +61,7 @@
         name: "theme",
         data() {
             return {
-                imgurl: 'http://pohm05hj4.bkt.clouddn.com/yulan1.png',
+                imgurl: 'http://cdn.xieyezi.com/yulan1.png',
                 themeId: 0 //默认为桃花粉主题
             }
         },
@@ -77,12 +77,13 @@
             handlePlayList(playList) {
                 const bottom = playList.length > 0 ? '20px' : '';
                 this.$refs.theme.style.bottom = bottom;
+                // this.$refs.mini-player.style.display = 'none';
             },
             back() {
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
-                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan1.png';
+                this.imgurl = 'http://cdn.xieyezi.com/yulan1.png';
                 this.$router.back();
             },
             changeThemeOK() {
@@ -91,21 +92,21 @@
                 this.$router.back();
             },
             chooseItem1() {
-                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan1.png';
+                this.imgurl = 'http://cdn.xieyezi.com/yulan1.png';
                 this.$refs.theme1.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 0;
             },
             chooseItem2() {
-                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan2.png';
+                this.imgurl = 'http://cdn.xieyezi.com/yulan2.png';
                 this.$refs.theme2.style.border = 'solid 1px gray';
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 1;
             },
             chooseItem3() {
-                this.imgurl = 'http://pohm05hj4.bkt.clouddn.com/yulan3.png';
+                this.imgurl = 'http://cdn.xieyezi.com/yulan3.png';
                 this.$refs.theme3.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme1.style.border = '0';
