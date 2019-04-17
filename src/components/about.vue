@@ -1,6 +1,9 @@
 <template>
     <transition name="slide">
      <div class="about">
+         <div class="background">
+             <img :src="backgroundImg" width="100%" height="100%"/>
+         </div>
         <div class="top" :class="themeNumber">
             <div class="back" @click="back">
                 <i class="icon-back"></i>
@@ -52,8 +55,12 @@
                     'http://cdn.xieyezi.com/logo1.png',
                     'http://cdn.xieyezi.com/logo2.png',
                     'http://cdn.xieyezi.com/logo3.png'
+                ],
+                backgroundImgList:[
+                    'http://cdn.xieyezi.com/background1.svg',
+                    'http://cdn.xieyezi.com/background2.svg',
+                    'http://cdn.xieyezi.com/background3.svg'
                 ]
-
             }
         },
         methods:{
@@ -67,6 +74,9 @@
             },
             imgURL(){
                 return this.theme === 0 ? this.imgList[0] : this.theme === 1 ? this.imgList[1] : this.imgList[2]
+            },
+            backgroundImg(){
+                return this.theme === 0 ? this.backgroundImgList[0] : this.theme === 1 ? this.backgroundImgList[1] : this.backgroundImgList[2]
             },
             ...mapGetters([
                 'theme',
@@ -85,6 +95,16 @@
         bottom: 0;
         z-index: 150;
         background: #fff;
+    }
+    .background {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 150%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0.2;
+        filter: blur(5px);
     }
     .back {
         position: absolute;

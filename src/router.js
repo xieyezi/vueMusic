@@ -9,7 +9,6 @@ const Search = () => import('views/search');
 const SingerDetail = () => import('views/singerDetail');
 const Disc = () => import('views/disc');
 const RankDetail = () => import('views/rankDetail');
-const Menu = () => import('components/usermenu');
 const Theme = () => import('components/theme');
 const About = () => import('components/about');
 
@@ -61,11 +60,6 @@ export default new Router({
             path: '/search',
             name: 'search',
             component: Search
-        },
-        {
-            path:'/menu',
-            name:'menu',
-            component:Menu
         },
         {
             path:'/theme',

@@ -1,31 +1,70 @@
 <template>
     <div class="mhead" :class="themeNumber">
-        <span class="icon"><Icon type="ios-musical-notes-outline" /></span>
+        <span class="icon"><Icon type="ios-musical-notes-outline"/></span>
         <h2 class="text">时刻音乐</h2>
-        <span class="icon"><Icon type="ios-musical-notes-outline" /></span>
+        <span class="icon"><Icon type="ios-musical-notes-outline"/></span>
         <div class="iconimg" @click="toMenu">
-            <Icon type="md-menu" />
+            <Icon type="md-menu"/>
         </div>
+       <div>
+           <Drawer width="100" v-model="drawer">
+               <div style="width: 100%;">
+                   <img :src="backgroundImg" style="width: 100%;height: auto"/>
+               </div>
+               <CellGroup>
+                   <div>
+                       <Cell title="最近收听" to="/components/button"/>
+                   </div>
+                   <div>
+                       <Cell title="我的收藏" to="/components/button"/>
+                   </div>
+                   <div @click="toChangeTheme">
+                       <Cell title="主题换肤" to="theme"/>
+                   </div>
+                   <div @click="toAboutMe">
+                       <Cell title="关于时刻" to="about"/>
+                   </div>
+               </CellGroup>
+           </Drawer>
+       </div>
     </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
+
     export default {
         name: "mhead",
+        data() {
+            return {
+                drawer: false,
+                backgroundImgList:[
+                    'http://cdn.xieyezi.com/background1.svg',
+                    'http://cdn.xieyezi.com/background2.svg',
+                    'http://cdn.xieyezi.com/background3.svg'
+                ]
+            }
+        },
         computed: {
             themeNumber() {
                 return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+            },
+            backgroundImg(){
+                return this.theme === 0 ? this.backgroundImgList[0] : this.theme === 1 ? this.backgroundImgList[1] : this.backgroundImgList[2]
             },
             ...mapGetters([
                 'theme',
             ])
         },
-        methods:{
-            toMenu(){
-                this.$router.push({
-                    path: '/menu'
-                });
+        methods: {
+            toMenu() {
+                this.drawer = true;
+            },
+            toAboutMe() {
+                this.drawer = false;
+            },
+            toChangeTheme() {
+                this.drawer = false;
             }
         }
     }
@@ -38,17 +77,17 @@
         width: 100%;
         text-align: center;
         color: rgba(255, 255, 255, 0.8);
-        /*background: #87CBD8;*/
-        /*background: #ff7675;*/
-
     }
-    .theme1{
+
+    .theme1 {
         background: #ff7675;
     }
-    .theme2{
+
+    .theme2 {
         background: #87cbd8;
     }
-    .theme3{
+
+    .theme3 {
         background: #D6A2E8;
     }
 
@@ -72,7 +111,8 @@
         line-height: 30px;
         font-size: 18px;
     }
-    .mhead .icon{
+
+    .mhead .icon {
         margin-top: 6px;
         display: inline-block;
         vertical-align: top;
