@@ -55,7 +55,7 @@
 
 <style scoped>
     .red{
-        color: #FF0000;
+        color: #df3336;
     }
     .song-list {
         /*margin-left: 15px;*/

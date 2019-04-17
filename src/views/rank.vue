@@ -3,7 +3,6 @@
         <scroll :data="topList" class="toplist" ref="toplist">
             <div>
                 <div class="recommend-list">
-                    <!--<h1 class="list-title" v-show="topList.length>0">官方榜</h1>-->
                     <ul class="list-content">
                         <li class="Songitem" @click="loadRankSongList(item)" v-if="index < 4" v-for="(item,index) in topList">
                             <div class="infoImg">
