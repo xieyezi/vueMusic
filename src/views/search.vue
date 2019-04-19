@@ -18,7 +18,7 @@
                         <h1 class="title">
                             <span class="text">搜索历史</span>
                             <span class="clear" @click="showConfirm">
-                                <Icon size="18" type="ios-trash-outline"/>
+                                <Icon size="22" type="ios-trash-outline"/>
                         </span>
                         </h1>
                         <search-list @select="addQuery" @delete="deleteSearchHistory"
@@ -187,11 +187,6 @@
 
     .search-history .title .text {
         flex: 1
-    }
-
-    .search-history .title .clear {
-        font-size: 14px;
-        /*color: $color-text-d*/
     }
 
     .search-result {

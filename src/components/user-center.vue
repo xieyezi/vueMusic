@@ -3,7 +3,7 @@
         <div class="user-center">
             <div :class="themeBackgroud">
                 <div class="back" @click="back">
-                    <i class="icon-back"></i>
+                    <i class="icon-backgray"></i>
                 </div>
                 <div class="switches-wrapper">
                     <switches @switch="switchItem" :switches="switches" :currentIndex="currentIndex"></switches>
@@ -211,7 +211,7 @@
         z-index: 50;
     }
 
-    .icon-back {
+    .icon-backgray {
         display: block;
         padding: 10px;
         font-size: 20px;

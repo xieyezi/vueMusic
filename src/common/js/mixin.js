@@ -45,6 +45,12 @@ export const playerMixin = {
             }
             return 'icon-not-favorite';
         },
+        getFavoriteIconGray(song) {
+            if (this.isFavorite(song)) {
+                return 'icon-favorite';
+            }
+            return 'icon-not-favorite-gray';
+        },
         isFavorite(song) {
             const index = this.favoriteList.findIndex((item) => {
                 return item.id === song.id;

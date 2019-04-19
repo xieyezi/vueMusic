@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'musicicon';
-  src:  url('../fonts/musicicon.eot?attlgy');
-  src:  url('../fonts/musicicon.eot?attlgy#iefix') format('embedded-opentype'),
-    url('../fonts/musicicon.ttf?attlgy') format('truetype'),
-    url('../fonts/musicicon.woff?attlgy') format('woff'),
-    url('../fonts/musicicon.svg?attlgy#musicicon') format('svg');
+  font-family: 'music';
+  src:  url('../fonts/music.eot?of5xr6');
+  src:  url('../fonts/music.eot?of5xr6#iefix') format('embedded-opentype'),
+    url('../fonts/music.ttf?of5xr6') format('truetype'),
+    url('../fonts/music.woff?of5xr6') format('woff'),
+    url('../fonts/music.svg?of5xr6#music') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'musicicon' !important;
+  font-family: 'music' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -24,63 +24,43 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-close:before {
-  content: "\e90e";
-  color: #fff;
-}
-.icon-play-mini:before {
+.icon-backgray:before {
   content: "\e900";
-  color: #fff;
+  color: #666;
 }
-.icon-pause-mini:before {
+.icon-back:before {
   content: "\e901";
   color: #fff;
 }
-.icon-playlist:before {
+.icon-close:before {
   content: "\e902";
   color: #fff;
 }
-.icon-music:before {
-  content: "\e913";
-  color: #bfbfbf;
-}
-.icon-delete1:before {
-  content: "\e912";
-  color: #bfbfbf;
-}
-.icon-themeplay:before {
-  content: "\e910";
-  color: #87cbd8;
-}
-.icon-favorite:before {
-  content: "\e90d";
-  color: #d81e06;
-}
-.icon-not-favorite:before {
+.icon-delete:before {
   content: "\e903";
   color: #fff;
 }
-.icon-user:before {
+.icon-favorite:before {
   content: "\e904";
-  color: #515151;
+  color: #d81e06;
 }
-.icon-sequence:before {
+.icon-loop:before {
   content: "\e905";
   color: #fff;
 }
-.icon-search:before {
+.icon-next:before {
   content: "\e906";
   color: #fff;
 }
-.icon-random:before {
+.icon-not-favorite-gray:before {
   content: "\e907";
-  color: #fff;
+  color: #666;
 }
-.icon-prev:before {
+.icon-not-favorite:before {
   content: "\e908";
   color: #fff;
 }
-.icon-play:before {
+.icon-pause-mini:before {
   content: "\e909";
   color: #fff;
 }
@@ -88,19 +68,31 @@
   content: "\e90a";
   color: #fff;
 }
-.icon-next:before {
+.icon-play-mini:before {
   content: "\e90b";
   color: #fff;
 }
-.icon-loop:before {
+.icon-play:before {
   content: "\e90c";
   color: #fff;
 }
-.icon-delete:before {
+.icon-playlist:before {
+  content: "\e90d";
+  color: #fff;
+}
+.icon-prev:before {
+  content: "\e90e";
+  color: #fff;
+}
+.icon-random:before {
   content: "\e90f";
   color: #fff;
 }
-.icon-back:before {
+.icon-search:before {
+  content: "\e910";
+  color: #fff;
+}
+.icon-sequence:before {
   content: "\e911";
   color: #fff;
 }

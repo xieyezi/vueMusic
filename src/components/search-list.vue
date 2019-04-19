@@ -4,7 +4,7 @@
             <li :key="item" class="search-item" @click="selectItem(item)" v-for="item in searches">
                 <span class="text">{{item}}</span>
                 <span class="icon" @click.stop="deleteOne(item)">
-                 <Icon size="20" type="ios-close" />
+                 <Icon size="22" type="ios-close" />
                 </span>
             </li>
         </transition-group>
@@ -53,9 +53,9 @@
         height: 0
     }
 
-    .icon {
-       /*extend-click()*/
-    }
+    /*.icon {*/
+       /*margin-left: 1px;*/
+    /*}*/
 
 
 </style>

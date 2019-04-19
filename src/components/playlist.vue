@@ -6,7 +6,6 @@
                     <h1 class="title">
                         <span class="text">当前播放列表</span>
                         <span class="clear" @click="showConfirm">
-                            <!--<i class="icon-clear"></i>-->
                             <Icon size="22" color="#666" type="ios-trash-outline"/>
                         </span>
                     </h1>
@@ -15,16 +14,13 @@
                     <transition-group name="list" tag="ul">
                         <li :key="item.id" ref="listItem" class="item" v-for="(item,index)  in sequenceList"
                             @click="selectItem(item,index)">
-                            <!--<i class="current" :class=""></i>-->
                             <Icon class="current" color="#666" size="18" :type="getCurrentIcon(item)"/>
                             <span class="text">{{item.name}} - {{item.ar}}</span>
-                            <span class="like">
-                                <!--<i class="icon-not-favorite"></i>-->
-                                <Icon color="#666" size="18" type="ios-heart-outline"/>
+                            <span class="like" @click.stop="toggleFavorite(item)">
+                                <i class="icon" :class="getFavoriteIconGray(item)"></i>
                             </span>
                             <span class="delete" @click.stop="deleteOne(item)">
-                                <!--<i class="icon-delete"></i>-->
-                                <Icon color="#666" size="24" type="ios-close"/>
+                                <Icon color="#666" size="26" type="ios-close"/>
                             </span>
                         </li>
                     </transition-group>
@@ -50,9 +46,10 @@
     import {playMode} from "../common/js/config";
     import Scroll from '../components/scroll'
     import Confirm from '../components/confirm'
+    import {playerMixin} from '../common/js/mixin'
 
     export default {
-        // mixins: [playerMixin],
+        mixins: [playerMixin],
         data() {
             return {
                 showFlag: false,
@@ -159,29 +156,17 @@
         background-color: rgba(0, 0, 0, 0.3);
     }
 
-
     .list-fade-enter-active, .list-fade-leave-active {
         transition: opacity 0.3s;
 
     }
 
-    /*.list-wrapper {*/
-    /*transition: all 0.3s;*/
-    /*}*/
-
-
     .list-fade-enter, .list-fade-leave-to {
         opacity: 0
     }
 
-
-    /*.list-wrapper {*/
-    /*transform: translate3d(0, 100%, 0)*/
-    /*}*/
-
-
-    .list-fade-enter {
-
+    .red {
+        color: #d81e06;
     }
 
     .list-wrapper {
@@ -270,10 +255,12 @@
 
     .list-content .like {
         margin-right: 15px;
-        /*font-size: 12px;*/
-        /*color: $color-theme*/
     }
-
+    .list-content .like .icon{
+        display: block;
+        /*padding: 9px;*/
+        font-size: 16px;
+    }
 
     .list-content .item .delete {
         /*font-size: 12px;*/
@@ -315,13 +302,16 @@
         font-size: 14px;
         color: white;
     }
-    .theme1{
+
+    .theme1 {
         background: #ff7675;
     }
-    .theme2{
+
+    .theme2 {
         background: #87cbd8;
     }
-    .theme3{
+
+    .theme3 {
         background: #D6A2E8;
     }
 
