@@ -11,8 +11,7 @@ const Disc = () => import('views/disc');
 const RankDetail = () => import('views/rankDetail');
 const Theme = () => import('components/theme');
 const About = () => import('components/about');
-
-
+const UserCenter = () => import('components/user-center');
 export default new Router({
     linkActiveClass: 'active',
     routes: [
@@ -70,6 +69,11 @@ export default new Router({
             path:'/about',
             name:'about',
             component:About
+        },
+        {
+            path:'/user-center',
+            name:'user-center',
+            component:UserCenter
         }
     ]
 })

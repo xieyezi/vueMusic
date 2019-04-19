@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 import {playMode} from '../common/js/config'
 import {shuffle} from "../common/js/util";
-import {saveSearch, deleteSearch, clearSearch, saveTheme} from '../common/js/cache'
+import {saveSearch, deleteSearch, clearSearch, saveTheme,savePlay,saveFavorite,deleteFavorite} from '../common/js/cache'
 import {playing} from "./getters";
 
 /**
@@ -153,4 +153,23 @@ export const clearSearchHistory = function ({commit}) {
 
 export const changeTheme = function ({commit}, theme) {
     commit(types.SET_THEME, saveTheme(theme));
+};
+/**
+ * 将播放历史存至localStorage和vueX里面
+ * @param commit
+ * @param song
+ */
+export const savePlayHistory = function ({commit},song) {
+    commit(types.SET_PLAY_HISTORY,savePlay(song));
+};
+/**
+ * 点击收藏歌曲
+ * @param commit
+ * @param song
+ */
+export const saveFavoriteList = function ({commit},song) {
+    commit(types.SET_FAVORITE_LIST,saveFavorite(song));
+};
+export const deleteFavoriteList = function ({commit},song) {
+    commit(types.SET_FAVORITE_LIST, deleteFavorite(song));
 };

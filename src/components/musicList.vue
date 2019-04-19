@@ -242,8 +242,6 @@
         margin: 0 auto;
         text-align: center;
         z-index: 999;
-        /*border: 1px solid rgb(135, 203, 216);*/
-        /*color: rgb(135, 203, 216);*/
         border-radius: 100px;
         font-size: 0;
     }
@@ -253,7 +251,6 @@
         vertical-align: middle;
         margin-right: 6px;
         font-size: 16px;
-        /*color: rgb(135, 203, 216);*/
     }
 
     .play .text {

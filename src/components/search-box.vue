@@ -11,7 +11,6 @@
 <script>
     import {mapGetters} from 'vuex'
     import {debounce} from "../common/js/util";
-
     export default {
         name: "search-box",
         props: {

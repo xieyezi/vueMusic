@@ -27,3 +27,7 @@ export const rank = state => state.rank;
 export const theme = state => state.theme;
 
 export const searchHistory = state => state.searchHistory;
+
+export const playHistory = state => state.playHistory;
+
+export const favoriteList = state => state.favoriteList;

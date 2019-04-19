@@ -4,12 +4,12 @@
             <div>
                 <div class="recommend-list">
                     <ul class="list-content">
-                        <li class="Songitem" @click="loadRankSongList(item)" v-if="index < 4" v-for="(item,index) in topList">
+                        <li class="Songitem" @click="loadRankSongList(item)" v-if="index < 4" v-for="(item,index) in topList" :key="index">
                             <div class="infoImg">
                                 <img @load="loadImage" v-lazy="item.coverImgUrl" class="imgInfo"/>
                             </div>
                             <div class="info">
-                                <div v-for="(song,count) in item.tracks" class="one">
+                                <div v-for="(song,count) in item.tracks" :key="count" class="one">
                                     <p class="song">{{count+1}}. {{song.first}} - {{song.second}}</p>
                                 </div>
                             </div>

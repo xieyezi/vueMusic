@@ -277,7 +277,6 @@
         flex: 0 0 30px;
         width: 30px;
         font-size: 17px;
-        /*color: $color-text-d*/
     }
 
     .icon-music {
@@ -288,8 +287,6 @@
         flex: 1;
         width: 90%;
         font-size: 14px;
-        /*color: $color-text-d*/
-
     }
 
     .suggest-item .name .text {

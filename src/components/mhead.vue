@@ -12,16 +12,16 @@
                    <img :src="backgroundImg" style="width: 100%;height: auto"/>
                </div>
                <CellGroup>
-                   <div>
-                       <Cell title="最近收听" to="/components/button"/>
+                   <div @click="closeDrawer">
+                       <Cell title="最近播放" to="user-center"/>
                    </div>
-                   <div>
-                       <Cell title="我的收藏" to="/components/button"/>
+                   <div @click="closeDrawer">
+                       <Cell title="我的收藏" to="user-center"/>
                    </div>
-                   <div @click="toChangeTheme">
+                   <div @click="closeDrawer">
                        <Cell title="主题换肤" to="theme"/>
                    </div>
-                   <div @click="toAboutMe">
+                   <div @click="closeDrawer">
                        <Cell title="关于时刻" to="about"/>
                    </div>
                </CellGroup>
@@ -60,10 +60,7 @@
             toMenu() {
                 this.drawer = true;
             },
-            toAboutMe() {
-                this.drawer = false;
-            },
-            toChangeTheme() {
+            closeDrawer(){
                 this.drawer = false;
             }
         }
