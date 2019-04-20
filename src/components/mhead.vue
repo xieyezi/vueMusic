@@ -6,27 +6,35 @@
         <div class="iconimg" @click="toMenu">
             <Icon type="md-menu"/>
         </div>
-       <div>
-           <Drawer width="100" v-model="drawer">
-               <div style="width: 100%;">
-                   <img :src="backgroundImg" style="width: 100%;height: auto"/>
-               </div>
-               <CellGroup>
-                   <div @click="closeDrawer">
-                       <Cell title="最近播放" to="user-center"/>
-                   </div>
-                   <div @click="closeDrawer">
-                       <Cell title="我的收藏" to="user-center"/>
-                   </div>
-                   <div @click="closeDrawer">
-                       <Cell title="主题换肤" to="theme"/>
-                   </div>
-                   <div @click="closeDrawer">
-                       <Cell title="关于时刻" to="about"/>
-                   </div>
-               </CellGroup>
-           </Drawer>
-       </div>
+        <div>
+            <Drawer width="100" v-model="drawer">
+                <div style="width: 100%;">
+                    <img :src="backgroundImg" style="width: 100%;height: auto"/>
+                </div>
+                <CellGroup>
+                    <div @click="closeDrawer">
+                        <Cell title="我的喜欢" :to="userCenterLike">
+                            <Icon type="ios-star-outline" slot="icon"/>
+                        </Cell>
+                    </div>
+                    <div @click="closeDrawer">
+                        <Cell title="最近播放" :to="userCenterHistory">
+                            <Icon type="ios-bookmark-outline" slot="icon"/>
+                        </Cell>
+                    </div>
+                    <div @click="closeDrawer">
+                        <Cell title="主题换肤" to="theme">
+                            <Icon type="ios-shirt-outline" slot="icon"/>
+                        </Cell>
+                    </div>
+                    <div @click="closeDrawer">
+                        <Cell title="关于时刻" to="about">
+                            <Icon type="ios-information-circle-outline" slot="icon"/>
+                        </Cell>
+                    </div>
+                </CellGroup>
+            </Drawer>
+        </div>
     </div>
 </template>
 
@@ -38,18 +46,30 @@
         data() {
             return {
                 drawer: false,
-                backgroundImgList:[
+                backgroundImgList: [
                     'http://cdn.xieyezi.com/background1.svg',
                     'http://cdn.xieyezi.com/background2.svg',
                     'http://cdn.xieyezi.com/background3.svg'
-                ]
+                ],
+                userCenterLike: {
+                    name: 'user-center',
+                    params: {
+                        index: 0
+                    }
+                },
+                userCenterHistory: {
+                    name: 'user-center',
+                    params: {
+                        index: 1
+                    }
+                }
             }
         },
         computed: {
             themeNumber() {
                 return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
             },
-            backgroundImg(){
+            backgroundImg() {
                 return this.theme === 0 ? this.backgroundImgList[0] : this.theme === 1 ? this.backgroundImgList[1] : this.backgroundImgList[2]
             },
             ...mapGetters([
@@ -60,7 +80,7 @@
             toMenu() {
                 this.drawer = true;
             },
-            closeDrawer(){
+            closeDrawer() {
                 this.drawer = false;
             }
         }

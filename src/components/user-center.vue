@@ -46,13 +46,13 @@
         mixins: [playlistMixin],
         data() {
             return {
-                currentIndex: 0,
+                currentIndex: -1,
                 switches: [
                     {
-                        name: '我喜欢的'
+                        name: '我的喜欢'
                     },
                     {
-                        name: '最近听的'
+                        name: '最近播放'
                     }
                 ]
             }
@@ -133,23 +133,17 @@
                 this.$router.back();
             },
             random() {
-                // let list = this.currentIndex === 0 ? this.favoriteList : this.playHistory;
-                // if (list.length === 0) {
-                //     return
-                // }
-                // list = list.map((song) => {
-                //     return new Song(song);
-                // });
-                // if (this.playHistory.length === 0 ) {
-                //     return;
-                // }
-                // this.randomPlay({
-                //     list:this.playHistory
-                // });
+                let list = this.currentIndex === 0 ? this.favoriteList : this.playHistory;
+                if (list.length === 0) {
+                    return
+                }
+                this.storageRandomPlay({
+                    list
+                });
             },
             ...mapActions([
                 'insertSong',
-                'randomPlay'
+                'storageRandomPlay'
             ])
         },
         components: {
@@ -157,6 +151,22 @@
             Scroll,
             SongList,
             NoResult
+        },
+        watch:{
+            // '$route'(from,to){
+            //     // this.currentIndex = -1;
+            //     console.log(this.$route.params.index);
+            //     if (this.$route.params.index) {
+            //         console.log(this.$route.params.index);
+            //         this.currentIndex = this.$route.params.index;
+            //     }
+            // }
+        },
+        created() {
+            // console.log("新建了usercenter");
+            this.currentIndex = this.$route.params.index;
+            //@todo 解决跳转同一路由不会重新渲染的问题
+            // console.log(this.$route.params.index);
         }
     }
 </script>

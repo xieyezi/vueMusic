@@ -1,8 +1,18 @@
 import * as types from './mutation-types'
 import {playMode} from '../common/js/config'
 import {shuffle} from "../common/js/util";
-import {saveSearch, deleteSearch, clearSearch, saveTheme,savePlay,saveFavorite,deleteFavorite} from '../common/js/cache'
+import axios from 'axios'
+import {
+    saveSearch,
+    deleteSearch,
+    clearSearch,
+    saveTheme,
+    savePlay,
+    saveFavorite,
+    deleteFavorite
+} from '../common/js/cache'
 import {playing} from "./getters";
+
 
 /**
  *
@@ -44,6 +54,41 @@ export const randomPlay = function ({commit}, {list}) {
     commit(types.SET_CURRENT_INDEX, 0);
     commit(types.SET_FULL_SCREEN, true);
     commit(types.SET_PLAYING_STATE, true);
+};
+/**
+ * 获取url带有时间戳，缓存歌曲随机播放必须重新获取URL
+ * @param commit
+ * @param list
+ */
+export const storageRandomPlay = function ({commit}, {list}) {
+    commit(types.SET_PLAY_MODE, playMode.random);
+    commit(types.SET_SEQUENCE_LIST, list);
+    let randomList = shuffle(list);
+    // console.log(randomList);
+    let songUrlList = [];
+    //重新获取URL
+    loadSongUrl(randomList)
+        .then(response => {
+            //console.log(response.data.data);
+            if (response.data.code === 200) {
+                songUrlList = response.data.data;
+                // console.log(songUrlList);
+                for (let i = 0;i<randomList.length;i++){
+                    for (let m = 0;m<songUrlList.length;m++){
+                        if (randomList[i].id === songUrlList[m].id) {
+                            randomList[i].songURL = songUrlList[m].url;
+                            break;
+                        }
+                    }
+                }
+                commit(types.SET_PLAYLIST, randomList);
+                commit(types.SET_CURRENT_INDEX, 0);
+                commit(types.SET_FULL_SCREEN, true);
+                commit(types.SET_PLAYING_STATE, true);
+            }
+        }).catch(error => {
+        console.log(error);
+    });
 };
 
 /**
@@ -159,17 +204,35 @@ export const changeTheme = function ({commit}, theme) {
  * @param commit
  * @param song
  */
-export const savePlayHistory = function ({commit},song) {
-    commit(types.SET_PLAY_HISTORY,savePlay(song));
+export const savePlayHistory = function ({commit}, song) {
+    commit(types.SET_PLAY_HISTORY, savePlay(song));
 };
 /**
  * 点击收藏歌曲
  * @param commit
  * @param song
  */
-export const saveFavoriteList = function ({commit},song) {
-    commit(types.SET_FAVORITE_LIST,saveFavorite(song));
+export const saveFavoriteList = function ({commit}, song) {
+    commit(types.SET_FAVORITE_LIST, saveFavorite(song));
 };
-export const deleteFavoriteList = function ({commit},song) {
+export const deleteFavoriteList = function ({commit}, song) {
     commit(types.SET_FAVORITE_LIST, deleteFavorite(song));
 };
+
+/**
+ * 获取歌曲URL
+ * @param list
+ */
+function loadSongUrl(list) {
+    let songsIds = '';
+    for (let i = 0; i < list.length; i++) {
+        //console.log(list[i].id);
+        songsIds += list[i].id + ',';
+    }
+    songsIds = songsIds.substring(0, songsIds.length - 1);
+    return axios.get('api/song/url', {
+        params: {
+            id: songsIds
+        }
+    });
+}
