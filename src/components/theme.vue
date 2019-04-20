@@ -14,7 +14,6 @@
                     <div class="imgwrapper">
                         <img :src="imgurl">
                     </div>
-
                 </div>
                 <div class="themeitme">
                     <Row :gutter="16" type="flex" justify="space-between" class="code-row-bg">
@@ -177,7 +176,8 @@
     }
 
     .content {
-        position: relative;
+        position: fixed;
+        top:44px;
         height: 100%;
         background: rgba(255, 255, 255, 0.9);
     }
@@ -186,7 +186,6 @@
         width: 70%;
         margin: 0 auto;
         padding: 5px 0px 5px 0px;
-        /*background: #d81e06;*/
     }
 
     .preview .imgwrapper {
@@ -194,8 +193,6 @@
     }
 
     .preview img {
-        width: auto;
-        height: auto;
         width: 100%;
         height: 100%;
     }
@@ -203,8 +200,8 @@
     .themeitme {
         width: 70%;
         margin: 0 auto;
+        height: 50px;
     }
-
     .content .title {
         color: white;
         font-size: 12px;
@@ -217,5 +214,15 @@
     .slide-enter, .slide-leave-to {
         transform: translate3d(100%, 0, 0);
     }
-
+    @media screen and (max-width: 330px) and (min-width: 310px) {
+        .preview {
+            width: 68%;
+        }
+        .themeitme{
+            width: 78%;
+        }
+        .themeitme .title{
+            font-size: 10px;
+        }
+    }
 </style>

@@ -153,14 +153,11 @@
             NoResult
         },
         watch:{
-            // '$route'(from,to){
-            //     // this.currentIndex = -1;
-            //     console.log(this.$route.params.index);
-            //     if (this.$route.params.index) {
-            //         console.log(this.$route.params.index);
-            //         this.currentIndex = this.$route.params.index;
-            //     }
-            // }
+            '$route'(to,from){
+                if (this.$route.params.index !== 'undefined') {
+                    this.currentIndex = this.$route.params.index;
+                }
+            }
         },
         created() {
             // console.log("新建了usercenter");
@@ -228,7 +225,7 @@
     }
 
     .switches-wrapper {
-        padding: 10px 0 20px 0;
+        padding: 15px 0 20px 0;
     }
 
     .play-btn {
@@ -263,7 +260,7 @@
 
     .list-wrapper {
         position: absolute;
-        top: 110px;
+        top: 115px;
         bottom: 0;
         width: 100%;
     }
