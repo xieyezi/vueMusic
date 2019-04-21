@@ -28,14 +28,12 @@
                 <span class="text">作者</span>
                 <span class="icon"><p>写夜子</p></span>
             </div>
-            <div class="item">
+            <a class="item" href="mailto:1435398529@qq.com">
                 <span class="text">帮助与反馈</span>
-                <a class="icon" href="Mailto:1435398529@qq.com">
                     <span>
                         <Icon size="20" color="#999" type="ios-arrow-forward" />
                     </span>
-                </a>
-            </div>
+            </a>
         </div>
         <div class="copyright">
             <p>© 2018- 2019 Xieyezi</p>
@@ -97,11 +95,11 @@
         background: #fff;
     }
     .background {
-        position: absolute;
+        position: fixed;
         left: 0;
         top: 0;
-        width: 150%;
-        height: 100%;
+        width: 100%;
+        height: 60%;
         z-index: 1;
         opacity: 0.2;
         filter: blur(5px);
