@@ -1,0 +1,20 @@
+{
+    "name": "时刻音乐",
+    "short_name": "时刻音乐",
+    "icons": [
+        {
+            "src": "images/ic_launcher-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "images/ic_launcher-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#fff"
+}
