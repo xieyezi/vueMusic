@@ -14,7 +14,7 @@
 
 
                 <div class="recommend-list">
-                    <h1 class="list-title" v-show="recommendList.length>0">热门歌单推荐</h1>
+                    <h1 class="list-title" :class="themeColor" v-show="recommendList.length>0">热门歌单推荐</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
                             <Col span="8" :key="index" v-if="index < 6" v-for="(item,index) in recommendList"
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="recommend-list">
-                    <h1 class="list-title" v-show="recommendList.length>0">精品歌单推荐</h1>
+                    <h1 class="list-title" :class="themeColor" v-show="recommendList.length>0">精品歌单推荐</h1>
                     <ul class="list-content">
                         <Row :gutter="4" type="flex" justify="space-between" class="code-row-bg">
                             <Col span="8" v-if="index > 5 && index < 12" :key="index" v-for="(item,index) in recommendList"
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="recommend-list">
-                    <h1 class="list-title" v-show="recommendList.length>0">写夜子推荐</h1>
+                    <h1 class="list-title" :class="themeColor" v-show="recommendList.length>0">写夜子推荐</h1>
                     <ul class="list-content">
                         <li class="Songitem" @click="openRecommendList(item)" :key="index" v-if="index>12" v-for="(item,index) in recommendList">
                             <div class="infoImg">
@@ -82,7 +82,7 @@
     import Scroll from 'components/scroll'
     import Loading from 'components/loading'
     import {playlistMixin} from '../common/js/mixin'
-    import {mapMutations} from 'vuex'
+    import {mapMutations,mapGetters} from 'vuex'
 
     export default {
         mixins: [playlistMixin],
@@ -95,6 +95,14 @@
                 newSongList: [],
                 // Spinshow:truess
             }
+        },
+        computed: {
+          themeColor() {
+          return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
+          },
+           ...mapGetters([
+              'theme'
+          ])
         },
         methods: {
             handlePlayList(playList) {
@@ -160,7 +168,16 @@
 </script>
 
 <style scoped>
+    .theme1 {
+        color: #ff7675;
+    }
+    .theme2 {
+        color: #87cbd8;
+    }
 
+    .theme3 {
+        color: #D6A2E8;
+    }
     .recommend {
         position: fixed;
         width: 100%;
@@ -194,7 +211,6 @@
         line-height: 60px;
         text-align: center;
         font-size: 16px;
-        color: rgba(102, 153, 204, 0.8);
     }
 
     .list-content {

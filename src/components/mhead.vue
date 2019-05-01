@@ -40,7 +40,6 @@
 
 <script>
     import {mapGetters} from 'vuex'
-
     export default {
         name: "mhead",
         data() {
