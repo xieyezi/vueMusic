@@ -26,9 +26,9 @@
                         </div>
                     </scroll>
                 </div>
-                <!--<div class="no-result-wrapper" v-show="noResult">-->
-                <!--<no-result :title="noResultDesc"></no-result>-->
-                <!--</div>-->
+                <div class="no-result-wrapper" v-show="noResult">
+                <no-result :title="noResultDesc"></no-result>
+                </div>
             </div>
 
         </div>
@@ -58,20 +58,20 @@
             }
         },
         computed: {
-            // noResult() {
-            //     if (this.currentIndex === 0) {
-            //         return !this.favoriteList.length
-            //     } else {
-            //         return !this.playHistory.length
-            //     }
-            // },
-            // noResultDesc() {
-            //     if (this.currentIndex === 0) {
-            //         return '暂无收藏歌曲'
-            //     } else {
-            //         return '你还没有听过歌曲'
-            //     }
-            // },
+            noResult() {
+                if (this.currentIndex === 0) {
+                    return !this.favoriteList.length
+                } else {
+                    return !this.playHistory.length
+                }
+            },
+            noResultDesc() {
+                if (this.currentIndex === 0) {
+                    return '暂无收藏歌曲'
+                } else {
+                    return '你还没有听过歌曲'
+                }
+            },
             themeNumber() {
                 return this.theme === 0 ? 'theme1' : this.theme === 1 ? 'theme2' : 'theme3'
             },

@@ -172,11 +172,9 @@
     }
 
     .Songitem .infoImg {
-        position: relative;
         flex: 1;
-        margin-top: 5px;
-        float: left;
-        margin-left: 5px;
+        width: 100%;
+        padding: 5px 8px 1px 5px;
     }
 
     .Songitem .imgInfo {
@@ -186,18 +184,18 @@
     }
 
     .Songitem .info {
-        position: relative;
-        top: 16%;
         flex: 3;
-        margin-left: 8px;
+        padding:20px 0px 10px 0px;
+        width: 100%;
     }
 
     .Songitem .info .one {
+        position: relative;
+        width: 65%;
         padding: 6px 0px 6px 0px;
     }
 
     .Songitem .info .one .song {
-        width: 80%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

@@ -91,6 +91,10 @@
     .content .info .name {
         color: rgba(0, 0, 0, 0.7);
         font-size: 14px;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     .content .info .desc {
