@@ -54,7 +54,6 @@
 </template>
 
 <script>
-    // import BScroll from 'better-scroll';
     import Scroll from 'components/scroll';
     import Loading from 'components/loading'
     import {mapMutations} from 'vuex'

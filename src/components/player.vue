@@ -429,13 +429,14 @@
             },
             middleTouchMove(e) {
                 if (!this.touch.initiated) {
-                    return
+                    return;
                 }
                 const touch = e.touches[0];
                 const deltaX = touch.pageX - this.touch.startX;
                 const deltaY = touch.pageY - this.touch.startY;
                 //如果纵向滚动大于横向滚动,则不做处理
                 if (Math.abs(deltaY) > Math.abs(deltaX)) {
+                    // console.log("大于，不应该移动!!");
                     return;
                 }
                 if (!this.touch.moved) {
@@ -451,7 +452,7 @@
             },
             middleTouchEnd() {
                 if (!this.touch.moved) {
-                    return
+                    return;
                 }
                 let offsetWidth;
                 let opacity;
@@ -647,7 +648,7 @@
 
     .playing-lyric-wrapper {
         width: 80%;
-        margin: 30px auto 0 auto;
+        margin: 50px auto 0 auto;
         overflow: hidden;
         text-align: center;
     }
@@ -656,7 +657,7 @@
         height: 20px;
         line-height: 20px;
         font-size: 14px;
-        color: #fff;
+        color: rgb(255, 255, 255);
     }
 
     .middle-r {
@@ -842,8 +843,8 @@
 
     .mini-player .icon {
         flex: 0 0 40px;
-        /*width: 40px;*/
-        /*height: 40px;*/
+        width: 40px;
+        height: 40px;
         padding: 0 10px 0 20px;
     }
 
@@ -882,7 +883,7 @@
         flex-direction: column;
         justify-content: center;
         flex: 1;
-        /*margin-left: 30px;*/
+        margin-left: 30px;
         line-height: 20px;
         overflow: hidden;
     }
@@ -905,8 +906,8 @@
     }
 
     .mini-player .control {
-        flex: 0 0 30px;
-        /*width: 30px;*/
+        flex: 0 0 50px;
+        width: 30px;
         padding: 0 10px;
     }
 
