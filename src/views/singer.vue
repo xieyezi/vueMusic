@@ -15,6 +15,9 @@
                         <li class="item" v-for="(item,index) in singerCategroyBySex" @click="chooseSingerBySex(index)">
                             <span :class="{itemactive:index === activeSex}">{{item}}</span>
                         </li>
+                        <li class="item" ref="singerRank" @click="getSingerRank">
+                            <span>歌手排行</span>
+                        </li>
                     </ul>
                 </div>
                 <p class="title">热门歌手</p>
@@ -63,8 +66,8 @@
         data() {
             return {
                 singerList: [],
-                singerListChoose:[],
-                isChoose:false,
+                singerListChoose: [],
+                isChoose: false,
                 activeCountry: -1,
                 activeSex: -1,
                 singerCategroyByCountry: [
@@ -93,130 +96,163 @@
             },
             chooseSingerByCountry(index) {
                 this.isChoose = true;
-                this.singerListChoose=[];
+                this.singerListChoose = [];
                 this.activeCountry = index;
+                this.$refs.singerRank.style.color = '#666';
                 if (this.activeSex === -1) {
                     //默认选择男歌手
                     this.activeSex = 0;
                 }
                 switch (index) {
-                    case 0:{
+                    case 0: {
                         if (this.activeSex === 0) {
                             this.loadSingerBychoose('1001');
-                        }else if (this.activeSex === 1){
+                        } else if (this.activeSex === 1) {
                             this.loadSingerBychoose('1002');
                         } else {
                             this.loadSingerBychoose('1003');
                         }
-                    }break;
-                    case 1:{
+                    }
+                        break;
+                    case 1: {
                         if (this.activeSex === 0) {
                             this.loadSingerBychoose('2001');
-                        }else if (this.activeSex === 1){
+                        } else if (this.activeSex === 1) {
                             this.loadSingerBychoose('2002');
                         } else {
                             this.loadSingerBychoose('2003');
                         }
-                    }break;
-                    case 2:{
+                    }
+                        break;
+                    case 2: {
                         if (this.activeSex === 0) {
                             this.loadSingerBychoose('6001');
-                        }else if (this.activeSex === 1){
+                        } else if (this.activeSex === 1) {
                             this.loadSingerBychoose('6002');
                         } else {
                             this.loadSingerBychoose('6003');
                         }
-                    }break;
-                    case 3:{
+                    }
+                        break;
+                    case 3: {
                         if (this.activeSex === 0) {
                             this.loadSingerBychoose('7001');
-                        }else if (this.activeSex === 1){
+                        } else if (this.activeSex === 1) {
                             this.loadSingerBychoose('7002');
                         } else {
                             this.loadSingerBychoose('7003');
                         }
-                    }break;
-                    case 4:{
+                    }
+                        break;
+                    case 4: {
                         if (this.activeSex === 0) {
                             this.loadSingerBychoose('4001');
-                        }else if (this.activeSex === 1){
+                        } else if (this.activeSex === 1) {
                             this.loadSingerBychoose('4002');
                         } else {
                             this.loadSingerBychoose('4003');
                         }
-                    }break;
+                    }
+                        break;
                 }
             },
             chooseSingerBySex(index) {
-                this.isChoose=true;
-                this.singerListChoose=[];
+                this.isChoose = true;
+                this.singerListChoose = [];
+                this.$refs.singerRank.style.color = '#666';
                 //如果没勾选国籍，则默认为华语
                 if (this.activeCountry === -1) {
                     this.activeCountry = 0;
                 }
                 this.activeSex = index;
                 switch (index) {
-                    case 0:{
+                    case 0: {
                         switch (this.activeCountry) {
-                            case 0:{
+                            case 0: {
                                 this.loadSingerBychoose('1001');
-                            }break;
-                            case 1:{
+                            }
+                                break;
+                            case 1: {
                                 this.loadSingerBychoose('2001');
-                            }break;
-                            case 2:{
+                            }
+                                break;
+                            case 2: {
                                 this.loadSingerBychoose('6001');
-                            }break;
-                            case 3:{
+                            }
+                                break;
+                            case 3: {
                                 this.loadSingerBychoose('7001');
-                            }break;
-                            case 4:{
+                            }
+                                break;
+                            case 4: {
                                 this.loadSingerBychoose('4001');
-                            }break;
+                            }
+                                break;
                         }
-                    }break;
-                    case 1:{
+                    }
+                        break;
+                    case 1: {
                         switch (this.activeCountry) {
-                            case 0:{
+                            case 0: {
                                 this.loadSingerBychoose('1002');
-                            }break;
-                            case 1:{
+                            }
+                                break;
+                            case 1: {
                                 this.loadSingerBychoose('2002');
-                            }break;
-                            case 2:{
+                            }
+                                break;
+                            case 2: {
                                 this.loadSingerBychoose('6002');
-                            }break;
-                            case 3:{
+                            }
+                                break;
+                            case 3: {
                                 this.loadSingerBychoose('7002');
-                            }break;
-                            case 4:{
+                            }
+                                break;
+                            case 4: {
                                 this.loadSingerBychoose('4002');
-                            }break;
+                            }
+                                break;
                         }
-                    }break;
-                    case 2:{
+                    }
+                        break;
+                    case 2: {
                         switch (this.activeCountry) {
-                            case 0:{
+                            case 0: {
                                 this.loadSingerBychoose('1003');
-                            }break;
-                            case 1:{
+                            }
+                                break;
+                            case 1: {
                                 this.loadSingerBychoose('2003');
-                            }break;
-                            case 2:{
+                            }
+                                break;
+                            case 2: {
                                 this.loadSingerBychoose('6003');
-                            }break;
-                            case 3:{
+                            }
+                                break;
+                            case 3: {
                                 this.loadSingerBychoose('7003');
-                            }break;
-                            case 4:{
+                            }
+                                break;
+                            case 4: {
                                 this.loadSingerBychoose('4003');
-                            }break;
+                            }
+                                break;
                         }
-                    }break;
+                    }
+                        break;
                 }
+            },
+            getSingerRank() {
+                this.$refs.singerRank.style.color = '#df3336';
+                this.activeCountry = -1;
+                this.activeSex = -1;
+                this.isChoose = false;
+                this.loadSingerHot();
             },
             loadSingerHot() {
                 var v = this;
+                this.singerList = [];
                 v.$axios.get('api/toplist/artist')
                     .then(response => {
                         //console.log(response.data.list.artists);
@@ -239,20 +275,20 @@
                         console.log(error);
                     });
             },
-            loadSingerBychoose(cat){
+            loadSingerBychoose(cat) {
                 var v = this;
                 v.$axios.get('api/artist/list', {
                     params: {
                         cat: cat,
-                        limit:50
+                        limit: 50
                     }
                 }).then(response => {
-                        // console.log(response);
-                        if (response.data.code === 200) {
-                            //console.log(response.data.artists);
-                            v.singerListChoose = response.data.artists;
-                        }
-                    })
+                    // console.log(response);
+                    if (response.data.code === 200) {
+                        //console.log(response.data.artists);
+                        v.singerListChoose = response.data.artists;
+                    }
+                })
                     .catch(error => {
                         console.log(error);
                     });
@@ -299,8 +335,8 @@
         height: 80px;
         display: flex;
         border-bottom: solid #e6e6e6 1px;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
     }
 
     .Singerlist .infoImg {
@@ -319,12 +355,13 @@
         vertical-align: top;
         flex: 7;
     }
+
     .SingerlistChoose {
         height: 80px;
         display: flex;
         border-bottom: solid #e6e6e6 1px;
-        justify-content:center;
-        align-items:center;
+        justify-content: center;
+        align-items: center;
     }
 
     .SingerlistChoose .infoImgChoose {
@@ -343,6 +380,7 @@
         vertical-align: top;
         flex: 3;
     }
+
     .categorycountry {
         margin: 5px 10px 0 5px;
     }
