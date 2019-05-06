@@ -7,7 +7,7 @@
             <Icon type="md-menu"/>
         </div>
         <div>
-            <Drawer width="100" v-model="drawer">
+            <Drawer width="300" v-model="drawer">
                 <div style="width: 100%;">
                     <img :src="backgroundImg" style="width: 100%;height: auto"/>
                 </div>

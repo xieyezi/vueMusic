@@ -8,7 +8,8 @@
         <ul class="suggest-list">
             <li class="suggest-item" @click="selectItem(item)" v-for="item in result">
                 <div class="icon">
-                    <i class="icon-music"></i>
+<!--                    <i class="icon-music"></i>-->
+                    <Icon type="ios-musical-notes-outline" />
                 </div>
                 <div class="name">
                     <p class="text">{{item.name}} - {{item.ar}}</p>
@@ -274,11 +275,6 @@
         width: 30px;
         font-size: 17px;
     }
-
-    .icon-music {
-        font-size: 17px;
-    }
-
     .suggest-item .name {
         flex: 1;
         width: 90%;
