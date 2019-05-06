@@ -67,20 +67,17 @@
         width: 100%;
         padding: 0 6px;
         height: 40px;
-        /*background: rgba(135, 203, 216, 0.7);*/
         border-radius: 6px;
     }
 
     .icon-search {
         font-size: 22px;
-        /*color: royalblue;*/
     }
 
     .box {
         flex: 1;
         margin: 0 5px;
         line-height: 18px;
-        /*background: rgba(135, 203, 216, 0.05);*/
         color: #666666;
         font-size: 14px;
         outline: 0;
@@ -110,9 +107,7 @@
 
     .icon-delete {
         font-size: 18px;
-        /*color: royalblue;*/
     }
-
     .searchInfo {
         position: relative;
         margin-left: 10px;

@@ -11,7 +11,7 @@
                     <i class="icon-music"></i>
                 </div>
                 <div class="name">
-                    <p class="text">{{item.name}}  - {{item.artists}}</p>
+                    <p class="text">{{item.name}} - {{item.ar}}</p>
                 </div>
             </li>
             <loading v-show="hasMore" :title="title"></loading>
@@ -27,6 +27,7 @@
     import Loading from 'components/loading'
     import NoResult from '../components/no-result'
     import {mapActions} from 'vuex'
+
     export default {
         name: "suggest",
         components: {
@@ -49,10 +50,7 @@
                 hasMore: true,  //是否有更多结果
                 songCount: 0, // 搜索结果总数
                 title: '',
-                beforeScroll: true,
-                insertSongUrl: '',
-                insertSongDetail: {},
-                waitInsertSong: {}
+                beforeScroll: true
             }
         },
         methods: {
@@ -76,23 +74,46 @@
                         v.songCount = response.data.result.songCount;
                         if (v.songCount > 0) {
                             resultTemp = response.data.result.songs;
-                            v.filterResult(resultTemp);
-                            v.result = resultTemp;
-                            // console.log(v.result);
-                        }
-                        if (v.pageTotal === -1 && v.result.length !== 0) {
-                            v.pageTotal = v.songCount % (v.result.length);
-                            if (v.pageTotal === 0) {
-                                v.pageTotal = v.songCount / (v.result.length);
-                            } else {
-                                v.pageTotal = (v.songCount / (v.result.length) + 1);
+                            // console.log(resultTemp);
+                            //计算总页数
+                            if (v.pageTotal === -1 && resultTemp.length !== 0) {
+                                v.pageTotal = v.songCount % (resultTemp.length);
+                                if (v.pageTotal === 0) {
+                                    v.pageTotal = v.songCount / (resultTemp.length);
+                                } else {
+                                    v.pageTotal = (parseInt(v.songCount / (resultTemp.length)) + 1);
+                                }
                             }
+                            //如果有结果，就去请求歌曲详情和播放地址
+                            if (resultTemp.length > 0) {
+                                v.$axios.all([v.loadSongUrl(resultTemp), v.loadSongDetail(resultTemp)])
+                                    .then(v.$axios.spread((resUrl, resDetail) => {
+                                        // console.log(resUrl);
+                                        v.filterResult(resDetail.data.songs);
+                                        // console.log(resDetail.data.songs);
+                                        v.manageSongList(resDetail.data.songs, resUrl.data.data);
+                                        // console.log(v.result);
+                                        v.checkMore(v.pageTotal);
+                                    })).catch(error => {
+                                    console.log(error);
+                                });
+                            }
+                        }else {
+                            this.hasMore = false;
                         }
-                        v.checkMore(v.pageTotal);
                     }
                 }).catch(error => {
                     console.log(error);
                 });
+            },
+            searchMore() {
+                if (!this.hasMore) {
+                    return;
+                } else {
+                    this.page++;
+                    this.loadMore(this.query, this.page);
+                    // this.checkMore();
+                }
             },
             loadMore(keywords, page) {
                 var v = this;
@@ -109,24 +130,23 @@
                     if (response.data.code === 200) {
                         v.songCount = response.data.result.songCount;
                         resultTemp = response.data.result.songs;
-                        //console.log(resultTemp);
-                        v.filterResult(resultTemp);
-                        v.result = v.result.concat(resultTemp);
-                        //console.log(v.result);
-                        v.checkMore(v.pageTotal);
+                        if (resultTemp.length>0){
+                            v.$axios.all([v.loadSongUrl(resultTemp), v.loadSongDetail(resultTemp)])
+                                .then(v.$axios.spread((resUrl, resDetail) => {
+                                    // console.log(resUrl);
+                                    v.filterResult(resDetail.data.songs);
+                                    // console.log(resDetail.data.songs);
+                                    v.manageSongList(resDetail.data.songs, resUrl.data.data);
+                                    // console.log(v.result);
+                                    v.checkMore(v.pageTotal);
+                                })).catch(error => {
+                                console.log(error);
+                            });
+                        }
                     }
                 }).catch(error => {
                     console.log(error);
                 });
-            },
-            searchMore() {
-                if (!this.hasMore) {
-                    return;
-                } else {
-                    this.page++;
-                    this.loadMore(this.query, this.page);
-                    // this.checkMore();
-                }
             },
             listScroll() {
                 this.$emit('listScroll');
@@ -142,99 +162,75 @@
                     this.hasMore = false;
                 }
             },
-            /**
-             * 传入歌曲id，获取歌曲播放地址
-             * @param list
-             */
-            loadSongUrl(song) {
+            loadSongUrl(list) {
                 var v = this;
+                let songsIds = '';
+                for (let i = 0; i < list.length; i++) {
+                    //console.log(list[i].id);
+                    songsIds += list[i].id + ',';
+                }
+                songsIds = songsIds.substring(0, songsIds.length - 1);
+                // console.log(songsIds);
                 return v.$axios.get('api/song/url', {
                     params: {
-                        id: song.id
+                        id: songsIds
                     }
                 });
             },
-            loadSongDetail(song) {
+            loadSongDetail(list) {
                 var v = this;
+                let songsIds = '';
+                for (let i = 0; i < list.length; i++) {
+                    songsIds += list[i].id + ',';
+                }
+                songsIds = songsIds.substring(0, songsIds.length - 1);
                 return v.$axios.get('api/song/detail', {
                     params: {
-                        ids: song.id
+                        ids: songsIds
                     }
                 });
             },
             selectItem(song) {
-                //获取歌曲URL和detail之后再将歌曲插入到vuex里面
+                this.insertSong(song);
+                //派发一个事件给父组件
+                this.$emit('select', song);
+            },
+            manageSongList(list1, list2) {
                 var v = this;
-                let songDetail = {};
-                return v.$axios.all([v.loadSongUrl(song), v.loadSongDetail(song)])
-                    .then(v.$axios.spread((resUrl, resDetail) => {
-                        v.insertSongUrl = resUrl.data.data[0].url;
-                        songDetail = resDetail.data.songs[0];
-                        v.filterSinger(songDetail);
-                        v.insertSongDetail = songDetail;
-                        v.manageSongInfo(v.insertSongUrl, v.insertSongDetail);
-                        //console.log(v.waitInsertSong);
-                        v.insertSong(v.waitInsertSong);
-                        //派发一个事件给父组件
-                        v.$emit('select', v.waitInsertSong);
-
-                    })).catch(error => {
-                        console.log(error);
-                    });
-            },
-            manageSongInfo(songurl, songDetail) {
-                // console.log(songurl);
-                // console.log(songDetail);
-                let song = {
-                    id: '',
-                    name: '',
-                    ar: '',
-                    al: '',
-                    imgURL: '',
-                    songURL: '',
-                    time: 0
-                };
-                song.id = songDetail.id;
-                song.name = songDetail.name;
-                song.ar = songDetail.ar;
-                song.al = songDetail.al.name;
-                song.imgURL = songDetail.al.picUrl;
-                song.time = songDetail.dt;
-                song.songURL = songurl;
-                this.waitInsertSong = song;
-                /**
-                 * @insertsong 上次写到这里，点击了搜索结果中的某首歌，
-                 * 根据歌曲ID去请求detail和播放地址URL
-                 * 整合为一首歌的数据结构
-                 * {
-                 *      al: "绿色"
-                        ar: "陈雪凝"
-                        id: 1345848098
-                        imgURL: "http://p1.music.126.net/R4ZP3AJ9xV0vvw8LX7AbMA==/109951163860425334.jpg"
-                        name: "绿色"
-                        songURL: "http://m10.music.126.net/20190314200006/1bcd419bed94d47ad5aa8b7b0aec5da1/ymusic/76b4/dcbb/0a65/9198b18815ee8ce42ae368ae29276f78.mp3"
-                        time: 269590
-                 * }
-                 */
-            },
-            filterSinger(song) {
-                let ret = [];
-                let ar = '';
-                song.ar.forEach((item) => {
-                    ret.push(item.name);
-                });
-                ar = ret.join('/');
-                song.ar = ar;
+                for (let i = 0; i < list1.length; i++) {
+                    let song = {
+                        id: '',
+                        name: '',
+                        ar: '',
+                        al: '',
+                        imgURL: '',
+                        songURL: '',
+                        time: 0
+                    };
+                    song.id = list1[i].id;
+                    song.name = list1[i].name;
+                    song.ar = list1[i].ar;
+                    song.al = list1[i].al.name;
+                    song.imgURL = list1[i].al.picUrl;
+                    song.time = list1[i].dt;
+                    for (let m = 0; m < list2.length; m++) {
+                        if (list1[i].id === list2[m].id) {
+                            song.songURL = list2[m].url;
+                            break;
+                        }
+                    }
+                    v.result.push(song);
+                }
             },
             filterResult(result) {
                 result.forEach((song) => {
                     let ret = [];
                     let ar = '';
-                    song.artists.forEach((item) => {
+                    song.ar.forEach((item) => {
                         ret.push(item.name);
                     });
                     ar = ret.join('/');
-                    song.artists = ar;
+                    song.ar = ar;
                 });
             },
             ...mapActions([

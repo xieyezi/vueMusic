@@ -60,7 +60,7 @@
         name: "theme",
         data() {
             return {
-                imgurl: 'http://cdn.xieyezi.com/yulan1.png',
+                imgurl: 'http://cdn.xieyezi.com/theme1.png',
                 themeId: 0 //默认为桃花粉主题
             }
         },
@@ -82,7 +82,7 @@
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
-                this.imgurl = 'http://cdn.xieyezi.com/yulan1.png';
+                this.imgurl = 'http://cdn.xieyezi.com/theme1.png';
                 this.$router.back();
             },
             changeThemeOK() {
@@ -91,21 +91,21 @@
                 this.$router.back();
             },
             chooseItem1() {
-                this.imgurl = 'http://cdn.xieyezi.com/yulan1.png';
+                this.imgurl = 'http://cdn.xieyezi.com/theme1.png';
                 this.$refs.theme1.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 0;
             },
             chooseItem2() {
-                this.imgurl = 'http://cdn.xieyezi.com/yulan2.png';
+                this.imgurl = 'http://cdn.xieyezi.com/theme2.png';
                 this.$refs.theme2.style.border = 'solid 1px gray';
                 this.$refs.theme1.style.border = '0';
                 this.$refs.theme3.style.border = '0';
                 this.themeId = 1;
             },
             chooseItem3() {
-                this.imgurl = 'http://cdn.xieyezi.com/yulan3.png';
+                this.imgurl = 'http://cdn.xieyezi.com/theme3.png';
                 this.$refs.theme3.style.border = 'solid 1px gray';
                 this.$refs.theme2.style.border = '0';
                 this.$refs.theme1.style.border = '0';
