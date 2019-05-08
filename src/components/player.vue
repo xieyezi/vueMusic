@@ -111,6 +111,7 @@
     import Lyric from 'xieyezi-lyric'
     import {prefixStyle} from "../common/js/dom";
     import {playerMixin} from '../common/js/mixin'
+
     const transitionDuration = prefixStyle('transitionDuration');
     const transform = prefixStyle('transform');
 
@@ -120,11 +121,11 @@
         data() {
             return {
                 songReady: false,
-                currentTime: 0,  // 初始时间
-                currentLyric: null, //  当前歌词
-                currentLineNum: 0,  //  当前歌词所在的行号
-                currentShow: 'cd',//  当前播放器展示cd
-                playingLyric: '', //  cd下的歌词
+                currentTime: 0,
+                currentLyric: null,
+                currentLineNum: 0,
+                currentShow: 'cd',
+                playingLyric: ''
             }
         },
         computed: {
@@ -400,11 +401,10 @@
                     v.currentLyric = new Lyric(lyric, this.handleLyric);
                     if (this.playing) {
                         // console.log("处理后的歌词:");
-                        //TODO 仍然有在网速不好时切换歌曲，歌词会先进行播放的bug
                         this.currentLyric.play();
                     }
                     // console.log(v.currentLyric);
-                }).catch(()=>{
+                }).catch(() => {
                     v.currentLyric = null;
                     v.playingLyric = '';
                     v.currentLineNum = 0;
@@ -431,14 +431,13 @@
             },
             middleTouchMove(e) {
                 if (!this.touch.initiated) {
-                    return;
+                    return
                 }
                 const touch = e.touches[0];
                 const deltaX = touch.pageX - this.touch.startX;
                 const deltaY = touch.pageY - this.touch.startY;
                 //如果纵向滚动大于横向滚动,则不做处理
                 if (Math.abs(deltaY) > Math.abs(deltaX)) {
-                    // console.log("大于，不应该移动!!");
                     return;
                 }
                 if (!this.touch.moved) {
@@ -498,7 +497,10 @@
         watch: {
             currentSong(newSong, oldSong) {
                 var v = this;
-                if (!newSong.id || !newSong.songURL || newSong.id === oldSong.id) {
+                if (!newSong.id) {
+                    return;
+                }
+                if (newSong.id === oldSong.id) {
                     return;
                 }
                 if (this.currentLyric) {
@@ -506,6 +508,7 @@
                 }
                 setTimeout(() => {
                     v.$refs.audio.play();
+                    //TODO 仍然有在网速不好时切换歌曲，歌词会先进行播放的bug
                     //获取歌曲歌词
                     v.getLyric();
                 }, 1000);
