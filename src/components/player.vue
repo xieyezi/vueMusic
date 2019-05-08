@@ -69,7 +69,8 @@
                             <i class="icon-next" @click="next"></i>
                         </div>
                         <div class="icon i-right">
-                            <i class="icon" @click="toggleFavorite(currentSong)" :class="getFavoriteIcon(currentSong)"></i>
+                            <i class="icon" @click="toggleFavorite(currentSong)"
+                               :class="getFavoriteIcon(currentSong)"></i>
                         </div>
                     </div>
                 </div>
@@ -100,7 +101,7 @@
 </template>
 
 <script>
-    import {mapGetters, mapMutations,mapActions  } from 'vuex'
+    import {mapGetters, mapMutations, mapActions} from 'vuex'
     import animations from 'create-keyframe-animation'
     import ProgressBar from './progress-bar'
     import {playMode} from '../common/js/config'
@@ -119,11 +120,11 @@
         data() {
             return {
                 songReady: false,
-                currentTime: 0,
-                currentLyric: null,
-                currentLineNum: 0,
-                currentShow: 'cd',
-                playingLyric:''
+                currentTime: 0,  // 初始时间
+                currentLyric: null, //  当前歌词
+                currentLineNum: 0,  //  当前歌词所在的行号
+                currentShow: 'cd',//  当前播放器展示cd
+                playingLyric: '', //  cd下的歌词
             }
         },
         computed: {
@@ -276,9 +277,9 @@
                 if (!this.songReady) {
                     return;
                 }
-                if (this.playList.length ===1){
+                if (this.playList.length === 1) {
                     this.loop();
-                }else {
+                } else {
                     let index = this.currentIndex - 1;
                     if (index === -1) {
                         //到第一首就切换到最后一首
@@ -296,9 +297,9 @@
                 if (!this.songReady) {
                     return;
                 }
-                if (this.playList.length ===1){
+                if (this.playList.length === 1) {
                     this.loop();
-                }else {
+                } else {
                     let index = this.currentIndex + 1;
                     if (index === this.playList.length) {
                         //到最后一首就切到第一首
@@ -357,10 +358,10 @@
                 });
                 this.setCurrentIndex(index);
             },
-             ready() {
+            ready() {
                 this.songReady = true;
                 //将该首歌曲存放至vuex里面的playHistory中
-                 this.savePlayHistory(this.currentSong);
+                this.savePlayHistory(this.currentSong);
             },
             error() {
                 this.songReady = true;
@@ -399,6 +400,7 @@
                     v.currentLyric = new Lyric(lyric, this.handleLyric);
                     if (this.playing) {
                         // console.log("处理后的歌词:");
+                        //TODO 仍然有在网速不好时切换歌曲，歌词会先进行播放的bug
                         this.currentLyric.play();
                     }
                     // console.log(v.currentLyric);
@@ -496,10 +498,7 @@
         watch: {
             currentSong(newSong, oldSong) {
                 var v = this;
-                if (!newSong.id) {
-                    return;
-                }
-                if (newSong.id === oldSong.id) {
+                if (!newSong.id || !newSong.songURL || newSong.id === oldSong.id) {
                     return;
                 }
                 if (this.currentLyric) {
@@ -509,7 +508,7 @@
                     v.$refs.audio.play();
                     //获取歌曲歌词
                     v.getLyric();
-                },1000);
+                }, 1000);
             },
             playing(newPlaying) {
                 var v = this;
