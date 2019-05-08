@@ -95,33 +95,32 @@
                 this.currentIndex = index;
             },
             selectSong(song) {
-                this.insertSong(song);
-                //todo 是否需要重新获取有待验证
+                // this.insertSong(song);
                 //网易云的歌曲播放地址有时间检测,所以需要重新获取
-                // this.loadSongUrl(song.id).then(response => {
-                //     // console.log(response.data.data[0].url);
-                //     if (response.data.code === 200) {
-                //         let newSong = {
-                //             id: '',
-                //             name: '',
-                //             ar: '',
-                //             al: '',
-                //             imgURL: '',
-                //             songURL: '',
-                //             time: 0
-                //         };
-                //         newSong.al = song.al;
-                //         newSong.ar = song.ar;
-                //         newSong.id = song.id;
-                //         newSong.imgURL = song.imgURL;
-                //         newSong.name = song.name;
-                //         newSong.time = song.time;
-                //         newSong.songURL = response.data.data[0].url;
-                //         this.insertSong(newSong);
-                //     }
-                // }).catch(error => {
-                //     console.log(error);
-                // });
+                this.loadSongUrl(song.id).then(response => {
+                    // console.log(response.data.data[0].url);
+                    if (response.data.code === 200) {
+                        let newSong = {
+                            id: '',
+                            name: '',
+                            ar: '',
+                            al: '',
+                            imgURL: '',
+                            songURL: '',
+                            time: 0
+                        };
+                        newSong.al = song.al;
+                        newSong.ar = song.ar;
+                        newSong.id = song.id;
+                        newSong.imgURL = song.imgURL;
+                        newSong.name = song.name;
+                        newSong.time = song.time;
+                        newSong.songURL = response.data.data[0].url;
+                        this.insertSong(newSong);
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
             },
             loadSongUrl(id) {
                 var v = this;
