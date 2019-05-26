@@ -50,14 +50,14 @@
         data(){
             return{
                 imgList:[
-                    'http://cdn.xieyezi.com/logo1.png',
-                    'http://cdn.xieyezi.com/logo2.png',
-                    'http://cdn.xieyezi.com/logo3.png'
+                    'https://cdn.xieyezi.com/logo1.png',
+                    'https://cdn.xieyezi.com/logo2.png',
+                    'https://cdn.xieyezi.com/logo3.png'
                 ],
                 backgroundImgList:[
-                    'http://cdn.xieyezi.com/background1.svg',
-                    'http://cdn.xieyezi.com/background2.svg',
-                    'http://cdn.xieyezi.com/background3.svg'
+                    'https://cdn.xieyezi.com/background1.svg',
+                    'https://cdn.xieyezi.com/background2.svg',
+                    'https://cdn.xieyezi.com/background3.svg'
                 ]
             }
         },
