@@ -8,12 +8,12 @@
   },
   "icons": [
     {
-      "src": "/images/ic_launcher-192.png",
+      "src": "https://cdn.xieyezi.com/ic_launcher-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/ic_launcher-512.png",
+      "src": "https://cdn.xieyezi.com/ic_launcher-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

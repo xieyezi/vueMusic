@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'music';
-  src:  url('../fonts/music.eot?of5xr6');
-  src:  url('../fonts/music.eot?of5xr6#iefix') format('embedded-opentype'),
-    url('../fonts/music.ttf?of5xr6') format('truetype'),
-    url('../fonts/music.woff?of5xr6') format('woff'),
-    url('../fonts/music.svg?of5xr6#music') format('svg');
+  src:  url('https://cdn.xieyezi.com/music.eot?of5xr6');
+  src:  url('https://cdn.xieyezi.com/music.eot?of5xr6#iefix') format('embedded-opentype'),
+    url('https://cdn.xieyezi.com/music.ttf?of5xr6') format('truetype'),
+    url('https://cdn.xieyezi.com/music.woff?of5xr6') format('woff'),
+    url('https://cdn.xieyezi.com/music.svg?of5xr6#music') format('svg');
   font-weight: normal;
   font-style: normal;
 }

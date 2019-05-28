@@ -11,7 +11,8 @@ import './plugins/iview.js'
 fastclick.attach(document.body);
 Vue.config.productionTip = false;
 Vue.use(VueLazyload, {
-    loading: require('common/image/default.jpg')
+    // loading: require('common/image/default.jpg')
+    loading: 'https://cdn.xieyezi.com/default.jpg'
 });
 
 Vue.prototype.$axios= axios;

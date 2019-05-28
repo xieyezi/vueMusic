@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "report": "vue-cli-service build --report"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -26,8 +27,7 @@
     "babel-plugin-import": "^1.11.0",
     "vue-cli-plugin-iview": "^1.0.6",
     "vue-lazyload": "^1.2.6",
-    "vue-template-compiler": "^2.5.17",
-    "webpack-bundle-analyzer": "^3.1.0"
+    "vue-template-compiler": "^2.5.17"
   },
   "postcss": {
     "plugins": {

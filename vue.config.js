@@ -1,6 +1,5 @@
 // vue.config.js
 const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -9,6 +8,8 @@ function resolve(dir) {
 module.exports = {
     // 选项...,
     baseUrl: './',
+    outputDir: 'dist',
+    productionSourceMap: false,  // 生产环境的 source map
     devServer: {
         port: 8080, // 端口号
         host: 'localhost',
@@ -42,15 +43,5 @@ module.exports = {
         performance: {
             hints:false
         },
-    },
-    // configureWebpack: config => {
-    //     if (process.env.NODE_ENV === 'production') {
-    //         return {
-    //             plugins: [
-    //                 new BundleAnalyzerPlugin()
-    //             ]
-    //         }
-    //     }
-    // }
-    //    "analyz": "npm_config_report=true npm run build"
+    }
 };
