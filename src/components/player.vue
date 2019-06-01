@@ -94,8 +94,9 @@
             </div>
         </transition>
         <play-list ref="playlist"></play-list>
-        <audio :src="currentSong.songURL" ref="audio" @canplay="ready"
+        <audio :src="currentSong.songURL" ref="audio" @playing="ready"
                @ended="end"
+               @pause="paused"
                @error="error" @timeupdate="updateTime"></audio>
     </div>
 </template>
@@ -114,7 +115,6 @@
 
     const transitionDuration = prefixStyle('transitionDuration');
     const transform = prefixStyle('transform');
-
     export default {
         name: "player",
         mixins: [playerMixin],
@@ -125,7 +125,7 @@
                 currentLyric: null,
                 currentLineNum: 0,
                 currentShow: 'cd',
-                playingLyric: ''
+                playingLyric:''
             }
         },
         computed: {
@@ -362,10 +362,16 @@
             ready() {
                 this.songReady = true;
                 //将该首歌曲存放至vuex里面的playHistory中
-                this.savePlayHistory(this.currentSong);
+                 this.savePlayHistory(this.currentSong);
             },
             error() {
                 this.songReady = true;
+            },
+            paused() {
+                this.setPlayingState(false);
+                if (this.currentLyric) {
+                    this.currentLyric.stop();
+                }
             },
             onProgressBarChange(percent) {
                 // console.log("totaltime:"+this.currentSong.dt);
@@ -404,7 +410,7 @@
                         this.currentLyric.play();
                     }
                     // console.log(v.currentLyric);
-                }).catch(() => {
+                }).catch(()=>{
                     v.currentLyric = null;
                     v.playingLyric = '';
                     v.currentLineNum = 0;
