@@ -45,7 +45,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="loading-container" v-show="!singerList.length">
+            <div class="loading-container" v-show="(!singerList.length && isChoose === false) ||(!singerListChoose.length&& isChoose === true)">
                 <loading></loading>
             </div>
         </scroll>
