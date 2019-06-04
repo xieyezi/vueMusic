@@ -94,10 +94,8 @@
             </div>
         </transition>
         <play-list ref="playlist"></play-list>
-        <audio :src="currentSong.songURL" ref="audio"
-               @play="ready"
+        <audio :src="currentSong.songURL" ref="audio" @play="ready"
                @ended="end"
-               @pause="paused"
                @error="error" @timeupdate="updateTime"></audio>
     </div>
 </template>
@@ -361,24 +359,12 @@
                 this.setCurrentIndex(index);
             },
             ready() {
-                clearTimeout(this.timer);
                 this.songReady = true;
-                this.canLyricPlay = true;
                 //将该首歌曲存放至vuex里面的playHistory中
-                this.savePlayHistory(this.currentSong);
-                if (this.currentLyric) {
-                    // 如果歌曲的播放晚于歌词的出现，播放的时候需要同步歌词
-                    this.currentLyric.seek(this.currentTime * 1000);
-                }
+                 this.savePlayHistory(this.currentSong);
             },
             error() {
                 this.songReady = true;
-            },
-            paused() {
-                this.setPlayingState(false);
-                if (this.currentLyric) {
-                    this.currentLyric.stop();
-                }
             },
             onProgressBarChange(percent) {
                 // console.log("totaltime:"+this.currentSong.dt);
@@ -404,9 +390,6 @@
             //封装歌词
             getLyric() {
                 var v = this;
-                v.currentLyric = null;
-                v.playingLyric = '';
-                v.currentLineNum = 0;
                 let lyric = '';
                 this.loadLyric().then((resolve) => {
                     if (resolve.data.code === 200) {
@@ -415,12 +398,12 @@
                         // console.log(lyric);
                     }
                     v.currentLyric = new Lyric(lyric, this.handleLyric);
-                    if (this.playing && this.canLyricPlay) {
-                        // 如果歌曲播放先于歌词播放，要切到对应位置
-                        this.currentLyric.seek(this.currentTime * 1000);
+                    if (this.playing) {
+                        // console.log("处理后的歌词:");
+                        this.currentLyric.play();
                     }
                     // console.log(v.currentLyric);
-                }).catch(() => {
+                }).catch(()=>{
                     v.currentLyric = null;
                     v.playingLyric = '';
                     v.currentLineNum = 0;
