@@ -94,7 +94,8 @@
             </div>
         </transition>
         <play-list ref="playlist"></play-list>
-        <audio :src="currentSong.songURL" ref="audio" @playing="ready"
+        <audio :src="currentSong.songURL" ref="audio"
+               @play="ready"
                @ended="end"
                @pause="paused"
                @error="error" @timeupdate="updateTime"></audio>
@@ -125,7 +126,7 @@
                 currentLyric: null,
                 currentLineNum: 0,
                 currentShow: 'cd',
-                playingLyric:''
+                playingLyric: ''
             }
         },
         computed: {
@@ -360,9 +361,15 @@
                 this.setCurrentIndex(index);
             },
             ready() {
+                clearTimeout(this.timer);
                 this.songReady = true;
+                this.canLyricPlay = true;
                 //将该首歌曲存放至vuex里面的playHistory中
-                 this.savePlayHistory(this.currentSong);
+                this.savePlayHistory(this.currentSong);
+                if (this.currentLyric) {
+                    // 如果歌曲的播放晚于歌词的出现，播放的时候需要同步歌词
+                    this.currentLyric.seek(this.currentTime * 1000);
+                }
             },
             error() {
                 this.songReady = true;
@@ -397,6 +404,9 @@
             //封装歌词
             getLyric() {
                 var v = this;
+                v.currentLyric = null;
+                v.playingLyric = '';
+                v.currentLineNum = 0;
                 let lyric = '';
                 this.loadLyric().then((resolve) => {
                     if (resolve.data.code === 200) {
@@ -405,12 +415,12 @@
                         // console.log(lyric);
                     }
                     v.currentLyric = new Lyric(lyric, this.handleLyric);
-                    if (this.playing) {
-                        // console.log("处理后的歌词:");
-                        this.currentLyric.play();
+                    if (this.playing && this.canLyricPlay) {
+                        // 如果歌曲播放先于歌词播放，要切到对应位置
+                        this.currentLyric.seek(this.currentTime * 1000);
                     }
                     // console.log(v.currentLyric);
-                }).catch(()=>{
+                }).catch(() => {
                     v.currentLyric = null;
                     v.playingLyric = '';
                     v.currentLineNum = 0;
@@ -514,7 +524,6 @@
                 }
                 setTimeout(() => {
                     v.$refs.audio.play();
-                    //TODO 仍然有在网速不好时切换歌曲，歌词会先进行播放的bug
                     //获取歌曲歌词
                     v.getLyric();
                 }, 1000);
