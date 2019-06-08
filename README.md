@@ -1,6 +1,6 @@
-# 夜子音乐Web App
+# 时刻音乐Web App
 
- 基于Vue开发的Web App，开发阶段
+ 基于Vue+Wbepack+Nginx开发的Web App，预览地址👉[www.xieyezi.com](www.xieyezi.com)
 
 
 ![](https://img.shields.io/badge/vue-2.5.22-green.svg)
@@ -8,33 +8,17 @@
 ![](https://img.shields.io/badge/vue--cli-3.0.4-green.svg)
 ![](https://img.shields.io/badge/license-MIT-green.svg)
 
-## Project setup
+### 功能
 
-预览地址：
+- [x] 歌单推荐
+- [x] 歌手推荐
+- [x] 歌手选择
+- [x] 排行榜
+- [x] 核心播放器
+- [x] 搜索功能
+- [x] 主题换肤
+- [x] 歌曲收藏
+- [x] 最近播放
 
-![预览地址](http://cdn.xieyezi.com/%E9%9F%B3%E4%B9%90app%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
-
-
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
+### 截图
+d
