@@ -11,7 +11,6 @@ services:
       - ./dist:/usr/share/nginx/html/    #挂载n项目
     depends_on:
       - music-server
-
   music-server:
     container_name: 'music-server-container'
     build: ./server  #根据server目录下面的Dockerfile构建镜像
