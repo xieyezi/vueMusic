@@ -1,0 +1,23 @@
+{
+  "short_name": "时刻音乐",
+  "name": "时刻音乐",
+  "plus":{
+    "statusbar": {
+      "immersed": true
+    }
+  },
+  "icons": [
+    {
+      "src": "https://cdn.xieyezi.com/ic_launcher-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://cdn.xieyezi.com/ic_launcher-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "index.html?launcher=true"
+}
