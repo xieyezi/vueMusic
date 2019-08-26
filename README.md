@@ -72,7 +72,7 @@
  这个项目开始于2018年12月，磕磕绊绊得到今年5月才完成。主要构建如下:
 
 
- <img width="60%" src="https://i.loli.net/2019/08/26/r1hvlGK4Db87eZ9.jpg"/>
+ <img src="https://i.loli.net/2019/08/26/r1hvlGK4Db87eZ9.jpg"/>
 
 语言/平台 | 描述
 ---- | ---
