@@ -12,8 +12,13 @@
  > API来自[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)，在此特此铭谢。同样，也在此铭谢在做这个项目的过程中给我帮助的人们。
 <br />
 <br />
->预览地址：www.xieyezi.com (请使用浏览器的手机调试模式进行查看)    
->手机端请扫描下方二维码:            
+> 预览地址：www.xieyezi.com (请使用浏览器的手机调试模式进行查看)  
+
+
+
+> 手机端请扫描下方二维码: 
+
+
 ![时刻音乐二维码.png](https://i.loli.net/2019/08/26/uGFDrqefA9yc5O8.png)
  
  ### 设计初衷
@@ -60,7 +65,7 @@
 </div> 
  <br />
 
- 
+
 ### 构建
   
  这个项目开始于2018年12月，磕磕绊绊得到今年5月才完成。主要构建如下:
