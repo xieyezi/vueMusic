@@ -16,10 +16,10 @@
 >手机端请扫描下方二维码:            
 ![时刻音乐二维码.png](https://i.loli.net/2019/08/26/uGFDrqefA9yc5O8.png)
  
- ## 设计初衷
+ ### 设计初衷
    
    从18年接触vue开始到现在，目前也差不多有一年了。自己早在大学大二时开始就想做一个自己的音乐App，因为自己很喜欢音乐，加上自己还是个网易云音乐人👉[写夜子](https://music.163.com/#/artist?id=12478216)，为此我学习了`Android`,但是无奈本人太菜😅，学得比较差，所以到最后也是不了了之。加上我想到只做`Android`版本也无法实现跨平台，所以后来开始考虑用前端来实现。
-## 功能
+### 功能
 
 功能 | 描述
 ---- | ---
@@ -33,7 +33,7 @@
 歌曲模式切换     |  随机播放、单曲循环、列表循环
 搜索     |	支持歌手和歌曲名搜索
 
-## 构建
+### 构建
   
  这个项目开始于2018年12月，磕磕绊绊得到今年5月才完成。主要构建如下:
 
@@ -51,6 +51,48 @@ rollup |	模块打包
 ES6 |	主要语法
 docker     |  利用docker-compose进行部署
 阿里云     |	阿里云服务器为linux 
+
+### 截图预览
+
+ <br />
+<div text="center">
+ <img width="48%" src="https://i.loli.net/2019/08/26/L27FlTkz8wQSyZh.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/aIr1wLHx8FXPc24.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/ZXJoTAb3FP76IkQ.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/QvVWMgr3CPZ6plU.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/9EpIrjS3JTm1X7Q.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/3I2iwyRm5eLarFV.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/e2cMpFDqyNlaGZV.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/aWtRoi5e3F71VCz.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/KPzdhc8aqRZ6U2A.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/tvK2QbY6jFBgdpn.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/bl75R2I8oV1WAuF.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/Stq9bUMniLIGaAs.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/yBN3rcoA4GSq5Fu.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/MdztuheB1LHSDPb.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/a6Iw9RKoQgjqxHc.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/6XRvDcTba4LKghF.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/pXiwL6QNErdbyoh.png"/>
+ <img width="48%" src="https://i.loli.net/2019/08/26/3UAKDasZjfVM7yQ.png"/>
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+ 
+ 
+</div> 
+
+
+
+
+
+
 
 
 
