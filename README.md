@@ -37,6 +37,9 @@
   
  这个项目开始于2018年12月，磕磕绊绊得到今年5月才完成。主要构建如下:
 
+
+ <img width="60%" src="https://i.loli.net/2019/08/26/r1hvlGK4Db87eZ9.jpg"/>
+
 语言/平台 | 描述
 ---- | ---
 vue | vue.js完成前台功能交互
@@ -50,7 +53,7 @@ docker     |  利用docker-compose进行部署
 阿里云     |	阿里云服务器为linux 
 
 
-<img width="70%" src="https://i.loli.net/2019/08/26/r1hvlGK4Db87eZ9.jpg"/>
+
 
 
 
