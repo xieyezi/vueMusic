@@ -33,26 +33,9 @@
 歌曲模式切换     |  随机播放、单曲循环、列表循环
 搜索     |	支持歌手和歌曲名搜索
 
-### 构建
-  
- 这个项目开始于2018年12月，磕磕绊绊得到今年5月才完成。主要构建如下:
 
 
- <img width="60%" src="https://i.loli.net/2019/08/26/r1hvlGK4Db87eZ9.jpg"/>
-
-语言/平台 | 描述
----- | ---
-vue | vue.js完成前台功能交互
-vue-router | 负责处理路由
-vuex | 状态管理
-localstorage   |	歌曲缓存和主题信息缓存
-webpack |	项目打包
-rollup |	模块打包
-ES6 |	主要语法
-docker     |  利用docker-compose进行部署
-阿里云     |	阿里云服务器为linux 
-
-### 截图预览
+### 预览
 
  <br />
 <div text="center">
@@ -74,23 +57,193 @@ docker     |  利用docker-compose进行部署
  <img width="48%" src="https://i.loli.net/2019/08/26/6XRvDcTba4LKghF.png"/>
  <img width="48%" src="https://i.loli.net/2019/08/26/pXiwL6QNErdbyoh.png"/>
  <img width="48%" src="https://i.loli.net/2019/08/26/3UAKDasZjfVM7yQ.png"/>
- 
- 
- 
- 
-
-
-
-
-
-
- 
- 
 </div> 
+ <br />
+### 构建
+  
+ 这个项目开始于2018年12月，磕磕绊绊得到今年5月才完成。主要构建如下:
+
+
+ <img width="60%" src="https://i.loli.net/2019/08/26/r1hvlGK4Db87eZ9.jpg"/>
+
+语言/平台 | 描述
+---- | ---
+vue | vue.js完成前台功能交互
+vue-router | 负责处理路由
+vuex | 状态管理
+localstorage   |	歌曲缓存和主题信息缓存
+webpack |	项目打包
+rollup |	模块打包
+ES6 |	主要语法
+docker     |  利用docker-compose进行部署
+阿里云     |	阿里云服务器为linux 
 
 
 
+### 配置文件
 
+```js
+export const playMode = {
+    sequence:0, //顺序播放
+    loop:1,  //单曲循环
+    random:2  //随机播放
+};
+export const themeNumber ={
+    pink:0,  //桃花粉
+    cyan:1,  //绿松青
+    violet:2 //丁香紫
+};
+```
+
+### 利用洗牌函数生成随机播放列表
+
+```js
+//洗牌函数,打乱歌曲顺序
+export function shuffle(arr) {
+    let _arr = arr.slice();
+    //保留arr,制作一个副本
+    for (let i = 0; i < _arr.length; i++) {
+        let j = getRandomInt(0,i);
+        let temp = _arr[i];
+        _arr[i]=_arr[j];
+        _arr[j] = temp;
+    }
+    return _arr;
+}
+```
+
+### 防抖
+
+```
+export function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            func.apply(this, args);
+        }, delay)
+    }
+}
+```
+### docker部署
+
+本项目通过docker-compose一键部署，前端利用nginx做容器，后端则使用node.js。通过配置nginx.conf，前端请求反向代理到后台。
+
+```docker
+version: '3'
+services:
+  music-web:
+    container_name: 'music-web-container'  #容器名称
+    image: nginx  #指定镜像
+    restart: always
+    ports:
+      - 80:80
+    volumes: 
+      - ./nginx.conf:/etc/nginx/nginx.conf  #挂载nginx配置
+      - ./dist:/usr/share/nginx/html/    #挂载n项目
+    depends_on:
+      - music-server
+  music-server:
+    container_name: 'music-server-container'
+    build: ./server  #根据server目录下面的Dockerfile构建镜像
+    restart: always
+    expose:
+      - 3000
+```
+
+nginx.conf:
+
+
+```nginx
+#user  nobody;
+worker_processes  1;
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+	gzip on;
+    gzip_min_length  5k;
+    gzip_buffers     4 16k;
+    #gzip_http_version 1.0;
+    gzip_comp_level 3;
+    gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+    gzip_vary on;
+	
+    server {
+        listen  80;
+		server_name  www.xieyezi.com;
+		
+		#音乐app项目
+		location / {
+		 index index.html index.htm;   #添加属性。 
+         root /usr/share/nginx/html;   #站点目录
+		}
+		#音乐app项目设置代理转发
+        location /api/ {
+          proxy_pass  http://music-server:3000/;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+             root   /usr/share/nginx/html;
+        }
+		
+    }
+
+}
+```
+
+### 快速开始
+
+ 1. clone项目: `git clone https://github.com/xieyezi/myMusic.git`
+ 2. 安装依赖: `cd myMusic && npm install`
+ 3. 运行: `npm run serve` 或者 `npm run start`
+ 4. 进入后台服务目录: `cd server`
+ 5. 安装依赖: `npm install`
+ 6. 启动后台服务: `node app.js`
+
+### 提问与交流
+
+  [点击这里](https://github.com/xieyezi/myMusic/issues)
+
+### 开源证书
+
+```
+MIT License
+
+Copyright (c) 2018-present xieyezi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 
 
