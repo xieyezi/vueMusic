@@ -14,13 +14,13 @@
 <br />
 
 
-> 预览地址：www.xieyezi.com (请使用浏览器的手机调试模式进行查看)  
+> 预览地址：http://xieyezi.com (请使用浏览器的手机调试模式进行查看)  
 
 
 > 手机端请扫描下方二维码: 
 
 
-![时刻音乐二维码.png](https://i.loli.net/2019/08/26/uGFDrqefA9yc5O8.png)
+![时刻音乐二维码.png](https://cdn.xieyezi.com/%E9%9F%B3%E4%B9%90%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
  
  ### 设计初衷
    
