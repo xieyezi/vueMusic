@@ -38,6 +38,7 @@
         <div class="copyright">
             <p>© 2018- 2019 Xieyezi</p>
             <p>Copyright Xieyezi.All Rights Reserved.</p>
+            <a href="http://www.beian.miit.gov.cn/" class="highlight-name_beian" target="_blank">渝ICP备17013916号</a>
         </div>
     </div>
     </transition>
