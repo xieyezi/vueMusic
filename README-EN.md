@@ -207,7 +207,7 @@ http {
 }
 ```
 
-### 快速开始
+### Start
 
 1.  Clone : `git clone https://github.com/xieyezi/myMusic.git`
 2.  Install dependencies: `cd myMusic && npm install`
