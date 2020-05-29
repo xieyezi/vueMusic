@@ -12,7 +12,7 @@ Language: [English](README-EN.md) | 中文简体
 <br />
 
 > API 来自[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)，在此特此铭谢。同样，也在此铭谢在做这个项目的过程中给我帮助的人们。
-> <br /> > <br />
+> <br />  <br />
 
 > 预览地址：http://xieyezi.com (请使用浏览器的手机调试模式进行查看)
 
