@@ -1,6 +1,6 @@
-Language: [English](README-EN.md) | 中文简体
+Language: English | [中文简体](https://github.com/xieyezi/vueMusic)
 
-<h1 align="center">时刻音乐Web APP</h1>
+<h1 align="center">Moment music Web APP</h1>
 
  <br />
  <div align="center">
@@ -11,34 +11,34 @@ Language: [English](README-EN.md) | 中文简体
 <br />
 <br />
 
-> API 来自[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)，在此特此铭谢。同样，也在此铭谢在做这个项目的过程中给我帮助的人们。
-> <br /> > <br />
+> The API comes from [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi), I would like to thank those who helped me in the process of doing this project.
 
-> 预览地址：http://xieyezi.com (请使用浏览器的手机调试模式进行查看)
+> <br /> <br />
+> Preview address: http://xieyezi.com (please use the mobile phone debugging mode of the browser to view)
 
-> 手机端请扫描下方二维码:
+> For mobile phone, please scan the QR code below:
 
 ![时刻音乐二维码.png](https://cdn.xieyezi.com/%E9%9F%B3%E4%B9%90%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
 
-### 设计初衷
+### Original intention
 
-从 18 年接触 vue 开始到现在，目前也差不多有一年了。自己早在大学大二时开始就想做一个自己的音乐 App，因为自己很喜欢音乐，加上自己还是个网易云音乐人 👉[写夜子](https://music.163.com/#/artist?id=12478216)，为此我学习了`Android`,但是无奈本人太菜 😅，学得比较差，所以到最后也是不了了之。加上我想到只做`Android`版本也无法实现跨平台，所以后来开始考虑用前端来实现。
+It has been almost a year since I contacted Vue for 18 years. I wanted to make my own music app as a sophomore in college, because I like music very much, plus I am still a NetEase cloud musician 👉 [写夜子](https://music.163.com/#/artist?id=12478216), for this I learned `Android`, but I was too helpless, but I learned poorly, so I could n’t do it in the end. Plus I thought that only doing the `Android` version can not achieve cross-platform, so later began to consider using the front-end to achieve.
 
-### 功能
+### Features
 
-| 功能         | 描述                                 |
-| ------------ | ------------------------------------ |
-| 首页推荐     | 首页头部导航图、下面为精品歌单推荐   |
-| 歌单详情     | 点击歌单或者歌手进入歌单详情         |
-| 歌手选择     | 各大类歌手选择                       |
-| 排行榜       | 各类排行榜                           |
-| 最近收听     | 只要点击了收听就会加入”最近收听“     |
-| 我的喜欢     | 在播放界面点击“心”就会加入“我的喜欢” |
-| 主题换肤     | 换肤功能                             |
-| 歌曲模式切换 | 随机播放、单曲循环、列表循环         |
-| 搜索         | 支持歌手和歌曲名搜索                 |
+| Features                 | Description                                                    |
+| ------------------------ | -------------------------------------------------------------- |
+| Home page recommendation | Home page header map, the following is a recommended song list |
+| Playlist details         | Click on the playlist or singer to enter the playlist details  |
+| Singer selection         | Various types of singer selection                              |
+| Leaderboards             | Various Leaderboards                                           |
+| Recently Listened        | Just click to listen and join "Recently Listened"              |
+| My Favorites             | Click "Heart" in the playback interface to add "My Favorites"  |
+| Theme Skin Change        | Skin Change Function                                           |
+| Song mode switching      | Random play, single loop, list loop                            |
+| Search                   | Support singer and song name search                            |
 
-### 预览
+### Preview
 
  <br />
 <div text="center">
@@ -63,25 +63,25 @@ Language: [English](README-EN.md) | 中文简体
 </div> 
  <br />
 
-### 构建
+### Construct
 
-这个项目开始于 2018 年 12 月，磕磕绊绊得到今年 5 月才完成。主要构建如下:
+This project started in December 2018, and it was only completed in May this year. The main structure is as follows:
 
- <img src="https://i.loli.net/2019/08/26/r1hvlGK4Db87eZ9.jpg"/>
+<img src="https://i.loli.net/2019/08/26/r1hvlGK4Db87eZ9.jpg"/>
 
-| 语言/平台    | 描述                         |
-| ------------ | ---------------------------- |
-| vue          | vue.js 完成前台功能交互      |
-| vue-router   | 负责处理路由                 |
-| vuex         | 状态管理                     |
-| localstorage | 歌曲缓存和主题信息缓存       |
-| webpack      | 项目打包                     |
-| rollup       | 模块打包                     |
-| ES6          | 主要语法                     |
-| docker       | 利用 docker-compose 进行部署 |
-| 阿里云       | 阿里云服务器为 linux         |
+| Language / Platform | Description                                          |
+| ------------------- | ---------------------------------------------------- |
+| vue                 | vue.js complete the front-end functional interaction |
+| vue-router          | Responsible for routing                              |
+| vuex                | State Management                                     |
+| localstorage        | Song cache and theme information cache               |
+| webpack             | Project Packing                                      |
+| rollup              | module packaging                                     |
+| ES6                 | Main Syntax                                          |
+| docker              | Deploy with docker-compose                           |
+| Alibaba Cloud       | Alibaba Cloud server is Linux                        |
 
-### 配置文件
+### Configuration file
 
 ```js
 export const playMode = {
@@ -96,7 +96,7 @@ export const themeNumber = {
 }
 ```
 
-### 利用洗牌函数生成随机播放列表
+### Use shuffle function to generate random playlist
 
 ```js
 //洗牌函数,打乱歌曲顺序
@@ -113,7 +113,7 @@ export function shuffle(arr) {
 }
 ```
 
-### 防抖
+### debounce
 
 ```
 export function debounce(func, delay) {
@@ -129,9 +129,9 @@ export function debounce(func, delay) {
 }
 ```
 
-### docker 部署
+### docker
 
-本项目通过 docker-compose 一键部署，前端利用 nginx 做容器，后端则使用 node.js。通过配置 nginx.conf，前端请求反向代理到后台。
+This project is deployed with one-click docker-compose, the front end uses nginx as the container, and the back end uses node.js. By configuring nginx.conf, the front end requests a reverse proxy to the background.
 
 ```docker
 version: '3'
@@ -209,18 +209,18 @@ http {
 
 ### 快速开始
 
-1.  clone 项目: `git clone https://github.com/xieyezi/myMusic.git`
-2.  安装依赖: `cd myMusic && npm install`
-3.  运行: `npm run serve` 或者 `npm run start`
-4.  进入后台服务目录: `cd server`
-5.  安装依赖: `npm install`
-6.  启动后台服务: `node app.js`
+1.  Clone : `git clone https://github.com/xieyezi/myMusic.git`
+2.  Install dependencies: `cd myMusic && npm install`
+3.  run: `npm run serve` 或者 `npm run start`
+4.  Enter the background service catalog: `cd server`
+5.  Install dependencies: `npm install`
+6.  run: `node app.js`
 
-### 提问与交流
+### Questions
 
-[点击这里](https://github.com/xieyezi/myMusic/issues)
+[Threre](https://github.com/xieyezi/myMusic/issues)
 
-### 开源证书
+### Open source certificate
 
 ```
 MIT License
