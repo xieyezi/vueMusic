@@ -9,7 +9,7 @@
     "report": "vue-cli-service build --report"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "better-scroll": "^1.13.2",
     "create-keyframe-animation": "^0.1.0",
     "css-loader": "^1.0.1",
